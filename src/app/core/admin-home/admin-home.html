@@ -1,0 +1,236 @@
+<main class="main-content">
+
+    <!-- Stat Cards -->
+    <div class="stats-grid">
+        <div class="stat-card teal">
+            <div class="stat-icon teal"><i class="ri-contacts-book-2-line"></i></div>
+            <div>
+                <div class="stat-value">12</div>
+                <div class="stat-label">Total Contacts</div>
+                <div class="stat-trend up"><i class="ri-arrow-up-line"></i> +4 this week</div>
+            </div>
+        </div>
+        <div class="stat-card purple">
+            <div class="stat-icon purple"><i class="ri-user-add-line"></i></div>
+            <div>
+                <div class="stat-value">4</div>
+                <div class="stat-label">New Leads</div>
+                <div class="stat-trend up"><i class="ri-arrow-up-line"></i> +2 today</div>
+            </div>
+        </div>
+        <div class="stat-card orange">
+            <div class="stat-icon orange"><i class="ri-checkbox-circle-line"></i></div>
+            <div>
+                <div class="stat-value">2</div>
+                <div class="stat-label">Qualified</div>
+                <div class="stat-trend up"><i class="ri-arrow-up-line"></i> +1 today</div>
+            </div>
+        </div>
+        <div class="stat-card green">
+            <div class="stat-icon green"><i class="ri-trophy-line"></i></div>
+            <div>
+                <div class="stat-value">2</div>
+                <div class="stat-label">Deals Won</div>
+                <div class="stat-trend up"><i class="ri-arrow-up-line"></i> +1 this month</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid-2 mb-20">
+        <!-- Chart image -->
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <div class="card-title">Pipeline Chart</div>
+                    <div class="card-subtitle">Contact distribution by stage</div>
+                </div>
+            </div>
+            <div class="card-body" style="padding:12px"><img src="images/dashboard-chart.svg" alt="Pipeline chart"
+                    style="width:100%;border-radius:8px" /></div>
+        </div>
+        <!-- Breakdown bars -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Pipeline Breakdown</div>
+            </div>
+            <div class="card-body" style="display:flex;flex-direction:column;gap:13px">
+                <div>
+                    <div class="flex justify-between mb-4"><span class="text-sm fw-600">Lead</span><span
+                            class="text-sm text-muted">4 (33%)</span></div>
+                    <div style="height:7px;background:var(--gray-100);border-radius:20px;overflow:hidden">
+                        <div style="width:33%;height:100%;background:#8B5CF6;border-radius:20px"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between mb-4"><span class="text-sm fw-600">Contacted</span><span
+                            class="text-sm text-muted">2 (17%)</span></div>
+                    <div style="height:7px;background:var(--gray-100);border-radius:20px;overflow:hidden">
+                        <div style="width:17%;height:100%;background:#3B82F6;border-radius:20px"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between mb-4"><span class="text-sm fw-600">Qualified</span><span
+                            class="text-sm text-muted">2 (17%)</span></div>
+                    <div style="height:7px;background:var(--gray-100);border-radius:20px;overflow:hidden">
+                        <div style="width:17%;height:100%;background:#F59E0B;border-radius:20px"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between mb-4"><span class="text-sm fw-600">Proposal</span><span
+                            class="text-sm text-muted">2 (17%)</span></div>
+                    <div style="height:7px;background:var(--gray-100);border-radius:20px;overflow:hidden">
+                        <div style="width:17%;height:100%;background:#EC4899;border-radius:20px"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between mb-4"><span class="text-sm fw-600">Won</span><span
+                            class="text-sm text-muted">2 (17%)</span></div>
+                    <div style="height:7px;background:var(--gray-100);border-radius:20px;overflow:hidden">
+                        <div style="width:17%;height:100%;background:#10B981;border-radius:20px"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between mb-4"><span class="text-sm fw-600">Lost</span><span
+                            class="text-sm text-muted">0 (0%)</span></div>
+                    <div style="height:7px;background:var(--gray-100);border-radius:20px;overflow:hidden">
+                        <div style="width:0%;height:100%;background:#EF4444;border-radius:20px"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid-2">
+        <!-- Recent Contacts -->
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <div class="card-title">Recent Contacts</div>
+                    <div class="card-subtitle">Latest additions</div>
+                </div>
+                <a href="contacts.html" class="btn btn-sm btn-outline"><i class="ri-arrow-right-line"></i> View All</a>
+            </div>
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Contact</th>
+                            <th>Company</th>
+                            <th>Status</th>
+                            <th>Assigned</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="contact-cell">
+                                    <div class="tbl-avatar" style="background:linear-gradient(135deg,#8B5CF6,#6D28D9)">
+                                        SM</div>
+                                    <div>
+                                        <div class="contact-name">Suresh Mehta</div>
+                                        <div class="contact-email">suresh@techcorp.in</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>TechCorp India</td>
+                            <td><span class="badge badge-lead">Lead</span></td>
+                            <td>Amit Singh</td>
+                            <td><a href="contact-detail.html" class="btn btn-sm btn-outline"><i
+                                        class="ri-eye-line"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="contact-cell">
+                                    <div class="tbl-avatar" style="background:linear-gradient(135deg,#3B82F6,#1D4ED8)">
+                                        KN</div>
+                                    <div>
+                                        <div class="contact-name">Kavita Nair</div>
+                                        <div class="contact-email">kavita@innovate.co</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Innovate Co</td>
+                            <td><span class="badge badge-contacted">Contacted</span></td>
+                            <td>Amit Singh</td>
+                            <td><a href="contact-detail.html" class="btn btn-sm btn-outline"><i
+                                        class="ri-eye-line"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="contact-cell">
+                                    <div class="tbl-avatar" style="background:linear-gradient(135deg,#10B981,#059669)">
+                                        RS</div>
+                                    <div>
+                                        <div class="contact-name">Ravi Shankar</div>
+                                        <div class="contact-email">ravi@bizplus.in</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>BizPlus</td>
+                            <td><span class="badge badge-won">Won</span></td>
+                            <td>Amit Singh</td>
+                            <td><a href="contact-detail.html" class="btn btn-sm btn-outline"><i
+                                        class="ri-eye-line"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="contact-cell">
+                                    <div class="tbl-avatar" style="background:linear-gradient(135deg,#EC4899,#BE185D)">
+                                        DJ</div>
+                                    <div>
+                                        <div class="contact-name">Deepa Joshi</div>
+                                        <div class="contact-email">deepa@startup.io</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>StartUp.io</td>
+                            <td><span class="badge badge-proposal">Proposal</span></td>
+                            <td>Neha Verma</td>
+                            <td><a href="contact-detail.html" class="btn btn-sm btn-outline"><i
+                                        class="ri-eye-line"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="contact-cell">
+                                    <div class="tbl-avatar" style="background:linear-gradient(135deg,#F59E0B,#D97706)">
+                                        MG</div>
+                                    <div>
+                                        <div class="contact-name">Manish Gupta</div>
+                                        <div class="contact-email">manish@globaltech.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Global Tech</td>
+                            <td><span class="badge badge-qualified">Qualified</span></td>
+                            <td>Neha Verma</td>
+                            <td><a href="contact-detail.html" class="btn btn-sm btn-outline"><i
+                                        class="ri-eye-line"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Quick Actions -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Quick Actions</div>
+            </div>
+            <div class="card-body" style="display:flex;flex-direction:column;gap:10px">
+                <a href="contacts.html" class="btn btn-primary btn-block"><i class="ri-user-add-line"></i> Add New
+                    Contact</a>
+                <a href="bulk-import.html" class="btn btn-secondary btn-block"><i class="ri-upload-cloud-2-line"></i>
+                    Bulk Import Contacts</a>
+                <a href="contacts.html" class="btn btn-secondary btn-block"><i class="ri-file-excel-2-line"></i> Export
+                    to CSV</a>
+                <a href="pipeline.html" class="btn btn-secondary btn-block"><i class="ri-kanban-view-line"></i> Open
+                    Sales Pipeline</a>
+                <a href="user-management.html" class="btn btn-outline btn-block"><i class="ri-team-line"></i> Manage
+                    Team Members</a>
+                <a href="charge-rates.html" class="btn btn-outline btn-block"><i class="ri-price-tag-3-line"></i> View
+                    Charge Rates</a>
+            </div>
+        </div>
+    </div>
+
+</main>

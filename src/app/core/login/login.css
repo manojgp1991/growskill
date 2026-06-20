@@ -1,0 +1,81 @@
+
+    html,body{margin:0;padding:0;height:100%}
+    body{overflow:auto}
+    .login-wrap{display:flex;height:100vh;font-family:'Inter',sans-serif}
+
+    /* ── LEFT PANEL ── */
+    .lp-left{
+      flex:1;position:relative;overflow:hidden;
+      background:linear-gradient(135deg,#0D1B2A 0%,#1E2F42 60%,#0a3d2e 100%);
+      display:flex;flex-direction:column;justify-content:center;align-items:center;padding:50px 60px;
+    }
+    .lp-left .bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55;z-index:0}
+    .lp-left-inner{position:relative;z-index:1;text-align:center;max-width:380px}
+    .lp-logo{
+      width:72px;height:72px;background:linear-gradient(135deg,#00C8A0,#00A882);
+      border-radius:20px;display:flex;align-items:center;justify-content:center;
+      font-weight:800;font-size:26px;color:#fff;margin:0 auto 18px;
+      font-family:'Syne',sans-serif;box-shadow:0 8px 24px rgba(0,200,160,.4);
+    }
+    .lp-title{font-family:'Syne',sans-serif;font-size:2.6rem;font-weight:800;color:#fff;line-height:1.1;margin:0 0 10px}
+    .lp-title span{color:#00C8A0}
+    .lp-sub{color:#8FA3BC;font-size:.93rem;line-height:1.6;margin-bottom:44px}
+    .lp-features{display:flex;flex-direction:column;gap:18px;text-align:left}
+    .lp-feat{display:flex;align-items:flex-start;gap:14px}
+    .lp-feat-icon{
+      width:40px;height:40px;flex-shrink:0;border-radius:10px;
+      background:rgba(0,200,160,.12);border:1px solid rgba(0,200,160,.25);
+      display:flex;align-items:center;justify-content:center;font-size:18px;
+    }
+    .lp-feat-text strong{display:block;color:#fff;font-size:.88rem;font-weight:600}
+    .lp-feat-text span{color:#8FA3BC;font-size:.78rem}
+
+    /* ── RIGHT PANEL ── */
+    .lp-right{
+      width:460px;flex-shrink:0;background:#fff;
+      display:flex;align-items:center;justify-content:center;
+      padding:52px 44px;overflow-y:auto;
+    }
+    .lp-form{width:100%}
+    .lp-h2{font-family:'Syne',sans-serif;font-size:1.9rem;font-weight:700;color:#0D1B2A;margin:0 0 4px}
+    .lp-desc{color:#8FA3BC;font-size:.87rem;margin:0 0 22px}
+
+    /* Hint box */
+    .hint-box{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);border-radius:10px;padding:11px 14px;margin-bottom:20px;font-size:.78rem;color:#3B82F6;line-height:1.8}
+
+    /* Role pills */
+    .role-row{display:flex;gap:8px;margin-bottom:20px}
+    .role-pill{
+      flex:1;border:1.5px solid #E2E8F0;border-radius:9px;padding:9px 6px;
+      text-align:center;cursor:pointer;transition:all .18s;font-size:.78rem;color:#64748B;
+      font-family:'Inter',sans-serif;background:#fff;
+    }
+    .role-pill i{display:block;font-size:18px;margin-bottom:4px}
+    .role-pill.active{border-color:#00C8A0;background:#E8F7F4;color:#00A882;font-weight:600}
+
+    /* Form fields */
+    .fg{margin-bottom:16px}
+    .fg label{display:block;font-size:.75rem;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px}
+    .fg .input-wrap{position:relative}
+    .fg .input-wrap i.prefix{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#94A3B8;font-size:15px;pointer-events:none}
+    .fg input{
+      width:100%;padding:11px 14px 11px 38px;border:1.5px solid #E2E8F0;border-radius:9px;
+      font-size:.88rem;font-family:'Inter',sans-serif;color:#0D1B2A;outline:none;
+      box-sizing:border-box;transition:border-color .18s;
+    }
+    .fg input:focus{border-color:#00C8A0;box-shadow:0 0 0 3px rgba(0,200,160,.1)}
+    .fg .eye-btn{position:absolute;right:11px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#94A3B8;font-size:15px;padding:2px}
+
+    /* Error */
+    .err-box{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:9px;padding:9px 13px;margin-bottom:14px;color:#EF4444;font-size:.8rem;display:none;align-items:center;gap:8px}
+
+    /* Submit btn */
+    .submit-btn{
+      width:100%;padding:13px;background:linear-gradient(135deg,#00C8A0,#00A882);
+      color:#fff;border:none;border-radius:10px;font-weight:700;font-size:.95rem;
+      cursor:pointer;font-family:'Inter',sans-serif;
+      box-shadow:0 4px 14px rgba(0,200,160,.35);transition:transform .15s,box-shadow .15s;
+    }
+    .submit-btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(0,200,160,.45)}
+
+    @media(max-width:768px){.lp-left{display:none}.lp-right{width:100%;padding:40px 28px}}

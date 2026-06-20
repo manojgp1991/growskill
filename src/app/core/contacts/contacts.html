@@ -1,0 +1,63 @@
+    <main class="main-content">
+
+      <!-- Page banner -->
+      <div class="page-banner">
+        <img src="images/contacts-icon.svg" alt=""/>
+        <div class="page-banner-overlay">
+          <i class="ri-contacts-book-2-line"></i>
+          <div><div class="pb-title">All Contacts</div><div class="pb-sub">12 total contacts in your CRM</div></div>
+          <div style="margin-left:auto"><a href="contacts.html" class="btn btn-primary btn-sm"><i class="ri-add-line"></i> Add Contact</a></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <!-- Filters -->
+        <div class="card-header" style="flex-wrap:wrap;gap:10px">
+          <div style="display:flex;gap:10px;flex-wrap:wrap;flex:1">
+            <div style="position:relative"><i class="ri-search-line" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--gray-400);font-size:14px"></i><input type="text" placeholder="Search…" style="padding:7px 12px 7px 30px;border:1.5px solid var(--gray-200);border-radius:8px;font-size:.8rem;outline:none;width:200px"/></div>
+            <select style="padding:7px 12px;border:1.5px solid var(--gray-200);border-radius:8px;font-size:.8rem;outline:none;background:#fff;color:#334155">
+              <option>All Statuses</option><option>Lead</option><option>Contacted</option><option>Qualified</option><option>Proposal</option><option>Won</option><option>Lost</option>
+            </select>
+            <select style="padding:7px 12px;border:1.5px solid var(--gray-200);border-radius:8px;font-size:.8rem;outline:none;background:#fff;color:#334155">
+              <option>All Assignees</option><option>Amit Singh</option><option>Neha Verma</option>
+            </select>
+          </div>
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-sm btn-secondary"><i class="ri-download-line"></i> Export</button>
+            <button class="btn btn-sm btn-primary"><i class="ri-add-line"></i> Add Contact</button>
+          </div>
+        </div>
+        <!-- Table -->
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th><input type="checkbox" class="table-checkbox"/></th>
+                <th>Contact</th><th>Phone</th><th>Company</th><th>Status</th><th>Assigned To</th><th>Created</th><th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><input type="checkbox" class="table-checkbox"/></td><td><div class="contact-cell"><div class="tbl-avatar" style="background:linear-gradient(135deg,#8B5CF6,#6D28D9)">SM</div><div><div class="contact-name">Suresh Mehta</div><div class="contact-email">suresh@techcorp.in</div></div></div></td><td>+91 98765 43210</td><td>TechCorp India</td><td><span class="badge badge-lead">Lead</span></td><td><div class="flex items-center gap-8"><div class="tbl-avatar" style="width:26px;height:26px;font-size:.6rem;background:linear-gradient(135deg,#3B82F6,#1D4ED8)">AS</div>Amit Singh</div></td><td class="text-muted text-xs">2024-01-15</td><td><div class="tbl-actions"><a href="contact-detail.html" class="btn btn-icon btn-outline"><i class="ri-eye-line"></i></a><button class="btn btn-icon btn-secondary"><i class="ri-edit-line"></i></button><button class="btn btn-icon btn-danger"><i class="ri-delete-bin-line"></i></button></div></td></tr>
+              <tr><td><input type="checkbox" class="table-checkbox"/></td><td><div class="contact-cell"><div class="tbl-avatar" style="background:linear-gradient(135deg,#3B82F6,#1D4ED8)">KN</div><div><div class="contact-name">Kavita Nair</div><div class="contact-email">kavita@innovate.co</div></div></div></td><td>+91 87654 32109</td><td>Innovate Co</td><td><span class="badge badge-contacted">Contacted</span></td><td><div class="flex items-center gap-8"><div class="tbl-avatar" style="width:26px;height:26px;font-size:.6rem;background:linear-gradient(135deg,#3B82F6,#1D4ED8)">AS</div>Amit Singh</div></td><td class="text-muted text-xs">2024-01-16</td><td><div class="tbl-actions"><a href="contact-detail.html" class="btn btn-icon btn-outline"><i class="ri-eye-line"></i></a><button class="btn btn-icon btn-secondary"><i class="ri-edit-line"></i></button><button class="btn btn-icon btn-danger"><i class="ri-delete-bin-line"></i></button></div></td></tr>
+              <tr><td><input type="checkbox" class="table-checkbox"/></td><td><div class="contact-cell"><div class="tbl-avatar" style="background:linear-gradient(135deg,#F59E0B,#D97706)">MG</div><div><div class="contact-name">Manish Gupta</div><div class="contact-email">manish@globaltech.com</div></div></div></td><td>+91 76543 21098</td><td>Global Tech</td><td><span class="badge badge-qualified">Qualified</span></td><td><div class="flex items-center gap-8"><div class="tbl-avatar" style="width:26px;height:26px;font-size:.6rem;background:linear-gradient(135deg,#EC4899,#BE185D)">NV</div>Neha Verma</div></td><td class="text-muted text-xs">2024-01-17</td><td><div class="tbl-actions"><a href="contact-detail.html" class="btn btn-icon btn-outline"><i class="ri-eye-line"></i></a><button class="btn btn-icon btn-secondary"><i class="ri-edit-line"></i></button><button class="btn btn-icon btn-danger"><i class="ri-delete-bin-line"></i></button></div></td></tr>
+              <tr><td><input type="checkbox" class="table-checkbox"/></td><td><div class="contact-cell"><div class="tbl-avatar" style="background:linear-gradient(135deg,#EC4899,#BE185D)">DJ</div><div><div class="contact-name">Deepa Joshi</div><div class="contact-email">deepa@startup.io</div></div></div></td><td>+91 65432 10987</td><td>StartUp.io</td><td><span class="badge badge-proposal">Proposal</span></td><td><div class="flex items-center gap-8"><div class="tbl-avatar" style="width:26px;height:26px;font-size:.6rem;background:linear-gradient(135deg,#EC4899,#BE185D)">NV</div>Neha Verma</div></td><td class="text-muted text-xs">2024-01-18</td><td><div class="tbl-actions"><a href="contact-detail.html" class="btn btn-icon btn-outline"><i class="ri-eye-line"></i></a><button class="btn btn-icon btn-secondary"><i class="ri-edit-line"></i></button><button class="btn btn-icon btn-danger"><i class="ri-delete-bin-line"></i></button></div></td></tr>
+              <tr><td><input type="checkbox" class="table-checkbox"/></td><td><div class="contact-cell"><div class="tbl-avatar" style="background:linear-gradient(135deg,#10B981,#059669)">RS</div><div><div class="contact-name">Ravi Shankar</div><div class="contact-email">ravi@bizplus.in</div></div></div></td><td>+91 54321 09876</td><td>BizPlus</td><td><span class="badge badge-won">Won</span></td><td><div class="flex items-center gap-8"><div class="tbl-avatar" style="width:26px;height:26px;font-size:.6rem;background:linear-gradient(135deg,#3B82F6,#1D4ED8)">AS</div>Amit Singh</div></td><td class="text-muted text-xs">2024-01-19</td><td><div class="tbl-actions"><a href="contact-detail.html" class="btn btn-icon btn-outline"><i class="ri-eye-line"></i></a><button class="btn btn-icon btn-secondary"><i class="ri-edit-line"></i></button><button class="btn btn-icon btn-danger"><i class="ri-delete-bin-line"></i></button></div></td></tr>
+              <tr><td><input type="checkbox" class="table-checkbox"/></td><td><div class="contact-cell"><div class="tbl-avatar" style="background:linear-gradient(135deg,#EF4444,#DC2626)">AD</div><div><div class="contact-name">Anita Desai</div><div class="contact-email">anita@ventures.co</div></div></div></td><td>+91 43210 98765</td><td>Ventures Co</td><td><span class="badge badge-lost">Lost</span></td><td><div class="flex items-center gap-8"><div class="tbl-avatar" style="width:26px;height:26px;font-size:.6rem;background:linear-gradient(135deg,#EC4899,#BE185D)">NV</div>Neha Verma</div></td><td class="text-muted text-xs">2024-01-20</td><td><div class="tbl-actions"><a href="contact-detail.html" class="btn btn-icon btn-outline"><i class="ri-eye-line"></i></a><button class="btn btn-icon btn-secondary"><i class="ri-edit-line"></i></button><button class="btn btn-icon btn-danger"><i class="ri-delete-bin-line"></i></button></div></td></tr>
+              <tr><td><input type="checkbox" class="table-checkbox"/></td><td><div class="contact-cell"><div class="tbl-avatar" style="background:linear-gradient(135deg,#8B5CF6,#6D28D9)">SB</div><div><div class="contact-name">Sanjay Bose</div><div class="contact-email">sanjay@enterprise.in</div></div></div></td><td>+91 32109 87654</td><td>Enterprise Ltd</td><td><span class="badge badge-lead">Lead</span></td><td><div class="flex items-center gap-8"><div class="tbl-avatar" style="width:26px;height:26px;font-size:.6rem;background:linear-gradient(135deg,#3B82F6,#1D4ED8)">AS</div>Amit Singh</div></td><td class="text-muted text-xs">2024-01-21</td><td><div class="tbl-actions"><a href="contact-detail.html" class="btn btn-icon btn-outline"><i class="ri-eye-line"></i></a><button class="btn btn-icon btn-secondary"><i class="ri-edit-line"></i></button><button class="btn btn-icon btn-danger"><i class="ri-delete-bin-line"></i></button></div></td></tr>
+              <tr><td><input type="checkbox" class="table-checkbox"/></td><td><div class="contact-cell"><div class="tbl-avatar" style="background:linear-gradient(135deg,#3B82F6,#1D4ED8)">PC</div><div><div class="contact-name">Pooja Chatterjee</div><div class="contact-email">pooja@digitalx.com</div></div></div></td><td>+91 21098 76543</td><td>DigitalX</td><td><span class="badge badge-contacted">Contacted</span></td><td><div class="flex items-center gap-8"><div class="tbl-avatar" style="width:26px;height:26px;font-size:.6rem;background:linear-gradient(135deg,#EC4899,#BE185D)">NV</div>Neha Verma</div></td><td class="text-muted text-xs">2024-01-22</td><td><div class="tbl-actions"><a href="contact-detail.html" class="btn btn-icon btn-outline"><i class="ri-eye-line"></i></a><button class="btn btn-icon btn-secondary"><i class="ri-edit-line"></i></button><button class="btn btn-icon btn-danger"><i class="ri-delete-bin-line"></i></button></div></td></tr>
+              <tr><td><input type="checkbox" class="table-checkbox"/></td><td><div class="contact-cell"><div class="tbl-avatar" style="background:linear-gradient(135deg,#F59E0B,#D97706)">AR</div><div><div class="contact-name">Arjun Reddy</div><div class="contact-email">arjun@cloud9.in</div></div></div></td><td>+91 91234 56780</td><td>Cloud9</td><td><span class="badge badge-qualified">Qualified</span></td><td><div class="flex items-center gap-8"><div class="tbl-avatar" style="width:26px;height:26px;font-size:.6rem;background:linear-gradient(135deg,#3B82F6,#1D4ED8)">AS</div>Amit Singh</div></td><td class="text-muted text-xs">2024-01-23</td><td><div class="tbl-actions"><a href="contact-detail.html" class="btn btn-icon btn-outline"><i class="ri-eye-line"></i></a><button class="btn btn-icon btn-secondary"><i class="ri-edit-line"></i></button><button class="btn btn-icon btn-danger"><i class="ri-delete-bin-line"></i></button></div></td></tr>
+              <tr><td><input type="checkbox" class="table-checkbox"/></td><td><div class="contact-cell"><div class="tbl-avatar" style="background:linear-gradient(135deg,#10B981,#059669)">SM</div><div><div class="contact-name">Sunita Malhotra</div><div class="contact-email">sunita@datasys.com</div></div></div></td><td>+91 61234 56789</td><td>DataSys</td><td><span class="badge badge-won">Won</span></td><td><div class="flex items-center gap-8"><div class="tbl-avatar" style="width:26px;height:26px;font-size:.6rem;background:linear-gradient(135deg,#EC4899,#BE185D)">NV</div>Neha Verma</div></td><td class="text-muted text-xs">2024-01-26</td><td><div class="tbl-actions"><a href="contact-detail.html" class="btn btn-icon btn-outline"><i class="ri-eye-line"></i></a><button class="btn btn-icon btn-secondary"><i class="ri-edit-line"></i></button><button class="btn btn-icon btn-danger"><i class="ri-delete-bin-line"></i></button></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Pagination -->
+        <div class="card-body" style="padding:10px 18px">
+          <div class="pagination">
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn"><i class="ri-arrow-right-s-line"></i></button>
+          </div>
+        </div>
+      </div>
+    </main>
+ 

@@ -25,7 +25,12 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/css/custom.css"
+            ],
+             "scripts": [
+               "node_modules/jquery/dist/jquery.min.js",
+               "src/assets/js/nav.js"
             ]
           },
           "configurations": {

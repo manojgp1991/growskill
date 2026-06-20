@@ -1,0 +1,68 @@
+ <main class="main-content">
+
+      <div class="page-banner">
+        <img src="images/users-icon.svg" alt=""/>
+        <div class="page-banner-overlay">
+          <i class="ri-team-line"></i>
+          <div><div class="pb-title">Team Members</div><div class="pb-sub">Add, edit and manage roles &amp; permissions</div></div>
+          <div style="margin-left:auto"><button class="btn btn-primary btn-sm"><i class="ri-user-add-line"></i> Add User</button></div>
+        </div>
+      </div>
+
+      <!-- Role info cards -->
+      <div class="grid-3 mb-20" style="grid-template-columns:repeat(4,1fr)">
+        <div style="padding:13px;background:rgba(0,200,160,.07);border:1px solid rgba(0,200,160,.25);border-radius:12px"><div style="font-size:9px;font-weight:700;color:#00A882;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Super Admin</div><div style="font-size:.78rem;color:var(--gray-600)">Full access to all modules including billing &amp; license</div></div>
+        <div style="padding:13px;background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.25);border-radius:12px"><div style="font-size:9px;font-weight:700;color:#8B5CF6;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Admin</div><div style="font-size:.78rem;color:var(--gray-600)">Manage contacts, users, imports &amp; settings</div></div>
+        <div style="padding:13px;background:rgba(59,130,246,.07);border:1px solid rgba(59,130,246,.25);border-radius:12px"><div style="font-size:9px;font-weight:700;color:#3B82F6;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Sales Person</div><div style="font-size:.78rem;color:var(--gray-600)">View &amp; update assigned contacts, add comments</div></div>
+        <div style="padding:13px;background:rgba(100,116,139,.07);border:1px solid rgba(100,116,139,.25);border-radius:12px"><div style="font-size:9px;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Viewer</div><div style="font-size:.78rem;color:var(--gray-600)">Read-only access to contacts &amp; pipeline</div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div><div class="card-title">Team Members</div><div class="card-subtitle">5 members</div></div>
+          <button class="btn btn-primary btn-sm"><i class="ri-user-add-line"></i> Add User</button>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th style="width:50px">Avatar</th><th>Name / Email</th><th>Role</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><div class="tbl-avatar" style="width:38px;height:38px;font-size:.78rem;background:linear-gradient(135deg,#00C8A0,#0099CC)">RK</div></td>
+                <td><div style="font-weight:600">Rajesh Kumar <span style="font-size:10px;background:#00C8A0;color:#fff;padding:1px 7px;border-radius:20px;margin-left:4px">You</span></div><div class="text-xs text-muted">rajesh@growskill.in</div></td>
+                <td><span class="badge badge-superadmin">Super Admin</span></td>
+                <td><span style="font-size:.78rem;font-weight:600;color:#10B981">● Active</span></td>
+                <td><div class="tbl-actions"><button class="btn btn-sm btn-outline"><i class="ri-edit-line"></i> Edit</button></div></td>
+              </tr>
+              <tr>
+                <td><div class="tbl-avatar" style="width:38px;height:38px;font-size:.78rem;background:linear-gradient(135deg,#8B5CF6,#6D28D9)">PS</div></td>
+                <td><div style="font-weight:600">Priya Sharma</div><div class="text-xs text-muted">priya@growskill.in</div></td>
+                <td><span class="badge badge-admin">Admin</span></td>
+                <td><span style="font-size:.78rem;font-weight:600;color:#10B981">● Active</span></td>
+                <td><div class="tbl-actions"><button class="btn btn-sm btn-outline"><i class="ri-edit-line"></i> Edit</button><button class="btn btn-sm btn-danger"><i class="ri-delete-bin-line"></i></button></div></td>
+              </tr>
+              <tr>
+                <td><div class="tbl-avatar" style="width:38px;height:38px;font-size:.78rem;background:linear-gradient(135deg,#3B82F6,#1D4ED8)">AS</div></td>
+                <td><div style="font-weight:600">Amit Singh</div><div class="text-xs text-muted">amit@growskill.in</div></td>
+                <td><span class="badge badge-sales">Sales</span></td>
+                <td><span style="font-size:.78rem;font-weight:600;color:#10B981">● Active</span></td>
+                <td><div class="tbl-actions"><button class="btn btn-sm btn-outline"><i class="ri-edit-line"></i> Edit</button><button class="btn btn-sm btn-danger"><i class="ri-delete-bin-line"></i></button></div></td>
+              </tr>
+              <tr>
+                <td><div class="tbl-avatar" style="width:38px;height:38px;font-size:.78rem;background:linear-gradient(135deg,#EC4899,#BE185D)">NV</div></td>
+                <td><div style="font-weight:600">Neha Verma</div><div class="text-xs text-muted">neha@growskill.in</div></td>
+                <td><span class="badge badge-sales">Sales</span></td>
+                <td><span style="font-size:.78rem;font-weight:600;color:#10B981">● Active</span></td>
+                <td><div class="tbl-actions"><button class="btn btn-sm btn-outline"><i class="ri-edit-line"></i> Edit</button><button class="btn btn-sm btn-danger"><i class="ri-delete-bin-line"></i></button></div></td>
+              </tr>
+              <tr>
+                <td><div class="tbl-avatar" style="width:38px;height:38px;font-size:.78rem;background:linear-gradient(135deg,#F59E0B,#D97706)">VP</div></td>
+                <td><div style="font-weight:600">Vikram Patel</div><div class="text-xs text-muted">vikram@growskill.in</div></td>
+                <td><span class="badge badge-viewer">Viewer</span></td>
+                <td><span style="font-size:.78rem;font-weight:600;color:#10B981">● Active</span></td>
+                <td><div class="tbl-actions"><button class="btn btn-sm btn-outline"><i class="ri-edit-line"></i> Edit</button><button class="btn btn-sm btn-danger"><i class="ri-delete-bin-line"></i></button></div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>

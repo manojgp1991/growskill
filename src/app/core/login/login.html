@@ -1,0 +1,58 @@
+<div class="login-wrap">
+
+  <!-- ── LEFT ── -->
+  <div class="lp-left">
+    <div class="lp-left-inner">
+      <div class="lp-logo">GS</div>
+      <h1 class="lp-title">Grow<span>Skill</span><br/>CRM</h1>
+      <p class="lp-sub">Your complete sales &amp; contact management platform</p>
+      <div class="lp-features">
+        <div class="lp-feat"><div class="lp-feat-icon"><i class="ri-contacts-book-2-line" style="color:#00C8A0"></i></div><div class="lp-feat-text"><strong>Smart Contact Management</strong><span>Import, assign &amp; track every lead</span></div></div>
+        <div class="lp-feat"><div class="lp-feat-icon"><i class="ri-kanban-view-line" style="color:#00C8A0"></i></div><div class="lp-feat-text"><strong>Visual Sales Pipeline</strong><span>Drag &amp; drop through deal stages</span></div></div>
+        <div class="lp-feat"><div class="lp-feat-icon"><i class="ri-team-line" style="color:#00C8A0"></i></div><div class="lp-feat-text"><strong>Role-based Access</strong><span>Admin, Sales &amp; Viewer roles</span></div></div>
+        <div class="lp-feat"><div class="lp-feat-icon"><i class="ri-file-excel-2-line" style="color:#00C8A0"></i></div><div class="lp-feat-text"><strong>Excel / CSV Import</strong><span>Bulk-upload contacts instantly</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── RIGHT ── -->
+  <div class="lp-right">
+    <div class="lp-form">
+      <h2 class="lp-h2">Welcome back</h2>
+      <p class="lp-desc">Sign in to your GrowSkill CRM account</p>
+
+      <div class="hint-box">
+        <div><b>Super Admin:</b> rajesh@growskill.in &nbsp;/&nbsp; admin123</div>
+        <div><b>Sales Person:</b> amit@growskill.in &nbsp;/&nbsp; sales123</div>
+      </div>
+
+      <!-- Role pills -->
+      <div class="role-row">
+        <button class="role-pill active" data-role="super_admin" type="button"><i class="ri-shield-star-line"></i>Super Admin</button>
+        <button class="role-pill" data-role="admin" type="button"><i class="ri-admin-line"></i>Admin</button>
+        <button class="role-pill" data-role="sales" type="button"><i class="ri-user-star-line"></i>Sales</button>
+        <button class="role-pill" data-role="viewer" type="button"><i class="ri-eye-line"></i>Viewer</button>
+      </div>
+
+      <form id="lf" onsubmit="doLogin(event)">
+        <div class="fg">
+          <label>Email Address</label>
+          <div class="input-wrap">
+            <i class="ri-mail-line prefix"></i>
+            <input type="email" id="em" value="rajesh@growskill.in" placeholder="you@growskill.in" required/>
+          </div>
+        </div>
+        <div class="fg">
+          <label>Password</label>
+          <div class="input-wrap">
+            <i class="ri-lock-line prefix"></i>
+            <input type="password" id="pw" value="admin123" placeholder="••••••••" required/>
+            <button type="button" class="eye-btn" id="eyebtn"><i class="ri-eye-line" id="eyeic"></i></button>
+          </div>
+        </div>
+        <div class="err-box" id="errbx"><i class="ri-error-warning-line"></i><span id="errtxt"></span></div>
+        <button type="submit" class="submit-btn"><i class="ri-login-box-line"></i> Sign In</button>
+      </form>
+    </div>
+  </div>
+</div>
