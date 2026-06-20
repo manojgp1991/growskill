@@ -25,33 +25,50 @@
         <div><b>Super Admin:</b> rajesh@growskill.in &nbsp;/&nbsp; admin123</div>
         <div><b>Sales Person:</b> amit@growskill.in &nbsp;/&nbsp; sales123</div>
       </div>
-
       <!-- Role pills -->
       <div class="role-row">
-        <button class="role-pill active" data-role="super_admin" type="button"><i class="ri-shield-star-line"></i>Super Admin</button>
-        <button class="role-pill" data-role="admin" type="button"><i class="ri-admin-line"></i>Admin</button>
-        <button class="role-pill" data-role="sales" type="button"><i class="ri-user-star-line"></i>Sales</button>
-        <button class="role-pill" data-role="viewer" type="button"><i class="ri-eye-line"></i>Viewer</button>
+        <ng-container *ngFor="let role of userRoles; trackBy: trackByRole">
+          <button
+            class="role-pill"
+            [class.active]="selectedRole === role?.id"
+            [attr.data-role]="role?.role"
+            type="button"
+            (click)="selectRole(role)">
+            <i [class]="role?.icon"></i>{{ role?.role }}
+          </button>
+        </ng-container>
       </div>
 
-      <form id="lf" onsubmit="doLogin(event)">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
         <div class="fg">
           <label>Email Address</label>
           <div class="input-wrap">
             <i class="ri-mail-line prefix"></i>
-            <input type="email" id="em" value="rajesh@growskill.in" placeholder="you@growskill.in" required/>
+            <input
+              type="email"
+              formControlName="user_name"
+              placeholder="you@growskill.in" />
           </div>
         </div>
         <div class="fg">
           <label>Password</label>
           <div class="input-wrap">
             <i class="ri-lock-line prefix"></i>
-            <input type="password" id="pw" value="admin123" placeholder="••••••••" required/>
+            <input
+              type="password"
+              formControlName="user_password"
+              placeholder="••••••••" />
             <button type="button" class="eye-btn" id="eyebtn"><i class="ri-eye-line" id="eyeic"></i></button>
           </div>
         </div>
-        <div class="err-box" id="errbx"><i class="ri-error-warning-line"></i><span id="errtxt"></span></div>
-        <button type="submit" class="submit-btn"><i class="ri-login-box-line"></i> Sign In</button>
+        <div class="err-box" *ngIf="errorMessage">
+          <i class="ri-error-warning-line"></i>
+          <span>{{ errorMessage }}</span>
+        </div>
+        <button type="submit" class="submit-btn">
+          <i class="ri-login-box-line"></i>
+          {{ isSubmitting ? 'Signing In...' : 'Sign In' }}
+        </button>
       </form>
     </div>
   </div>
