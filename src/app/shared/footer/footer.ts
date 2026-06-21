@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { CookieStorageService } from '../../services/cookie-service/cookie.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,4 +8,17 @@ import { RouterLink } from '@angular/router';
   templateUrl: './footer.html',
   styleUrl: './footer.css',
 })
-export class Footer {}
+export class Footer implements OnInit {
+
+  cookieUserData: any = {};
+
+  constructor(private _cookieService: CookieStorageService, private router: Router) { }
+  ngOnInit(): void {
+    this.cookieUserData = this._cookieService.getUser();
+  }
+
+  logOut() {
+    this._cookieService.clearAllCookies();
+    this.router.navigate(['/login']);
+  }
+}

@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './services/guards/auth-guard';
 
 export const routes: Routes = [
   {
@@ -25,7 +26,8 @@ export const routes: Routes = [
         path: 'pipeline',
         loadComponent: () => import('./core/pipeline/pipeline').then(m => m.Pipeline)
       },
-      {
+      { 
+        canActivate: [authGuard],
         path: 'users',
         loadComponent: () => import('./core/users/users').then(m => m.Users)
       },

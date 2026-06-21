@@ -1,7 +1,7 @@
 <div class="sidebar-footer">
     <a routerLink="/login" class="sidebar-user" style="text-decoration:none">
         <div class="u-avatar">RK</div>
-        <div><span class="u-name">Rajesh Kumar</span><span class="u-role">Super Admin</span></div>
-        <i class="ri-logout-box-r-line logout-ic"></i>
+        <div><span class="u-name">{{cookieUserData?.name}}</span><span class="u-role">{{cookieUserData?.roleName}}</span></div>
+        <i (click)="logOut()" class="ri-logout-box-r-line logout-ic"></i>
     </a>
 </div>

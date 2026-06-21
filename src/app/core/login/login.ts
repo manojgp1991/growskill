@@ -82,7 +82,6 @@ export class Login implements OnInit {
     this.errorMessage = '';
 
     const payload = {
-      sub_id: '1E44A0B1-4D30-4ED7-B659-18548A53823D',
       user_name: this.loginForm.value.user_name,
       user_password: this.loginForm.value.user_password,
       user_role: this.selectedRole
