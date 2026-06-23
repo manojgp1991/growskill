@@ -1,42 +1,69 @@
- <main class="main-content">
+<main class="main-content">
 
-      <div class="page-banner">
-        <img src="images/bulk-import-icon.svg" alt=""/>
-        <div class="page-banner-overlay">
-          <i class="ri-upload-cloud-2-line"></i>
-          <div><div class="pb-title">Bulk Contact Import</div><div class="pb-sub">Upload Excel or CSV · Preview · Assign · Import</div></div>
+  <div class="page-banner">
+    <img src="images/bulk-import-icon.svg" alt="" />
+    <div class="page-banner-overlay">
+      <i class="ri-upload-cloud-2-line"></i>
+      <div>
+        <div class="pb-title">Bulk Contact Import</div>
+        <div class="pb-sub">Upload Excel or CSV · Preview · Assign · Import</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:20px">
+
+    <!-- Step 1 -->
+    <div class="card">
+      <div class="card-header">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div
+            style="width:26px;height:26px;border-radius:50%;background:var(--teal);color:#fff;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            1</div>
+          <div>
+            <div class="card-title">Download Template</div>
+            <div class="card-subtitle">Use our template to prepare your contacts file correctly</div>
+          </div>
+        </div>
+        <button (click)="downloadTemplate()" class="btn btn-sm btn-outline"><i class="ri-download-line"></i> Download
+          Template</button>
+      </div>
+      <div class="card-body" style="display:flex;gap:10px;flex-wrap:wrap">
+        <div
+          style="padding:7px 13px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px;font-size:.78rem">
+          <i class="ri-checkbox-circle-line" style="color:var(--success)"></i> <b>Name</b> — Full contact name
+        </div>
+        <div
+          style="padding:7px 13px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px;font-size:.78rem">
+          <i class="ri-checkbox-circle-line" style="color:var(--success)"></i> <b>Email</b> — Contact email
+        </div>
+        <div
+          style="padding:7px 13px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px;font-size:.78rem">
+          <i class="ri-checkbox-circle-line" style="color:var(--success)"></i> <b>Phone</b> — Mobile number
+        </div>
+        <div
+          style="padding:7px 13px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px;font-size:.78rem">
+          <i class="ri-checkbox-circle-line" style="color:var(--success)"></i> <b>Company</b> — Company name
+        </div>
+        <div
+          style="padding:7px 13px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px;font-size:.78rem">
+          <i class="ri-information-line" style="color:var(--warning)"></i> <b>Pipeline Stage</b> — lead / contacted /
+          qualified / proposal / won / lost <i>(default: lead)</i>
         </div>
       </div>
+    </div>
 
-      <div style="display:flex;flex-direction:column;gap:20px">
-
-        <!-- Step 1 -->
-        <div class="card">
-          <div class="card-header">
-            <div style="display:flex;align-items:center;gap:12px">
-              <div style="width:26px;height:26px;border-radius:50%;background:var(--teal);color:#fff;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0">1</div>
-              <div><div class="card-title">Download Template</div><div class="card-subtitle">Use our template to prepare your contacts file correctly</div></div>
-            </div>
-            <button class="btn btn-sm btn-outline"><i class="ri-download-line"></i> Download Template</button>
-          </div>
-          <div class="card-body" style="display:flex;gap:10px;flex-wrap:wrap">
-            <div style="padding:7px 13px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px;font-size:.78rem"><i class="ri-checkbox-circle-line" style="color:var(--success)"></i> <b>Name</b> — Full contact name</div>
-            <div style="padding:7px 13px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px;font-size:.78rem"><i class="ri-checkbox-circle-line" style="color:var(--success)"></i> <b>Email</b> — Contact email</div>
-            <div style="padding:7px 13px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px;font-size:.78rem"><i class="ri-checkbox-circle-line" style="color:var(--success)"></i> <b>Phone</b> — Mobile number</div>
-            <div style="padding:7px 13px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px;font-size:.78rem"><i class="ri-checkbox-circle-line" style="color:var(--success)"></i> <b>Company</b> — Company name</div>
-            <div style="padding:7px 13px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px;font-size:.78rem"><i class="ri-information-line" style="color:var(--warning)"></i> <b>Pipeline Stage</b> — lead / contacted / qualified / proposal / won / lost <i>(default: lead)</i></div>
-          </div>
+    <!-- Step 2 -->
+    <div class="card">
+      <div class="card-header">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div
+            style="width:26px;height:26px;border-radius:50%;background:var(--teal);color:#fff;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            2</div>
+          <div class="card-title">Upload Your File</div>
         </div>
-
-        <!-- Step 2 -->
-        <div class="card">
-          <div class="card-header">
-            <div style="display:flex;align-items:center;gap:12px">
-              <div style="width:26px;height:26px;border-radius:50%;background:var(--teal);color:#fff;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0">2</div>
-              <div class="card-title">Upload Your File</div>
-            </div>
-          </div>
-          <div class="card-body">
+      </div>
+      <!-- <div class="card-body">
             <div class="upload-zone">
               <div class="upload-icon"><i class="ri-upload-cloud-2-line"></i></div>
               <h4>Drop your Excel or CSV file here</h4>
@@ -47,30 +74,144 @@
                 <span class="format-tag"><i class="ri-file-excel-line"></i> .xls</span>
               </div>
             </div>
-          </div>
-        </div>
+          </div> -->
 
-        <!-- Step 3: Preview (static sample) -->
-        <div class="card">
-          <div class="card-header">
-            <div style="display:flex;align-items:center;gap:12px">
-              <div style="width:26px;height:26px;border-radius:50%;background:var(--teal);color:#fff;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0">3</div>
-              <div><div class="card-title">Preview &amp; Assign</div><div class="card-subtitle">4 rows ready to import</div></div>
+
+      <div class="card-body">
+        <label for="file-upload" style="display: block;">
+          <div class="upload-zone" id="upload-zone" ondragover="event.preventDefault();this.classList.add('drag-over')"
+            ondragleave="this.classList.remove('drag-over')"
+            ondrop="event.preventDefault();this.classList.remove('drag-over');handleFileDrop(event)">
+            <div class="upload-icon"><i class="ri-upload-cloud-2-line"></i></div>
+            <h4>Drop your Excel or CSV file here</h4>
+            <p id="upload-hint">or click to browse files from your computer</p>
+            <div class="formats">
+              <span class="format-tag"><i class="ri-file-excel-2-line"></i> .xlsx</span>
+              <span class="format-tag"><i class="ri-file-text-line"></i> .csv</span>
+              <span class="format-tag"><i class="ri-file-excel-line"></i> .xls</span>
             </div>
-            <button class="btn btn-sm btn-primary"><i class="ri-upload-2-line"></i> Import All</button>
           </div>
-          <div class="table-wrap">
-            <table class="data-table">
-              <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Company</th><th>Stage</th><th>Assign To</th></tr></thead>
-              <tbody>
-                <tr><td style="font-weight:600">Aarav Shah</td><td class="text-muted text-sm">aarav@example.com</td><td class="text-muted text-sm">+91 91111 22222</td><td>Shah Corp</td><td><span class="badge badge-lead">Lead</span></td><td><select style="padding:4px 8px;border:1.5px solid var(--gray-200);border-radius:7px;font-size:.78rem;outline:none;background:#fff"><option>Amit Singh</option><option>Neha Verma</option></select></td></tr>
-                <tr><td style="font-weight:600">Diya Patel</td><td class="text-muted text-sm">diya@example.com</td><td class="text-muted text-sm">+91 82222 33333</td><td>Patel Ltd</td><td><span class="badge badge-lead">Lead</span></td><td><select style="padding:4px 8px;border:1.5px solid var(--gray-200);border-radius:7px;font-size:.78rem;outline:none;background:#fff"><option>Amit Singh</option><option>Neha Verma</option></select></td></tr>
-                <tr><td style="font-weight:600">Zara Khan</td><td class="text-muted text-sm">zara@example.com</td><td class="text-muted text-sm">+91 73333 44444</td><td>Khan Ventures</td><td><span class="badge badge-contacted">Contacted</span></td><td><select style="padding:4px 8px;border:1.5px solid var(--gray-200);border-radius:7px;font-size:.78rem;outline:none;background:#fff"><option>Neha Verma</option><option>Amit Singh</option></select></td></tr>
-                <tr><td style="font-weight:600">Rohan Mehta</td><td class="text-muted text-sm">rohan@example.com</td><td class="text-muted text-sm">+91 64444 55555</td><td>Mehta Group</td><td><span class="badge badge-qualified">Qualified</span></td><td><select style="padding:4px 8px;border:1.5px solid var(--gray-200);border-radius:7px;font-size:.78rem;outline:none;background:#fff"><option>Amit Singh</option><option>Neha Verma</option></select></td></tr>
-              </tbody>
-            </table>
+        </label>
+        <input type="file" id="file-upload" accept=".xlsx,.csv,.xls" style="display:none"
+          (change)="onFileSelected($event)" />
+      </div>
+    </div>
+
+    <!-- Step 3: Preview (static sample) -->
+    <div class="card" *ngIf="tempImportsList.length > 0">
+      <div class="card-header">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div
+            style="width:28px;height:28px;border-radius:50%;background:var(--teal);color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            3</div>
+          <div>
+            <div class="card-title">Preview &amp; Assign</div>
+            <div class="card-subtitle" id="preview-count">{{ tempImportsList.length }} rows ready to import</div>
           </div>
         </div>
-
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-sm btn-secondary" (click)="CancelImport()"><i class="ri-close-line"></i>
+            Cancel</button>
+          <button class="btn btn-sm btn-primary" (click)="processImport()"><i class="ri-upload-2-line"></i> Import
+            All</button>
+        </div>
       </div>
-    </main>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Company</th>
+              <th>Stage</th>
+              <th>Assign To</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let c of tempImportsList">
+              <tr>
+                <td style="font-weight:600">{{c?.name}}</td>
+                <td class="text-muted text-sm">{{c?.email}}</td>
+                <td class="text-muted text-sm">{{c?.phone}}</td>
+                <td>{{c?.company}}</td>
+                <td><span class="badge badge-lead">{{c?.status}}</span></td>
+                <td><select [(ngModel)]="c.assignedTo"
+                    style="padding:4px 8px;border:1.5px solid var(--gray-200);border-radius:7px;font-size:.78rem;outline:none;background:#fff">
+                    <option value="0">-Not Assigned-</option>
+                    <option [value]="u.id" *ngFor="let u of userList">{{u?.name}}</option>
+                  </select>
+                </td>
+              </tr>
+
+            </ng-container>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="card" *ngIf="errorList.length > 0">
+      <div class="card-header" style="background-color: #ff1e1e26;">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div
+            style="width:28px;height:28px;border-radius:50%;background:#c80050;color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            3</div>
+          <div>
+            <div class="card-title">Duplicated &amp; Records</div>
+            <div class="card-subtitle" style="color: #14171b !important;" id="preview-count">{{ errorList.length }} rows have issues</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-sm btn-secondary" (click)="ClearlImport()"><i class="ri-close-line"></i>
+            Clear</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Company</th>
+              <th>Reason</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let c of errorList">
+              <tr>
+                <td style="font-weight:600">{{c?.name}}</td>
+                <td class="text-muted text-sm">{{c?.email}}</td>
+                <td class="text-muted text-sm">{{c?.phone}}</td>
+                <td>{{c?.company}}</td>
+                <td>{{c?.reason}}</td>
+              </tr>
+            </ng-container>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="card" *ngIf="(tempImportsList.length <= 0) && (errorList.length <= 0)">
+      <div class="card-header">
+        <div class="card-title">Import History</div>
+        <div class="card-subtitle" id="history-count"></div>
+      </div>
+      <div class="card-body" id="import-history">
+        <div class="empty-state" style="padding:30px 0">
+          <div class="empty-icon"><i class="ri-history-line"></i></div>
+          <h4>No imports yet</h4>
+          <p>Your import history will appear here after your first upload.</p>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</main>
