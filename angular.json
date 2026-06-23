@@ -25,9 +25,10 @@
               }
             ],
             "styles": [
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css",
-              "src/assets/css/custom.css",
-              "node_modules/ngx-toastr/toastr.css"
+              "src/assets/css/custom.css"
             ],
              "scripts": [
                "node_modules/jquery/dist/jquery.min.js",

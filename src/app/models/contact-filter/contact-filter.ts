@@ -25,6 +25,8 @@ export interface ContactDto {
   phone?: string;
   company?: string;
   status?: string;
+  status_id?: number;
+  assignedTo_id?: number;
   assignedTo?: string;
   createdDate: string;
 }

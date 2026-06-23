@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieStorageService } from '../../services/cookie-service/cookie.service';
+import { InitialsPipe } from '../../services/pipe/initials-pipe';
 
 @Component({
   selector: 'app-header',
-  imports: [],
+  imports: [InitialsPipe],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })

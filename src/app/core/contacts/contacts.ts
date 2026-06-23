@@ -6,10 +6,13 @@ import { CookieStorageService } from '../../services/cookie-service/cookie.servi
 import { GrowSkillAPIEndPointPath } from '../../services/api-service/api.service.path';
 import { CommonModule } from '@angular/common';
 import { InitialsPipe } from '../../services/pipe/initials-pipe';
+import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AddContactPopup } from '../popup/add-contact-popup/add-contact-popup';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-contacts',
-  imports: [CommonModule, InitialsPipe], 
+  imports: [CommonModule, InitialsPipe, NgbModule, RouterLink],
   templateUrl: './contacts.html',
   styleUrl: './contacts.css',
 })
@@ -27,10 +30,23 @@ export class Contacts implements OnInit {
 
   private searchInput$ = new Subject<string>();
   private sub?: Subscription;
-
+  avatarGradients: string[] = [
+    'linear-gradient(135deg,#00C8A0,#0099CC)',
+    'linear-gradient(135deg,#F59E0B,#D97706)',
+    'linear-gradient(135deg,#3B82F6,#1D4ED8)',
+    'linear-gradient(135deg,#EC4899,#BE185D)'
+  ];
+  roleGradients = [
+    'badge badge-sales',
+    'badge badge-viewer',
+    'badge badge-admin',
+    'badge badge-superadmin'
+  ];
   constructor(private _apiService: ApiService,
     private _cookieService: CookieStorageService,
-    private cdr: ChangeDetectorRef,) {
+    private cdr: ChangeDetectorRef,
+    private modalService: NgbModal,
+  ) {
 
   }
   ngOnInit(): void {
@@ -40,8 +56,8 @@ export class Contacts implements OnInit {
     this.sub = this.searchInput$
       .pipe(debounceTime(400), distinctUntilChanged())
       .subscribe((text) => {
-          this.filter.pageNumber = 1; 
-          this.loadContacts();
+        this.filter.pageNumber = 1;
+        this.loadContacts();
       });
     this.loadContacts();
   }
@@ -72,7 +88,7 @@ export class Contacts implements OnInit {
     this.loadContacts();
   }
 
-  loadContacts(): void {debugger
+  loadContacts(): void {
     this.isLoading = true;
     this.errorMessage = '';
 
@@ -82,7 +98,7 @@ export class Contacts implements OnInit {
           if (res?.response?.contactList?.length > 0) {
             this.contacts = res?.response?.contactList ?? [];
             this.totalRecords = res?.response?.totalRecords;
-            this.totalPages =  res?.response?.totalPages;
+            this.totalPages = res?.response?.totalPages;
             this.filter.pageNumber = res?.response?.pageNumber;
             this.filter.pageSize = res?.response?.pageSize;
             this.isLoading = false;
@@ -102,9 +118,6 @@ export class Contacts implements OnInit {
       }
     });
   }
-
-
-
   getDropdowns() {
     this.getDropdownsApiCall(true);
   }
@@ -134,7 +147,55 @@ export class Contacts implements OnInit {
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
   }
-   trackByContact(index: number, user: any): string {
+  trackByContact(index: number, user: any): string {
     return user?.id ?? index;
+  }
+  getAvatarStyle(index: number) {
+    return {
+      width: '38px',
+      height: '38px',
+      fontSize: '.78rem',
+      background: this.avatarGradients[index % this.avatarGradients.length]
+    };
+  }
+  exportContacts(): void {
+    this.isLoading = true;
+    this.errorMessage = '';
+    this._apiService.PostApiExcelExport$(GrowSkillAPIEndPointPath.GetExportContacts, this.filter, false, 'blob')
+      .subscribe({
+        next: (response: Blob) => {
+          const blob = new Blob([response], {
+            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+          });
+          const url = window.URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = `Contacts_${new Date().getTime()}.xlsx`;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          window.URL.revokeObjectURL(url);
+          this.isLoading = false;
+        },
+        error: (err) => {
+          console.error('Export failed', err);
+          this.isLoading = false;
+        }
+      });
+  }
+  openAddContact(contact: any) {
+    const modalRef = this.modalService.open(AddContactPopup,
+      { centered: true, backdrop: 'static', keyboard: false, size: 'md', windowClass: "modal fade modal-overlay" }
+    );
+    let obj = {
+      status: this.status,
+      userList: this.userList,
+      contactDto : contact
+    }
+    modalRef.componentInstance.data = JSON.stringify(obj);
+    modalRef.result.then(res => {
+    }, (data:any) => {
+      if(data=='success') { this.loadContacts(); }
+    })
   }
 }

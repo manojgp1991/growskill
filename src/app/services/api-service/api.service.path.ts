@@ -4,4 +4,6 @@ export const GrowSkillAPIEndPointPath = {
   GetUserByRole: "Admin/GetUserByRole",
   GetContactPageData: "Admin/GetContactPageData",
   GetContactByFilter: "Admin/GetContactByFilter",
+  GetExportContacts: "Admin/exportContacts",
+  GetUpdateContact: "Admin/GetUpdateContact",
 }

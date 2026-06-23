@@ -9,7 +9,7 @@
         <div class="pb-title">All Contacts</div>
         <div class="pb-sub">{{totalRecords}} total contacts in your CRM</div>
       </div>
-      <div style="margin-left:auto"><a href="contacts.html" class="btn btn-primary btn-sm"><i class="ri-add-line"></i>
+      <div style="margin-left:auto"><a href="javascript:void(0)" (click)="openAddContact('')" class="btn btn-primary btn-sm"><i class="ri-add-line"></i>
           Add Contact</a></div>
     </div>
   </div>
@@ -35,8 +35,8 @@
         </select>
       </div>
       <div style="display:flex;gap:8px">
-        <button class="btn btn-sm btn-secondary"><i class="ri-download-line"></i> Export</button>
-        <button class="btn btn-sm btn-primary"><i class="ri-add-line"></i> Add Contact</button>
+        <button (click)="exportContacts()" class="btn btn-sm btn-secondary"><i class="ri-download-line"></i> Export</button>
+        <button (click)="openAddContact('')" class="btn btn-sm btn-primary"><i class="ri-add-line"></i> Add Contact</button>
       </div>
     </div>
     <!-- Table -->
@@ -54,11 +54,11 @@
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngFor="let c of contacts; trackBy: trackByContact">
+          <ng-container *ngFor="let c of contacts; let i = index; trackBy: trackByContact">
           <tr>
             <td>
               <div class="contact-cell">
-                <div class="tbl-avatar" style="background:linear-gradient(135deg,#8B5CF6,#6D28D9)"> {{c?.name | initials}}</div>
+                <div class="tbl-avatar" [ngStyle]="getAvatarStyle(i)"> {{c?.name | initials}}</div>
                 <div>
                   <div class="contact-name">{{c?.name}}</div>
                   <div class="contact-email">{{c?.email}}</div>
@@ -67,23 +67,34 @@
             </td>
             <td>{{c?.phone}}</td>
             <td>{{c?.company}}</td>
-            <td><span class="badge badge-lead">Lead</span></td>
+            <td><span class="badge badge-lead">{{c?.status}}</span></td>
             <td>
               <div class="flex items-center gap-8">
                 <div class="tbl-avatar"
-                  style="width:26px;height:26px;font-size:.6rem;background:linear-gradient(135deg,#3B82F6,#1D4ED8)">  {{ (c?.assignedTo || 'Not Assigned') | initials }}
+                  [ngStyle]="getAvatarStyle(i)">  {{ (c?.assignedTo || 'Not Assigned') | initials }}
                 </div>{{ c?.assignedTo || 'Not Assigned' }}
               </div>
             </td>
-            <td class="text-muted text-xs">{{c?.createdDate}}</td>
+            <td class="text-muted text-xs">{{c?.createdDate | date:'dd/MM/yyyy'}}</td>
             <td>
-              <div class="tbl-actions"><a href="contact-detail.html" class="btn btn-icon btn-outline"><i
-                    class="ri-eye-line"></i></a><button class="btn btn-icon btn-secondary"><i
-                    class="ri-edit-line"></i></button><button class="btn btn-icon btn-danger"><i
-                    class="ri-delete-bin-line"></i></button></div>
+              <div class="tbl-actions">
+                <a routerLink="/contacts-details" class="btn btn-icon btn-outline"><i
+                    class="ri-eye-line"></i></a>
+                    <button (click)="openAddContact(c)" class="btn btn-icon btn-secondary"><i
+                    class="ri-edit-line"></i>
+                  </button>
+                  <button class="btn btn-icon btn-danger"><i
+                    class="ri-delete-bin-line"></i>
+                  </button>
+                  </div>
             </td>
           </tr>
        </ng-container>
+        <ng-container *ngIf="contacts.length === 0">
+          <tr>
+            <td colspan="7" style="text-align:center;padding:20px;color:var(--gray-400)">No contacts found</td>
+          </tr>
+        </ng-container>
         </tbody>
       </table>
     </div>
