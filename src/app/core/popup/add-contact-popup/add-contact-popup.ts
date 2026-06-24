@@ -8,10 +8,12 @@ import { FormsModule } from '@angular/forms';
 import { GrowSkillAPIEndPointPath } from '../../../services/api-service/api.service.path';
 import { CookieStorageService } from '../../../services/cookie-service/cookie.service';
 import { ApplicationToasterService } from '../../../services/toaster-service/toaster-service';
+import { NumberOnly } from '../../../services/directive/number-only/number-only';
+import { EmailOnly } from '../../../services/directive/email-only/email-only';
 
 @Component({
   selector: 'app-add-contact-popup',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, NumberOnly, EmailOnly],
   templateUrl: './add-contact-popup.html',
   styleUrl: './add-contact-popup.css',
 })
@@ -19,6 +21,7 @@ export class AddContactPopup implements OnInit {
   @Input() public data: string = '';
   contactModel: ContactDto = {
     id: 0,
+    internal_code: '',
     name: '',
     email: '',
     phone: '',

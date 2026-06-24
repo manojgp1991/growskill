@@ -162,7 +162,7 @@ img{max-width:100%;display:block}
 .btn-primary{background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:#fff;box-shadow:0 3px 10px rgba(0,200,160,.28)}
 .btn-primary:hover{transform:translateY(-1px);box-shadow:0 5px 16px rgba(0,200,160,.38)}
 .btn-secondary{background:var(--gray-100);color:var(--gray-800);border:1.5px solid var(--gray-200)}
-.btn-secondary:hover{background:var(--gray-200)}
+.btn-secondary:hover{background:var(--gray-200); color: black;}
 .btn-outline{background:transparent;color:var(--teal);border:1.5px solid var(--teal)}
 .btn-outline:hover{background:var(--teal-light)}
 .btn-danger{background:rgba(239,68,68,.09);color:var(--danger);border:1.5px solid rgba(239,68,68,.2)}

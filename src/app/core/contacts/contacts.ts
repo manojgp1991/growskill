@@ -8,11 +8,12 @@ import { CommonModule } from '@angular/common';
 import { InitialsPipe } from '../../services/pipe/initials-pipe';
 import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddContactPopup } from '../popup/add-contact-popup/add-contact-popup';
-import { RouterLink } from '@angular/router';
+import { NavigationExtras, Router, RouterLink } from '@angular/router';
+import { ApplicationToasterService } from '../../services/toaster-service/toaster-service';
 
 @Component({
   selector: 'app-contacts',
-  imports: [CommonModule, InitialsPipe, NgbModule, RouterLink],
+  imports: [CommonModule, InitialsPipe, NgbModule],
   templateUrl: './contacts.html',
   styleUrl: './contacts.css',
 })
@@ -42,10 +43,13 @@ export class Contacts implements OnInit {
     'badge badge-admin',
     'badge badge-superadmin'
   ];
-  constructor(private _apiService: ApiService,
+  constructor(
+    private _apiService: ApiService,
     private _cookieService: CookieStorageService,
     private cdr: ChangeDetectorRef,
     private modalService: NgbModal,
+    private _toaster: ApplicationToasterService,
+    private _router: Router
   ) {
 
   }
@@ -129,7 +133,7 @@ export class Contacts implements OnInit {
       this.dropdownSubscription.unsubscribe();
     }
     this.dropdownSubscription =
-      this._apiService.Post$(GrowSkillAPIEndPointPath.GetContactPageData, payload, true).subscribe({
+      this._apiService.Post$(GrowSkillAPIEndPointPath.GetContactPageData, payload, isPageLoaderShow).subscribe({
         next: (res: any) => {
           if (res.status) {
             if (res?.response?.length > 0) {
@@ -190,12 +194,52 @@ export class Contacts implements OnInit {
     let obj = {
       status: this.status,
       userList: this.userList,
-      contactDto : contact
+      contactDto: contact
     }
     modalRef.componentInstance.data = JSON.stringify(obj);
     modalRef.result.then(res => {
-    }, (data:any) => {
-      if(data=='success') { this.loadContacts(); }
+    }, (data: any) => {
+      if (data == 'success') { this.loadContacts(); }
     })
+  }
+
+  confirmDeleteContact(contact: any) {
+    if (confirm('Are you sure you want to delete this contact?')) {
+      this.ApiCallSaveContacts(contact);
+    }
+  }
+  ApiCallSaveContacts(data: any) {
+    let obj: any = {};
+    obj.id = data?.id ?? 0;
+    obj.sub_id = this.cookieUserData?.subcriptionId;
+    obj.user_id = this.cookieUserData?.id;
+    obj.action_type = -1;
+
+    this._apiService.Post$(GrowSkillAPIEndPointPath.GetUpdateContact, obj, true).subscribe({
+      next: (res: any) => {
+        if (res.status) {
+          this._toaster.success('Successful', 'Contact removed successfully.');
+          this.loadContacts();
+          this.cdr.markForCheck();
+        } else {
+          this._toaster.error('', 'Failed to removed contact.');
+        }
+
+      },
+      error: () => {
+      }
+    });
+  }
+  openContactDetail($event: any) {
+    var clickedContact: any = $event;
+    let pdata = {
+      internal_code: clickedContact.internal_Code
+    }
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        "pdata": JSON.stringify(pdata)
+      }
+    };
+    this._router.navigate(['contacts-details'], navigationExtras);
   }
 }

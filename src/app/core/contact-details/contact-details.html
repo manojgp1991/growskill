@@ -1,83 +1,164 @@
- <main class="main-content">
-      <div style="margin-bottom:16px"><a href="contacts.html" class="btn btn-sm btn-secondary"><i class="ri-arrow-left-line"></i> Back to Contacts</a></div>
+<main class="main-content">
+  <div style="margin-bottom:16px"><a routerLink="/contacts" class="btn btn-sm btn-secondary"><i
+        class="ri-arrow-left-line"></i> Back to Contacts</a></div>
 
-      <!-- Banner -->
-      <div class="page-banner">
-        <img src="images/contact-detail-icon.svg" alt=""/>
-        <div class="page-banner-overlay">
-          <div><div class="pb-title">Kavita Nair</div><div class="pb-sub">Innovate Co</div></div>
+  <!-- Banner -->
+  <div class="page-banner">
+    <img src="images/contact-detail-icon.svg" alt="" />
+    <div class="page-banner-overlay">
+      <div>
+        <div class="pb-title">{{contactDetails?.name}}</div>
+        <div class="pb-sub">{{contactDetails?.company}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <!-- Left -->
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <!-- Profile card -->
+      <div class="card">
+        <div class="card-body">
+          <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:16px">
+
+            <div
+              style="width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#3B82F6,#1D4ED8);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;color:#fff;font-family:'Syne',sans-serif;flex-shrink:0">
+              {{contactDetails?.name | initials}}</div>
+            <div style="flex:1">
+              <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.15rem;color:var(--navy)">
+                {{contactDetails?.name}}
+              </div>
+              <div style="display:flex;gap:14px;margin-top:6px;flex-wrap:wrap">
+                <span style="font-size:.8rem;color:var(--gray-600)"><i class="ri-mail-line"></i>
+                  {{contactDetails?.email}}</span>
+                <span style="font-size:.8rem;color:var(--gray-600)"><i class="ri-phone-line"></i>
+                  {{contactDetails?.phone}}</span>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:8px;align-items:center;flex-wrap:wrap">
+                <span class="badge badge-contacted">{{contactDetails?.status}}</span>
+                <span style="font-size:.8rem;color:var(--gray-600)"><i class="ri-building-line"></i>
+                  {{contactDetails?.company}}</span>
+              </div>
+
+            </div>
+          </div>
+          <div style="border-top:1px solid var(--gray-100);padding-top:13px;display:flex;align-items:center;gap:9px">
+            <div
+              style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#3B82F6,#1D4ED8);display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;color:#fff">
+              AS</div>
+            <span style="font-size:.83rem;color:var(--gray-600)">Assigned to <strong>{{contactDetails?.assignedTo ??
+                'Not Assigned'}}</strong></span>
+          </div>
         </div>
       </div>
+      <!-- Timeline -->
+      <div class="card" *ngIf="(activityList?.length ?? 0) > 0">
+        <div class="card-header">
+          <div class="card-title">📋 Activity Timeline</div>
+        </div>
+        <div class="card-body">
+          <div class="timeline">
 
-      <div class="grid-2">
-        <!-- Left -->
-        <div style="display:flex;flex-direction:column;gap:18px">
-          <!-- Profile card -->
-          <div class="card">
-            <div class="card-body">
-              <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:16px">
-                <div style="width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#3B82F6,#1D4ED8);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;color:#fff;font-family:'Syne',sans-serif;flex-shrink:0">KN</div>
-                <div style="flex:1">
-                  <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.15rem;color:var(--navy)">Kavita Nair</div>
-                  <div style="display:flex;gap:14px;margin-top:6px;flex-wrap:wrap">
-                    <span style="font-size:.8rem;color:var(--gray-600)"><i class="ri-mail-line"></i> kavita@innovate.co</span>
-                    <span style="font-size:.8rem;color:var(--gray-600)"><i class="ri-phone-line"></i> +91 87654 32109</span>
-                  </div>
-                  <div style="display:flex;gap:8px;margin-top:8px;align-items:center;flex-wrap:wrap">
-                    <span class="badge badge-contacted">Contacted</span>
-                    <span style="font-size:.8rem;color:var(--gray-600)"><i class="ri-building-line"></i> Innovate Co</span>
-                  </div>
+
+            <!-- <div class="tl-item">
+              <div class="tl-left">
+                <div class="tl-dot" style="background:rgba(0,200,160,.15);border:2px solid #00C8A0;color:#00C8A0"><i
+                    class="ri-user-add-line"></i></div>
+                <div class="tl-line"></div>
+              </div>
+              <div class="tl-content">
+                <div class="tl-box">Contact created – status: contacted</div>
+                <div class="tl-meta"><b>System</b> · 2024-01-16</div>
+              </div>
+            </div>
+            
+            <div class="tl-item">
+              <div class="tl-left">
+                <div class="tl-dot" style="background:rgba(59,130,246,.15);border:2px solid #3B82F6;color:#3B82F6"><i
+                    class="ri-phone-line"></i></div>
+                <div class="tl-line"></div>
+              </div>
+              <div class="tl-content">
+                <div class="tl-box">Called – very interested in training package.</div>
+                <div class="tl-meta"><b>Amit Singh</b> · 2024-01-17 10:00</div>
+              </div>
+            </div> -->
+
+            <ng-container *ngFor="let activity of activityList; let i = index">
+              <div class="tl-item">
+                <div class="tl-left">
+                  <div class="tl-dot" style="background:rgba(245,158,11,.15);border:2px solid #F59E0B;color:#F59E0B"><i
+                      class="ri-chat-3-line"></i></div>
+                </div>
+                <div class="tl-content">
+                  <div class="tl-box">{{activity?.contact_follow_up}}</div>
+                  <div class="tl-meta"><b>{{activity?.assignedTo}}</b> · {{activity?.updated_date | date:'dd-MM-yyyy
+                    HH:mm'}}</div>
                 </div>
               </div>
-              <div style="border-top:1px solid var(--gray-100);padding-top:13px;display:flex;align-items:center;gap:9px">
-                <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#3B82F6,#1D4ED8);display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;color:#fff">AS</div>
-                <span style="font-size:.83rem;color:var(--gray-600)">Assigned to <strong>Amit Singh</strong></span>
-              </div>
-            </div>
-          </div>
-          <!-- Timeline -->
-          <div class="card">
-            <div class="card-header"><div class="card-title">📋 Activity Timeline</div></div>
-            <div class="card-body">
-              <div class="timeline">
-                <div class="tl-item"><div class="tl-left"><div class="tl-dot" style="background:rgba(0,200,160,.15);border:2px solid #00C8A0;color:#00C8A0"><i class="ri-user-add-line"></i></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-box">Contact created – status: contacted</div><div class="tl-meta"><b>System</b> · 2024-01-16</div></div></div>
-                <div class="tl-item"><div class="tl-left"><div class="tl-dot" style="background:rgba(59,130,246,.15);border:2px solid #3B82F6;color:#3B82F6"><i class="ri-phone-line"></i></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-box">Called – very interested in training package.</div><div class="tl-meta"><b>Amit Singh</b> · 2024-01-17 10:00</div></div></div>
-                <div class="tl-item"><div class="tl-left"><div class="tl-dot" style="background:rgba(245,158,11,.15);border:2px solid #F59E0B;color:#F59E0B"><i class="ri-chat-3-line"></i></div></div><div class="tl-content"><div class="tl-box">Follow-up scheduled for next week. Needs detailed proposal.</div><div class="tl-meta"><b>Amit Singh</b> · 2024-01-18 14:00</div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Right -->
-        <div style="display:flex;flex-direction:column;gap:18px">
-          <!-- Status selector -->
-          <div class="card">
-            <div class="card-header"><div class="card-title">🔄 Update Status</div></div>
-            <div class="card-body" style="display:flex;flex-direction:column;gap:7px">
-              <div style="display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:9px;border:1.5px solid var(--gray-200);background:#fff"><span>🎯</span><span style="font-size:.86rem;flex:1">Lead</span></div>
-              <div style="display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:9px;border:1.5px solid #3B82F6;background:rgba(59,130,246,.1)"><span>📞</span><span style="font-size:.86rem;font-weight:700;color:#3B82F6;flex:1">Contacted</span><span style="font-size:16px">✓</span></div>
-              <div style="display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:9px;border:1.5px solid var(--gray-200);background:#fff"><span>✅</span><span style="font-size:.86rem;flex:1">Qualified</span></div>
-              <div style="display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:9px;border:1.5px solid var(--gray-200);background:#fff"><span>📄</span><span style="font-size:.86rem;flex:1">Proposal</span></div>
-              <div style="display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:9px;border:1.5px solid var(--gray-200);background:#fff"><span>🏆</span><span style="font-size:.86rem;flex:1">Won</span></div>
-              <div style="display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:9px;border:1.5px solid var(--gray-200);background:#fff"><span>❌</span><span style="font-size:.86rem;flex:1">Lost</span></div>
-            </div>
-          </div>
-          <!-- Add Comment -->
-          <div class="card">
-            <div class="card-header"><div class="card-title">💬 Add Note / Comment</div></div>
-            <div class="card-body" style="display:flex;flex-direction:column;gap:10px">
-              <textarea rows="4" placeholder="Write a call note, follow-up or update…" style="width:100%;padding:10px 12px;border:1.5px solid var(--gray-200);border-radius:9px;font-size:.85rem;resize:vertical;outline:none;font-family:inherit;box-sizing:border-box"></textarea>
-              <button class="btn btn-primary"><i class="ri-send-plane-line"></i> Save Comment</button>
-            </div>
-          </div>
-          <!-- Quick Actions -->
-          <div class="card">
-            <div class="card-header"><div class="card-title">⚡ Quick Actions</div></div>
-            <div class="card-body" style="display:flex;flex-direction:column;gap:9px">
-              <button class="btn btn-secondary" style="justify-content:flex-start"><i class="ri-whatsapp-line"></i> Send WhatsApp</button>
-              <button class="btn btn-secondary" style="justify-content:flex-start"><i class="ri-mail-send-line"></i> Send Email</button>
-              <button class="btn btn-outline" style="justify-content:flex-start"><i class="ri-edit-line"></i> Edit Contact</button>
-            </div>
+            </ng-container>
+
           </div>
         </div>
       </div>
-    </main>
+    </div>
+    <!-- Right -->
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <!-- Status selector -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">🔄 Update Status</div>
+        </div>
+        <div class="card-body" style="display:flex;flex-direction:column;gap:7px">
+
+          <ng-container *ngFor="let s of statusList; let i = index">
+            <div (click)="updateContactStatus(s)"
+              style="display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:9px;border:1.5px solid var(--gray-200);background:#fff"
+              [style.border]="s.id == contactDetails?.status_id ? '1.5px solid #3B82F6' : null"
+              [style.background]="s.id == contactDetails?.status_id ? 'rgba(59,130,246,.1)' : null">
+
+              <span>{{ statusIcons[i % statusIcons.length] }}</span>
+
+              <span style="font-size:.86rem;flex:1"
+                [style.font-weight]="s.id == contactDetails?.status_id ? '700' : null"
+                [style.color]="s.id == contactDetails?.status_id ? '#3B82F6' : null">
+                {{ s?.caption }}
+              </span>
+
+              <span *ngIf="s.id == contactDetails?.status_id" style="font-size:16px">
+                ✓
+              </span>
+
+            </div>
+          </ng-container>
+
+        </div>
+      </div>
+      <!-- Add Comment -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">💬 Add Note / Comment</div>
+        </div>
+        <div class="card-body" style="display:flex;flex-direction:column;gap:10px">
+          <textarea [(ngModel)]="contactNote" rows="4" placeholder="Write a call note, follow-up or update…"
+            style="width:100%;padding:10px 12px;border:1.5px solid var(--gray-200);border-radius:9px;font-size:.85rem;resize:vertical;outline:none;font-family:inherit;box-sizing:border-box"></textarea>
+          <button (click)="addCommentOnContact()" class="btn btn-primary"><i class="ri-send-plane-line"></i> Save Comment</button>
+        </div>
+      </div>
+      <!-- Quick Actions -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">⚡ Quick Actions</div>
+        </div>
+        <div class="card-body" style="display:flex;flex-direction:column;gap:9px">
+          <button class="btn btn-secondary" style="justify-content:flex-start"><i class="ri-whatsapp-line"></i> Send
+            WhatsApp</button>
+          <button class="btn btn-secondary" style="justify-content:flex-start"><i class="ri-mail-send-line"></i> Send
+            Email</button>
+          <button class="btn btn-outline" style="justify-content:flex-start"><i class="ri-edit-line"></i> Edit
+            Contact</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

@@ -55,10 +55,12 @@
           <div class="input-wrap">
             <i class="ri-lock-line prefix"></i>
             <input
-              type="password"
+              [type]="showPassword ? 'text' : 'password'"
+              id="pw"
               formControlName="user_password"
               placeholder="••••••••" />
-            <button type="button" class="eye-btn" id="eyebtn"><i class="ri-eye-line" id="eyeic"></i></button>
+            <button type="button" class="eye-btn" (click)="showPassword = !showPassword">
+            <i [class]="showPassword ? 'ri-eye-off-line' : 'ri-eye-line'"></i></button>
           </div>
         </div>
         <div class="err-box" *ngIf="errorMessage">

@@ -78,12 +78,12 @@
             <td class="text-muted text-xs">{{c?.createdDate | date:'dd/MM/yyyy'}}</td>
             <td>
               <div class="tbl-actions">
-                <a routerLink="/contacts-details" class="btn btn-icon btn-outline"><i
+                <a (click)="openContactDetail(c)" class="btn btn-icon btn-outline"><i
                     class="ri-eye-line"></i></a>
                     <button (click)="openAddContact(c)" class="btn btn-icon btn-secondary"><i
                     class="ri-edit-line"></i>
                   </button>
-                  <button class="btn btn-icon btn-danger"><i
+                  <button (click)="confirmDeleteContact(c)" class="btn btn-icon btn-danger"><i
                     class="ri-delete-bin-line"></i>
                   </button>
                   </div>

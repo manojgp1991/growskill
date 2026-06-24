@@ -12,12 +12,12 @@
     </div>
     <div class="form-group">
       <label>Email *</label>
-      <input type="email" id="add-email" [(ngModel)]="contactModel.email" name="email" #email="ngModel"
+      <input type="email" appEmailOnly id="add-email" [(ngModel)]="contactModel.email" name="email" #email="ngModel"
       [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" placeholder="john@company.com" required/>
     </div>
     <div class="form-group">
       <label>Phone</label>
-      <input type="text" id="add-phone" [(ngModel)]="contactModel.phone" name="phone" #phone="ngModel"
+      <input type="text" appNumberOnly id="add-phone" [(ngModel)]="contactModel.phone" name="phone" #phone="ngModel"
       [ngClass]="{ 'is-invalid': f.submitted && phone.invalid }" placeholder="+91 99999 00000" required/></div>
     <div class="form-group">
       <label>Company</label>

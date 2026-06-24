@@ -20,6 +20,7 @@ export class ContactFilter {
 
 export interface ContactDto {
   id: number;
+  internal_code?: string;
   name: string;
   email: string;
   phone?: string;

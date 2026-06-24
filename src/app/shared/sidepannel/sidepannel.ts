@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 import { Footer } from '../footer/footer';
 import { CookieStorageService } from '../../services/cookie-service/cookie.service';
 
 @Component({
   selector: 'app-sidepannel',
-  imports: [RouterLink, Footer],
+  imports: [RouterLink, Footer,RouterModule],
   templateUrl: './sidepannel.html',
   styleUrl: './sidepannel.css',
 })

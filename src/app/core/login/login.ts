@@ -22,6 +22,7 @@ export class Login implements OnInit {
   isSubmitting = false;
   errorMessage = '';
   loginForm!: FormGroup;
+  showPassword = false;
 
   constructor(
     private _apiService: ApiService,

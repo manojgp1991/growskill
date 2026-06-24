@@ -7,5 +7,8 @@ export const GrowSkillAPIEndPointPath = {
   GetExportContacts: "Admin/exportContacts",
   GetUpdateContact: "Admin/GetUpdateContact",
   GetImportContacts: "Contact/GetImportContacts",
-  GetProcessImportContacts: "Admin/GetProcessContact"
+  GetProcessImportContacts: "Admin/GetProcessContact",
+  GetContactDetails: "Admin/GetContactDetails",
+  GetContactActivities: "Admin/GetContactActivities",
+  UpdateContactStatus: "Admin/UpdateContactStatus",
 }
