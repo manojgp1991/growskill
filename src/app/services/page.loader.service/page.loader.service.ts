@@ -7,6 +7,6 @@ import { BehaviorSubject } from 'rxjs';
 export class PageLoaderService {
 
   public isLoading = new BehaviorSubject(false);
-  public loadingText = new BehaviorSubject('');
+  public loadingText = new BehaviorSubject('Loading...');
   constructor() { }
 }

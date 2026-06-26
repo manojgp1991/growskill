@@ -164,7 +164,11 @@ img{max-width:100%;display:block}
 .btn-secondary{background:var(--gray-100);color:var(--gray-800);border:1.5px solid var(--gray-200)}
 .btn-secondary:hover{background:var(--gray-200); color: black;}
 .btn-outline{background:transparent;color:var(--teal);border:1.5px solid var(--teal)}
-.btn-outline:hover{background:var(--teal-light)}
+.btn-outline:hover{
+  background: #bfede4;
+    color: var(--teal);
+    border: 1.5px solid var(--teal);
+}
 .btn-danger{background:rgba(239,68,68,.09);color:var(--danger);border:1.5px solid rgba(239,68,68,.2)}
 .btn-sm{padding:5px 13px;font-size:.78rem}
 .btn-icon{padding:7px;width:33px;height:33px;justify-content:center}
@@ -251,7 +255,7 @@ img{max-width:100%;display:block}
 .page-btn:hover:not(.active){border-color:var(--teal);color:var(--teal)}
 
 /* ── GRID HELPERS ── */
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid-2{display:grid;grid-template-columns:2fr 1fr;gap:18px}
 .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
 .flex{display:flex}.items-center{align-items:center}.justify-between{justify-content:space-between}
 .gap-8{gap:8px}.gap-12{gap:12px}.gap-16{gap:16px}

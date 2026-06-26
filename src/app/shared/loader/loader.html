@@ -1,0 +1,28 @@
+<!-- <ng-container *ngIf="IsShowPageLoader">
+    <div class="full-page-loader">
+		<div class="cigarette-holder">
+			<div class="burnt">
+				<p></p> <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+			</div>
+			<div class="ciggi-body"> <span></span>
+				<div class="smoke"></div>
+				<div class="smoke-2"></div>
+				<div class="smoke-3"></div>
+				<div class="smoke-4"></div>
+				<div class="smoke-5"></div>
+			</div>
+			<div class="filter"> <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+			</div>
+		</div>
+		<div class="text-msg">Please wait while the site is loading...</div>
+	</div>
+</ng-container> -->
+
+
+<ng-container *ngIf="IsShowPageLoader">
+  <div class="full-page-loader">
+    <div class="text-msg">
+      {{ Loadertext || 'Loading while fetching data...' }}
+    </div>
+  </div>
+</ng-container>
