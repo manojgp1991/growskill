@@ -48,6 +48,7 @@ export class AdminHome implements OnInit {
     private _router: Router
   ) {
     this.cookieUserData = this._cookieService.getUser();
+    this._cookieService.checkModuleAccess('Dashboard');
     this.getModulePermissions();
   }
   ngOnInit(): void {

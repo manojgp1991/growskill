@@ -37,6 +37,7 @@ roleGradients = [
 
   ngOnInit(): void {
     this.cookieUserData = this._cookieService.getUser();
+    this._cookieService.checkModuleAccess('User Management');
     this.getUsersByRole()
   }
 

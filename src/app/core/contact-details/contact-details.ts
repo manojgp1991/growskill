@@ -62,6 +62,7 @@ export class ContactDetails implements OnInit {
     private _activatedRoute: ActivatedRoute
   ) {
     this.cookieUserData = this._cookieService.getUser();
+    this._cookieService.checkModuleAccess('Contact Details');
     this.getModulePermissions();
     this._activatedRoute.queryParams.subscribe(params => {
       if (params['pdata']) {

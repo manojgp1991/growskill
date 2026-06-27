@@ -57,6 +57,7 @@ export class Contacts implements OnInit {
     private _router: Router
   ) {
     this.cookieUserData = this._cookieService.getUser();
+    this._cookieService.checkModuleAccess('Contacts');
     this.getModulePermissions();
   }
   ngOnInit(): void {

@@ -41,6 +41,7 @@ export class BulkImport implements OnInit {
     private _cookieService: CookieStorageService,
   ) {
     this.cookieUserData = this._cookieService.getUser();
+    this._cookieService.checkModuleAccess('Bulk Import');
     this.getModulePermissions();
   }
   ngOnInit(): void {

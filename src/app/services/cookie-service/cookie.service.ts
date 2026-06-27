@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { ReadWritePermission } from '../../models/loginUser/menuPermission';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CookieStorageService {
-  constructor(private _cookieService: CookieService) {
+  constructor(
+    private _cookieService: CookieService,
+    private _router: Router
+  ) {
 
   }
 
@@ -41,36 +45,45 @@ export class CookieStorageService {
   }
 
   hasModuleAccess(moduleName: string): boolean {
-  const user = this.getUser();
-  if (!user || !user.moduleAccess) {
-    return false;
-  }
-  const module = user.moduleAccess.find(
-    (m: any) => m.module_name.toLowerCase() === moduleName.toLowerCase()
-  );
-  return module?.allow_access ?? false;
-}
-
-getRolePermission(roleId: number): ReadWritePermission {
-  const user = this.getUser();
-
-  if (!user || !user.permissions) {
-    return { readPermission: false, writePermission: false };
+    const user = this.getUser();
+    if (!user || !user.moduleAccess) {
+      return false;
+    }
+    const module = user.moduleAccess.find(
+      (m: any) => m.module_name.toLowerCase() === moduleName.toLowerCase()
+    );
+    return module?.allow_access ?? false;
   }
 
-  const permission = user.permissions.find(
-    (p: any) => p.role_id === roleId
-  );
+  getRolePermission(roleId: number): ReadWritePermission {
+    const user = this.getUser();
 
-  return permission
-    ? {
+    if (!user || !user.permissions) {
+      return { readPermission: false, writePermission: false };
+    }
+
+    const permission = user.permissions.find(
+      (p: any) => p.role_id === roleId
+    );
+
+    return permission
+      ? {
         readPermission: permission.allow_read,
         writePermission: permission.allow_write
       }
-    : {
+      : {
         readPermission: false,
         writePermission: false
       };
-}
+  }
 
+  checkModuleAccess(moduleName: string): boolean {debugger
+    const hasAccess = this.hasModuleAccess(moduleName);
+    if (!hasAccess) {
+      this.clearAllCookies();
+      this._router.navigate(['/login']);
+      return false;
+    }
+    return true;
+  }
 }
