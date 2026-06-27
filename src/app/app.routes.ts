@@ -40,6 +40,16 @@ export const routes: Routes = [
         canActivate: [authGuard],
         path: 'settings',
         loadComponent: () => import('./core/settings/settings').then(m => m.Settings)
+      },
+       {
+        canActivate: [authGuard],
+        path: 'email-templates',
+        loadComponent: () => import('./core/email-templates/email-templates').then(m => m.EmailTemplates)
+      },
+      {
+        canActivate: [authGuard],
+        path: 'new-email-template',
+        loadComponent: () => import('./core/new-email-template/new-email-template').then(m => m.NewEmailTemplate)
       }
     ]
   },

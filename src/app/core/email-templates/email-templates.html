@@ -1,0 +1,91 @@
+<main class="main-content">
+
+  <!-- Page banner -->
+  <div class="page-banner">
+    <img src="images/contacts-icon.svg" alt="" />
+    <div class="page-banner-overlay">
+      <i class="ri-contacts-book-2-line"></i>
+      <div>
+        <div class="pb-title">All Templates</div>
+        <div class="pb-sub">2 total templates in your CRM</div>
+      </div>
+      <div style="margin-left:auto"><a routerLink="/new-email-template" class="btn btn-primary btn-sm"><i class="ri-add-line"></i>
+          Add New Template</a></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <!-- Table -->
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Template Name</th>
+            <th>Create on</th>
+            <th>Created by</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- <ng-container *ngFor="let c of contacts; let i = index; trackBy: trackByContact">
+          <tr>
+            <td>
+              <div class="contact-cell">
+                <div class="tbl-avatar" [ngStyle]="getAvatarStyle(i)"> {{c?.name | initials}}</div>
+                <div>
+                  <div class="contact-name">{{c?.name}}</div>
+                  <div class="contact-email">{{c?.email}}</div>
+                </div>
+              </div>
+            </td>
+            <td>{{c?.phone}}</td>
+            <td>{{c?.company}}</td>
+            <td><span class="badge badge-lead">{{c?.status}}</span></td>
+            <td>
+              <div class="flex items-center gap-8">
+                <div class="tbl-avatar"
+                  [ngStyle]="getAvatarStyle(i)">  {{ (c?.assignedTo || 'Not Assigned') | initials }}
+                </div>{{ c?.assignedTo || 'Not Assigned' }}
+              </div>
+            </td>
+            <td class="text-muted text-xs">{{c?.createdDate | date:'dd/MM/yyyy'}}</td>
+            <td>
+              <div class="tbl-actions">
+                <a (click)="openContactDetail(c)" class="btn btn-icon btn-outline"><i
+                    class="ri-eye-line"></i></a>
+                    <button *ngIf="actionPermission.writePermission" (click)="openAddContact(c)" class="btn btn-icon btn-secondary"><i
+                    class="ri-edit-line"></i>
+                  </button>
+                  <button *ngIf="actionPermission.writePermission" (click)="confirmDeleteContact(c)" class="btn btn-icon btn-danger"><i
+                    class="ri-delete-bin-line"></i>
+                  </button>
+                  </div>
+            </td>
+          </tr>
+       </ng-container>
+        <ng-container *ngIf="contacts.length === 0">
+          <tr>
+            <td colspan="7" style="text-align:center;padding:20px;color:var(--gray-400)">No contacts found</td>
+          </tr>
+        </ng-container> -->
+        </tbody>
+      </table>
+    </div>
+    <!-- Pagination -->
+    <div class="card-body" style="padding:10px 18px">
+      <div class="pagination">
+        <!-- <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn"><i class="ri-arrow-right-s-line"></i></button> -->
+
+         <!-- <button
+            *ngFor="let p of [].constructor(totalPages); let i = index"
+            class="page-btn"
+            [class.active]="filter.pageNumber === i + 1"
+            (click)="goToPage(i + 1)">
+            {{ i + 1 }}
+        </button> -->
+      </div>
+    </div>
+  </div>
+</main>
