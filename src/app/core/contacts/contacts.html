@@ -9,7 +9,7 @@
         <div class="pb-title">All Contacts</div>
         <div class="pb-sub">{{totalRecords}} total contacts in your CRM</div>
       </div>
-      <div style="margin-left:auto"><a href="javascript:void(0)" (click)="openAddContact('')" class="btn btn-primary btn-sm"><i class="ri-add-line"></i>
+      <div *ngIf="actionPermission.writePermission" style="margin-left:auto"><a href="javascript:void(0)" (click)="openAddContact('')" class="btn btn-primary btn-sm"><i class="ri-add-line"></i>
           Add Contact</a></div>
     </div>
   </div>
@@ -36,7 +36,7 @@
       </div>
       <div style="display:flex;gap:8px">
         <button (click)="exportContacts()" class="btn btn-sm btn-secondary"><i class="ri-download-line"></i> Export</button>
-        <button (click)="openAddContact('')" class="btn btn-sm btn-primary"><i class="ri-add-line"></i> Add Contact</button>
+        <button *ngIf="actionPermission.writePermission" (click)="openAddContact('')" class="btn btn-sm btn-primary"><i class="ri-add-line"></i> Add Contact</button>
       </div>
     </div>
     <!-- Table -->
@@ -80,10 +80,10 @@
               <div class="tbl-actions">
                 <a (click)="openContactDetail(c)" class="btn btn-icon btn-outline"><i
                     class="ri-eye-line"></i></a>
-                    <button (click)="openAddContact(c)" class="btn btn-icon btn-secondary"><i
+                    <button *ngIf="actionPermission.writePermission" (click)="openAddContact(c)" class="btn btn-icon btn-secondary"><i
                     class="ri-edit-line"></i>
                   </button>
-                  <button (click)="confirmDeleteContact(c)" class="btn btn-icon btn-danger"><i
+                  <button *ngIf="actionPermission.writePermission" (click)="confirmDeleteContact(c)" class="btn btn-icon btn-danger"><i
                     class="ri-delete-bin-line"></i>
                   </button>
                   </div>

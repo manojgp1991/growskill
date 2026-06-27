@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { ReadWritePermission } from '../../models/loginUser/menuPermission';
 
 @Injectable({
   providedIn: 'root'
@@ -38,5 +39,38 @@ export class CookieStorageService {
   getLocalStorage(key: string): any {
     return localStorage.getItem(key);
   }
+
+  hasModuleAccess(moduleName: string): boolean {
+  const user = this.getUser();
+  if (!user || !user.moduleAccess) {
+    return false;
+  }
+  const module = user.moduleAccess.find(
+    (m: any) => m.module_name.toLowerCase() === moduleName.toLowerCase()
+  );
+  return module?.allow_access ?? false;
+}
+
+getRolePermission(roleId: number): ReadWritePermission {
+  const user = this.getUser();
+
+  if (!user || !user.permissions) {
+    return { readPermission: false, writePermission: false };
+  }
+
+  const permission = user.permissions.find(
+    (p: any) => p.role_id === roleId
+  );
+
+  return permission
+    ? {
+        readPermission: permission.allow_read,
+        writePermission: permission.allow_write
+      }
+    : {
+        readPermission: false,
+        writePermission: false
+      };
+}
 
 }

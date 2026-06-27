@@ -1,12 +1,10 @@
 import { inject } from '@angular/core';
-import { CanActivateFn } from '@angular/router';
+import { CanActivateFn, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
 import { CookieStorageService } from '../cookie-service/cookie.service';
-//import { SearchHeaderComponent } from 'src/app/modules_or_pages/layout/search-header/search-header.component';
 
 export const authGuard: CanActivateFn = (route, state) => {
-
+  const router = inject(Router);
   const cookieService = inject(CookieStorageService);
   const modalService = inject(NgbModal);
 
@@ -23,6 +21,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   //   modalService,
   //   cookieService
   // ).openLoginPopup();
-
-  return false;
+  
+  //return false;
+   return router.createUrlTree(['/login']);
 };

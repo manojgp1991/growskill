@@ -10,6 +10,7 @@ import { GrowSkillAPIEndPointPath } from '../../services/api-service/api.service
 import { ContactDto } from '../../models/contact-filter/contact-filter';
 import { InitialsPipe } from '../../services/pipe/initials-pipe';
 import { FormsModule } from '@angular/forms';
+import { ReadWritePermission } from '../../models/loginUser/menuPermission';
 
 @Component({
   selector: 'app-contact-details',
@@ -47,6 +48,10 @@ export class ContactDetails implements OnInit {
   ];
   contactNote: string = '';
   tempConnetNote: string = '';
+  actionPermission: ReadWritePermission = {
+    readPermission: false,
+    writePermission: false
+  }
 
   constructor(
     private _apiService: ApiService,
@@ -57,6 +62,7 @@ export class ContactDetails implements OnInit {
     private _activatedRoute: ActivatedRoute
   ) {
     this.cookieUserData = this._cookieService.getUser();
+    this.getModulePermissions();
     this._activatedRoute.queryParams.subscribe(params => {
       if (params['pdata']) {
         var data: any = JSON.parse(params['pdata']);
@@ -176,5 +182,8 @@ export class ContactDetails implements OnInit {
     };
 
     this.updateContactStatus(payload)
+  }
+  getModulePermissions() {
+    this.actionPermission = this._cookieService.getRolePermission(this.cookieUserData?.roleId)
   }
 }

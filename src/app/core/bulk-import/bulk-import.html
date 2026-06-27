@@ -54,7 +54,7 @@
     </div>
 
     <!-- Step 2 -->
-    <div class="card">
+    <div class="card" *ngIf="actionPermission.writePermission">
       <div class="card-header">
         <div style="display:flex;align-items:center;gap:12px">
           <div
@@ -63,21 +63,7 @@
           <div class="card-title">Upload Your File</div>
         </div>
       </div>
-      <!-- <div class="card-body">
-            <div class="upload-zone">
-              <div class="upload-icon"><i class="ri-upload-cloud-2-line"></i></div>
-              <h4>Drop your Excel or CSV file here</h4>
-              <p>or click to browse files from your computer</p>
-              <div class="format-tags">
-                <span class="format-tag"><i class="ri-file-excel-2-line"></i> .xlsx</span>
-                <span class="format-tag"><i class="ri-file-text-line"></i> .csv</span>
-                <span class="format-tag"><i class="ri-file-excel-line"></i> .xls</span>
-              </div>
-            </div>
-          </div> -->
-
-
-      <div class="card-body">
+        <div class="card-body">
         <label for="file-upload" style="display: block;">
           <div class="upload-zone" id="upload-zone" ondragover="event.preventDefault();this.classList.add('drag-over')"
             ondragleave="this.classList.remove('drag-over')"

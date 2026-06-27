@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { CookieStorageService } from '../../services/cookie-service/cookie.service';
 import { Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { ReadWritePermission } from '../../models/loginUser/menuPermission';
 
 @Component({
   selector: 'app-bulk-import',
@@ -28,15 +29,21 @@ export class BulkImport implements OnInit {
   status: any[] = [];
   cookieUserData: any = {};
   dropdownSubscription: Subscription | undefined;
+  actionPermission: ReadWritePermission = {
+    readPermission: false,
+    writePermission: false
+  }
 
   constructor(
     private cdr: ChangeDetectorRef,
     private _apiService: ApiService,
     private _toaster: ApplicationToasterService,
     private _cookieService: CookieStorageService,
-  ) { }
-  ngOnInit(): void {
+  ) {
     this.cookieUserData = this._cookieService.getUser();
+    this.getModulePermissions();
+  }
+  ngOnInit(): void {
     this.getDropdowns();
   }
   getDropdowns() {
@@ -105,11 +112,11 @@ export class BulkImport implements OnInit {
 
     this._apiService.PostImportFile$(GrowSkillAPIEndPointPath.GetImportContacts, formData, true).subscribe({
       next: (res) => {
-          this.result = res;
-          this.tempImportsList = this.result?.countactList ?? [];
-          this.errorList = this.result?.errors ?? [];
-          this.isUploading = false;
-          this.cdr.markForCheck();
+        this.result = res;
+        this.tempImportsList = this.result?.countactList ?? [];
+        this.errorList = this.result?.errors ?? [];
+        this.isUploading = false;
+        this.cdr.markForCheck();
       },
       error: (err: HttpErrorResponse) => {
         this.errorMessage = err.error?.message ?? 'Something went wrong during import.';
@@ -128,7 +135,7 @@ export class BulkImport implements OnInit {
     this.isUploading = false;
     this.cdr.markForCheck();
   }
-  
+
   ClearlImport(): void {
     this.errorList = [];
     this.cdr.markForCheck();
@@ -167,5 +174,7 @@ export class BulkImport implements OnInit {
       }
     });
   }
-
+  getModulePermissions() {
+    this.actionPermission = this._cookieService.getRolePermission(this.cookieUserData?.roleId)
+  }
 }

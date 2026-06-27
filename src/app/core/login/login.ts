@@ -56,7 +56,7 @@ export class Login implements OnInit {
           if (result.status) {
             this.userRoles = result?.response ?? [];
             if (this.userRoles.length > 0) {
-              this.selectedRole = this.userRoles[0]?.role ?? null;
+              this.selectRole(this.userRoles[0]);
             }
             this.cdr.markForCheck();
           }

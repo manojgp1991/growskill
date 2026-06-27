@@ -10,6 +10,7 @@ import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddContactPopup } from '../popup/add-contact-popup/add-contact-popup';
 import { NavigationExtras, Router, RouterLink } from '@angular/router';
 import { ApplicationToasterService } from '../../services/toaster-service/toaster-service';
+import { ReadWritePermission } from '../../models/loginUser/menuPermission';
 
 @Component({
   selector: 'app-contacts',
@@ -43,6 +44,10 @@ export class Contacts implements OnInit {
     'badge badge-admin',
     'badge badge-superadmin'
   ];
+  actionPermission: ReadWritePermission = {
+    readPermission: false,
+    writePermission: false
+  }
   constructor(
     private _apiService: ApiService,
     private _cookieService: CookieStorageService,
@@ -51,10 +56,10 @@ export class Contacts implements OnInit {
     private _toaster: ApplicationToasterService,
     private _router: Router
   ) {
-
+    this.cookieUserData = this._cookieService.getUser();
+    this.getModulePermissions();
   }
   ngOnInit(): void {
-    this.cookieUserData = this._cookieService.getUser();
     this.filter.sub_id = this.cookieUserData?.subcriptionId;
     this.getDropdowns();
     this.sub = this.searchInput$
@@ -241,5 +246,9 @@ export class Contacts implements OnInit {
       }
     };
     this._router.navigate(['contacts-details'], navigationExtras);
+  }
+
+  getModulePermissions() {
+    this.actionPermission = this._cookieService.getRolePermission(this.cookieUserData?.roleId)
   }
 }

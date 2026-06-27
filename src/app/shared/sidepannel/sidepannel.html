@@ -5,15 +5,15 @@
     </div>
     <nav class="sidebar-nav">
         <div class="nav-label">Main</div>
-        <a routerLink="/" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><i class="ri-dashboard-2-line"></i> Dashboard</a>
-        <a routerLink="/contacts" routerLinkActive="active" class="nav-item "><i class="ri-contacts-book-2-line"></i> Contacts <span
+        <a *ngIf="menuPermissions.dashboard" routerLink="/" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><i class="ri-dashboard-2-line"></i> Dashboard</a>
+        <a *ngIf="menuPermissions.contacts" routerLink="/contacts" routerLinkActive="active" class="nav-item "><i class="ri-contacts-book-2-line"></i> Contacts <span
                 class="nav-badge">12</span></a>
-        <a routerLink="/pipeline" routerLinkActive="active" class="nav-item "><i class="ri-kanban-view-line"></i> Pipeline</a>
+        <a *ngIf="menuPermissions.pipeline" routerLink="/pipeline" routerLinkActive="active" class="nav-item "><i class="ri-kanban-view-line"></i> Pipeline</a>
         <div class="nav-label" style="margin-top:6px">Management</div>
-        <a routerLink="/bulk-import" routerLinkActive="active" class="nav-item "><i class="ri-upload-cloud-2-line"></i> Bulk Import</a>
-        <a routerLink="/users" routerLinkActive="active" class="nav-item "><i class="ri-team-line"></i> Users</a>
+        <a *ngIf="menuPermissions.bulkImport" routerLink="/bulk-import" routerLinkActive="active" class="nav-item "><i class="ri-upload-cloud-2-line"></i> Bulk Import</a>
+        <a *ngIf="menuPermissions.userManagement" routerLink="/users" routerLinkActive="active" class="nav-item "><i class="ri-team-line"></i> Users</a>
         <div class="nav-label" routerLinkActive="active" style="margin-top:6px">System</div>
-        <a routerLink="/settings" routerLinkActive="active" class="nav-item "><i class="ri-settings-3-line"></i> Settings</a>
+        <a *ngIf="menuPermissions.settings" routerLink="/settings" routerLinkActive="active" class="nav-item "><i class="ri-settings-3-line"></i> Settings</a>
     </nav>
     <app-footer></app-footer>
 </aside>

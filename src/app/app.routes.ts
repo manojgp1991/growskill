@@ -7,22 +7,27 @@ export const routes: Routes = [
     loadComponent: () => import('./core/layout/layout').then(m => m.Layout),
     children: [
       {
+         canActivate: [authGuard],
         path: '',
         loadComponent: () => import('./core/admin-home/admin-home').then(m => m.AdminHome)
       },
       {
+         canActivate: [authGuard],
         path: 'bulk-import',
         loadComponent: () => import('./core/bulk-import/bulk-import').then(m => m.BulkImport)
       },
       {
+         canActivate: [authGuard],
         path: 'contacts',
         loadComponent: () => import('./core/contacts/contacts').then(m => m.Contacts)
       },
       {
+         canActivate: [authGuard],
         path: 'contacts-details',
         loadComponent: () => import('./core/contact-details/contact-details').then(m => m.ContactDetails)
       },
       {
+         canActivate: [authGuard],
         path: 'pipeline',
         loadComponent: () => import('./core/pipeline/pipeline').then(m => m.Pipeline)
       },
@@ -32,6 +37,7 @@ export const routes: Routes = [
         loadComponent: () => import('./core/users/users').then(m => m.Users)
       },
       {
+        canActivate: [authGuard],
         path: 'settings',
         loadComponent: () => import('./core/settings/settings').then(m => m.Settings)
       }

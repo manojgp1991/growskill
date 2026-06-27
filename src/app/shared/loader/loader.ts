@@ -14,7 +14,7 @@ export class Loader implements OnInit {
   IsShowPageLoader: boolean = false;
   Loadertext: string = "Loading while fetching data...";
   @Input() applyClass: string  | any;
-  constructor(private loaderService: PageLoaderService) {debugger
+  constructor(private loaderService: PageLoaderService) {
     this.loaderService.isLoading.subscribe((result: boolean) => {
       this.IsShowPageLoader = result;
     });

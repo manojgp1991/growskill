@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { GrowSkillAPIEndPointPath } from '../../services/api-service/api.service.path';
 import { InitialsPipe } from '../../services/pipe/initials-pipe';
 import { CommonModule } from '@angular/common';
+import { ReadWritePermission } from '../../models/loginUser/menuPermission';
 
 @Component({
   selector: 'app-admin-home',
@@ -34,6 +35,10 @@ export class AdminHome implements OnInit {
     'ri-trophy-line',
     'ri-user-star-line'
   ];
+  actionPermission: ReadWritePermission = {
+    readPermission: false,
+    writePermission: false
+  }
   constructor(
     private _apiService: ApiService,
     private _cookieService: CookieStorageService,
@@ -43,6 +48,7 @@ export class AdminHome implements OnInit {
     private _router: Router
   ) {
     this.cookieUserData = this._cookieService.getUser();
+    this.getModulePermissions();
   }
   ngOnInit(): void {
     this.cdr.markForCheck();
@@ -99,10 +105,13 @@ export class AdminHome implements OnInit {
 
   }
 
-    trackByPipeline(index: number, status: any): string {
+  trackByPipeline(index: number, status: any): string {
     return status?.totalContactText ?? index;
   }
-    trackByContact(index: number, status: any): string {
+  trackByContact(index: number, status: any): string {
     return status?.internal_code ?? index;
+  }
+    getModulePermissions() {
+    this.actionPermission = this._cookieService.getRolePermission(this.cookieUserData?.roleId)
   }
 }

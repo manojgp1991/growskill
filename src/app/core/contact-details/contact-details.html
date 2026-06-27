@@ -59,31 +59,6 @@
         <div class="card-body">
           <div class="timeline">
 
-
-            <!-- <div class="tl-item">
-              <div class="tl-left">
-                <div class="tl-dot" style="background:rgba(0,200,160,.15);border:2px solid #00C8A0;color:#00C8A0"><i
-                    class="ri-user-add-line"></i></div>
-                <div class="tl-line"></div>
-              </div>
-              <div class="tl-content">
-                <div class="tl-box">Contact created – status: contacted</div>
-                <div class="tl-meta"><b>System</b> · 2024-01-16</div>
-              </div>
-            </div>
-            
-            <div class="tl-item">
-              <div class="tl-left">
-                <div class="tl-dot" style="background:rgba(59,130,246,.15);border:2px solid #3B82F6;color:#3B82F6"><i
-                    class="ri-phone-line"></i></div>
-                <div class="tl-line"></div>
-              </div>
-              <div class="tl-content">
-                <div class="tl-box">Called – very interested in training package.</div>
-                <div class="tl-meta"><b>Amit Singh</b> · 2024-01-17 10:00</div>
-              </div>
-            </div> -->
-
             <ng-container *ngFor="let activity of activityList; let i = index">
               <div class="tl-item">
                 <div class="tl-left">
@@ -112,41 +87,66 @@
         <div class="card-body" style="display:flex;flex-direction:column;gap:7px">
 
           <ng-container *ngFor="let s of statusList; let i = index">
-            <div (click)="updateContactStatus(s)"
-              style="display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:9px;border:1.5px solid var(--gray-200);background:#fff"
-              [style.border]="s.id == contactDetails?.status_id ? '1.5px solid #3B82F6' : null"
-              [style.background]="s.id == contactDetails?.status_id ? 'rgba(59,130,246,.1)' : null">
+            <ng-container *ngIf="!actionPermission.writePermission">
+              <div
+                style="display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:9px;border:1.5px solid var(--gray-200);background:#fff"
+                [style.border]="s.id == contactDetails?.status_id ? '1.5px solid #3B82F6' : null"
+                [style.background]="s.id == contactDetails?.status_id ? 'rgba(59,130,246,.1)' : null">
 
-              <span>{{ statusIcons[i % statusIcons.length] }}</span>
+                <span>{{ statusIcons[i % statusIcons.length] }}</span>
 
-              <span style="font-size:.86rem;flex:1"
-                [style.font-weight]="s.id == contactDetails?.status_id ? '700' : null"
-                [style.color]="s.id == contactDetails?.status_id ? '#3B82F6' : null">
-                {{ s?.caption }}
-              </span>
+                <span style="font-size:.86rem;flex:1"
+                  [style.font-weight]="s.id == contactDetails?.status_id ? '700' : null"
+                  [style.color]="s.id == contactDetails?.status_id ? '#3B82F6' : null">
+                  {{ s?.caption }}
+                </span>
 
-              <span *ngIf="s.id == contactDetails?.status_id" style="font-size:16px">
-                ✓
-              </span>
+                <span *ngIf="s.id == contactDetails?.status_id" style="font-size:16px">
+                  ✓
+                </span>
 
-            </div>
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf="actionPermission.writePermission">
+              <div (click)="updateContactStatus(s)"
+                style="display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:9px;border:1.5px solid var(--gray-200);background:#fff"
+                [style.border]="s.id == contactDetails?.status_id ? '1.5px solid #3B82F6' : null"
+                [style.background]="s.id == contactDetails?.status_id ? 'rgba(59,130,246,.1)' : null">
+
+                <span>{{ statusIcons[i % statusIcons.length] }}</span>
+
+                <span style="font-size:.86rem;flex:1"
+                  [style.font-weight]="s.id == contactDetails?.status_id ? '700' : null"
+                  [style.color]="s.id == contactDetails?.status_id ? '#3B82F6' : null">
+                  {{ s?.caption }}
+                </span>
+
+                <span *ngIf="s.id == contactDetails?.status_id" style="font-size:16px">
+                  ✓
+                </span>
+
+              </div>
+            </ng-container>
+
           </ng-container>
 
         </div>
       </div>
       <!-- Add Comment -->
-      <div class="card">
+      <div class="card" *ngIf="actionPermission.writePermission">
         <div class="card-header">
           <div class="card-title">💬 Add Note / Comment</div>
         </div>
         <div class="card-body" style="display:flex;flex-direction:column;gap:10px">
           <textarea [(ngModel)]="contactNote" rows="4" placeholder="Write a call note, follow-up or update…"
             style="width:100%;padding:10px 12px;border:1.5px solid var(--gray-200);border-radius:9px;font-size:.85rem;resize:vertical;outline:none;font-family:inherit;box-sizing:border-box"></textarea>
-          <button (click)="addCommentOnContact()" class="btn btn-primary"><i class="ri-send-plane-line"></i> Save Comment</button>
+          <button (click)="addCommentOnContact()" class="btn btn-primary"><i class="ri-send-plane-line"></i> Save
+            Comment</button>
         </div>
       </div>
       <!-- Quick Actions -->
-      <div class="card">
+      <div class="card" *ngIf="actionPermission.writePermission">
         <div class="card-header">
           <div class="card-title">⚡ Quick Actions</div>
         </div>
@@ -155,8 +155,8 @@
             WhatsApp</button>
           <button class="btn btn-secondary" style="justify-content:flex-start"><i class="ri-mail-send-line"></i> Send
             Email</button>
-          <button class="btn btn-outline" style="justify-content:flex-start"><i class="ri-edit-line"></i> Edit
-            Contact</button>
+          <!-- <button class="btn btn-outline" style="justify-content:flex-start"><i class="ri-edit-line"></i> Edit
+            Contact</button> -->
         </div>
       </div>
     </div>
