@@ -31,3 +31,14 @@ export interface IPermission {
   allow_read: boolean;
   allow_write: boolean;
 }
+
+export class addUserModel {
+  id: number = 0;
+  user_id: number = 0;
+  sub_id: string = '';
+  name: string = '';
+  email: string = '';
+  password: string = '';
+  role_id: number = 0;
+  actionType: number = 0;
+}

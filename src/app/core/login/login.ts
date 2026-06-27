@@ -39,12 +39,12 @@ export class Login implements OnInit {
       user_password: ['', [Validators.required]]
     });
 
-    this.getCategoriesList(false);
+    this.getUserRoleList(true);
   }
-  getCategoriesList(isPageLoaderShow: boolean) {
-    this.getCategoriesAPICall(isPageLoaderShow);
+  getUserRoleList(isPageLoaderShow: boolean) {
+    this.getUserRoleAPICall(isPageLoaderShow);
   }
-  getCategoriesAPICall(isPageLoaderShow: boolean) {
+  getUserRoleAPICall(isPageLoaderShow: boolean) {
     if (this.userLogSubscription) {
       this.userLogSubscription.unsubscribe();
     }

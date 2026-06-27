@@ -34,6 +34,7 @@ export class Sidepannel implements OnInit {
     userManagement: false,
     settings: false,
   }
+  isSettingsOpen = false;
   constructor(private _cookieService: CookieStorageService) { }
   ngOnInit(): void {
     this.cookieUserData = this._cookieService.getUser();

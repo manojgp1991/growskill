@@ -12,4 +12,5 @@ export const GrowSkillAPIEndPointPath = {
   GetContactActivities: "Admin/GetContactActivities",
   UpdateContactStatus: "Admin/UpdateContactStatus",
   GetDashboardData: "Admin/GetLoadDashboard",
+  UpdateUser: "Admin/GetUpdateUser",
 }

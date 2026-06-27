@@ -77,7 +77,7 @@ export class CookieStorageService {
       };
   }
 
-  checkModuleAccess(moduleName: string): boolean {debugger
+  checkModuleAccess(moduleName: string): boolean {
     const hasAccess = this.hasModuleAccess(moduleName);
     if (!hasAccess) {
       this.clearAllCookies();

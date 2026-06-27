@@ -1,0 +1,17 @@
+.submenu{
+    margin-left: 12px;
+}
+
+.submenu-item{
+    padding-left: 10px;
+    font-size: .8rem;
+}
+
+.ms-auto{
+    margin-left:auto;
+    transition:transform .2s;
+}
+
+.rotate{
+    transform:rotate(180deg);
+}

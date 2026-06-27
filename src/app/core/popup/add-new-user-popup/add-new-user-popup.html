@@ -1,0 +1,40 @@
+<div class="modal-header">
+    <h3 class="popup-header"><i class="ri-user-add-line" style="color:var(--teal)"></i> {{headerText}}</h3>
+    <button class="modal-close" (click)="closeModel('close')"><i class="ri-close-line"></i></button>
+</div>
+<form (ngSubmit)="f.form.valid && onUpdateUser()" #f="ngForm" novalidate>
+
+    <div class="modal-body">
+        <div class="form-grid">
+            <div class="form-group full">
+                <label>Full Name *</label>
+                <input type="text" id="new-name"
+                [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" required
+                    placeholder="Full name" [(ngModel)]="userModel.name" name="name" #name="ngModel">
+                </div>
+            <div class="form-group" [ngClass]="{'full': !(userModel.id==0)}">
+                <label>Email *</label>
+                <input type="email" id="new-email" required
+                [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
+                    placeholder="user@example.com" appEmailOnly id="add-email" [(ngModel)]="userModel.email" name="email" #email="ngModel">
+                </div>
+            <div class="form-group" *ngIf="userModel.id==0">
+                <label>Password *</label>
+                <input type="password" id="new-pass" required
+                [ngClass]="{ 'is-invalid': f.submitted && password.invalid }"
+                    placeholder="### ### ###" [(ngModel)]="userModel.password" name="password" #password="ngModel">
+                </div>
+            <div class="form-group full">
+                <label>Role</label>
+                <select id="new-role" required [(ngModel)]="userModel.role_id" required name="role_id" #role_id="ngModel">
+                    <option value="0">-Select Role-</option>
+                     <option [value]="r.id" *ngFor="let r of userRoles">{{r.role}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" (click)="closeModel('close')">Cancel</button>
+        <button class="btn btn-primary" type="submit"><i class="ri-save-line"></i> Save Contact</button>
+    </div>
+</form>
