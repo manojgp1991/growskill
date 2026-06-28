@@ -87,12 +87,27 @@ export class AddContactPopup implements OnInit {
     
     this._apiService.Post$(GrowSkillAPIEndPointPath.GetUpdateContact, obj, true).subscribe({
       next: (res: any) => {
-        if (res.status) {
-          this._toaster.success('Successful', 'Contact updated successfully.');
-          this.closeModel('success');
+
+         if (res.status) {
+          const result = res?.response ?? {};
+          if (result?.code == 'success') {
+            this._toaster.success('', res?.response?.message ?? 'ontact updated successfully.');
+            this.closeModel('success');
+          } else if (result?.code == 'duplicate') {
+            this._toaster.error('', res?.response?.message ?? 'Contact information already exists in system.');
+          } else if (result?.code == 'error') {
+            this._toaster.error('', res?.response?.message ?? 'Invalid contact information.');
+          }
         } else {
-          this._toaster.error('', 'Failed to save contact information.');
+          this._toaster.error('', res?.response?.message ?? 'Failed to save contact information.');
         }
+
+        // if (res.status) {
+        //   this._toaster.success('Successful', 'Contact updated successfully.');
+        //   this.closeModel('success');
+        // } else {
+        //   this._toaster.error('', 'Failed to save contact information.');
+        // }
 
       },
       error: () => {

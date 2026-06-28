@@ -50,6 +50,21 @@ export const routes: Routes = [
         canActivate: [authGuard],
         path: 'new-email-template',
         loadComponent: () => import('./core/new-email-template/new-email-template').then(m => m.NewEmailTemplate)
+      },
+      {
+        canActivate: [authGuard],
+        path: 'manage-subscriptions',
+        loadComponent: () => import('./core/manage-subscriptions/manage-subscriptions').then(m => m.ManageSubscriptions)
+      },
+      {
+        canActivate: [authGuard],
+        path: 'add-new-subscription',
+        loadComponent: () => import('./core/add-new-subscriptions/add-new-subscriptions').then(m => m.AddNewSubscriptions)
+      },
+      {
+        canActivate: [authGuard],
+        path: 'system-configurations',
+        loadComponent: () => import('./core/system-configurations/system-configurations').then(m => m.SystemConfigurations)
       }
     ]
   },

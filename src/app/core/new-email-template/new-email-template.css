@@ -2,3 +2,71 @@
     text-align: right;
     padding: 17px 0;
 }
+
+/* new-email-template.css */
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* you already have this inline, keep it consistent here instead */
+}
+
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.form-group.full {
+  display: flex;
+  flex-direction: column;
+}
+
+/* The template name field shouldn't grow */
+.form-group.full:first-of-type {
+  flex-shrink: 0;
+}
+
+/* The editor's wrapper group should take all remaining space */
+.form-group.full:last-of-type {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* NgxEditor wrapper itself */
+.NgxEditor__Wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.NgxEditor__Wrapper ngx-editor-menu {
+  flex-shrink: 0; /* toolbar fixed height */
+}
+
+.NgxEditor__Wrapper ngx-editor {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* The actual contenteditable area inside ngx-editor */
+.NgxEditor__Wrapper ngx-editor .NgxEditor {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+/* Footer buttons should not be squeezed */
+.footer-option {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 12px;
+}

@@ -223,13 +223,27 @@ export class Contacts implements OnInit {
 
     this._apiService.Post$(GrowSkillAPIEndPointPath.GetUpdateContact, obj, true).subscribe({
       next: (res: any) => {
-        if (res.status) {
-          this._toaster.success('Successful', 'Contact removed successfully.');
-          this.loadContacts();
-          this.cdr.markForCheck();
+
+         if (res.status) {
+          const result = res?.response ?? {};
+          if (result?.code == 'success') {
+            this._toaster.success('', res?.response?.message ?? 'Contact removed successfully.');
+          } else if (result?.code == 'error') {
+            this._toaster.error('', res?.response?.message ?? 'Invalid contact information.');
+          }
+           this.loadContacts();
+           this.cdr.markForCheck();
         } else {
-          this._toaster.error('', 'Failed to removed contact.');
+          this._toaster.error('', res?.response?.message ?? 'Failed to removed contact.');
         }
+
+        // if (res.status) {
+        //   this._toaster.success('Successful', 'Contact removed successfully.');
+        //   this.loadContacts();
+        //   this.cdr.markForCheck();
+        // } else {
+        //   this._toaster.error('', 'Failed to removed contact.');
+        // }
 
       },
       error: () => {

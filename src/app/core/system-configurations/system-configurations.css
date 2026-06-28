@@ -1,0 +1,51 @@
+.tab-content { display:none }
+.tab-content.active { display:block }
+span{
+    margin-left: 2px;
+    color: red;
+}
+.btn:hover {
+    border-color: #565e6400 !important;
+}
+
+.company-logo-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 22px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.logo-info {
+  flex: 1;
+}
+
+.logo-preview-wrapper {
+  width: 120px;
+  height: 120px;
+  border-radius: 20px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  border: 3px solid #fff;
+  outline: 1px solid var(--gray-200);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.logo-preview-wrapper:hover {
+  transform: scale(1.04);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.16);
+}
+
+.logo-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}

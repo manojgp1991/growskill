@@ -1,0 +1,262 @@
+<main class="main-content">
+
+    <!-- Banner -->
+    <div class="page-banner">
+        <img src="images/settings-icon.svg" alt="" />
+        <div class="page-banner-overlay">
+            <i class="ri-settings-3-line"></i>
+            <div>
+                <div class="pb-title">CRM Settings</div>
+                <div class="pb-sub">Company, users, pipeline stages, integrations &amp; account</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="settings-layout">
+
+        <!-- Settings Nav -->
+        <div>
+            <div class="card">
+                <div class="card-body" style="padding:10px">
+                    <div class="settings-nav">
+                        <a href="javascript:void(0)" class="settings-nav-item" [class.active]="activeTab === 'company'"
+                            (click)="switchTab('company')"><i class="ri-building-line"></i> Company Profile</a>
+                        <a href="javascript:void(0)" class="settings-nav-item" [class.active]="activeTab === 'pipeline'"
+                            (click)="switchTab('pipeline')"><i class="ri-upload-cloud-2-line"></i> Pipeline Stages</a>
+                        <a href="javascript:void(0)" class="settings-nav-item" [class.active]="activeTab === 'account'"
+                            (click)="switchTab('account')"><i class="ri-user-settings-line"></i> My Account</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Content -->
+        <div>
+
+            <!-- COMPANY TAB -->
+            <div id="tab-company" class="tab-content card" [class.active]="activeTab === 'company'"
+                *ngIf="activeTab === 'company'">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Company Profile</div>
+                        <div class="card-subtitle">Update your company details and branding</div>
+                    </div>
+                </div>
+                <div class="card-body">
+            
+                    
+                    <div class="company-logo-section">
+  <div class="logo-info">
+    <div style="font-weight:600;margin-bottom:5px">Company Logo</div>
+    <div class="text-xs text-muted" style="margin-bottom:10px">Upload PNG or JPG (200×200px recommended)</div>
+    <a  href="javascript:void(0)" class="btn btn-sm btn-secondary" (click)="logoInput.click()">
+      <i class="ri-upload-line"></i> Upload Logo
+    </a>
+    <input #logoInput type="file" accept=".png,.jpg,.jpeg" style="display:none" (change)="onLogoSelected($event)" />
+  </div>
+
+  <div class="logo-preview-wrapper">
+    <img [src]="companyLogoPreviewUrl || 'images/default-company-logo.png'" alt="Company Logo" class="logo-preview-img" />
+  </div>
+</div>
+
+
+                    <form #companyForm="ngForm" (ngSubmit)="onSaveCompany(companyForm)" novalidate>
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label>Company Name <span> *</span></label>
+                                <input type="text" name="companyName" [(ngModel)]="companyModel.companyName"
+                                    #companyName="ngModel" required maxlength="100" placeholder="Company Name.."
+                                    [class.is-invalid]="submitted && companyName.invalid" />
+                                <div class="invalid-feedback" *ngIf="submitted && companyName.errors?.['required']">
+                                    Company name is required.
+                                </div>
+                                <div class="invalid-feedback" *ngIf="submitted && companyName.errors?.['maxlength']">
+                                    Company name cannot exceed 100 characters.
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Company Slogan</label>
+                                <input type="text" name="companySlogan" [(ngModel)]="companyModel.companySlogan"
+                                    #companySlogan="ngModel" maxlength="150" placeholder="Slogan.." />
+                                <div class="invalid-feedback" *ngIf="submitted && companySlogan.errors?.['maxlength']">
+                                    Slogan cannot exceed 150 characters.
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Website</label>
+                                <input type="text" name="website" [(ngModel)]="companyModel.website" #website="ngModel"
+                                    required pattern="^(https?:\/\/)?([\w-]+\.)+[\w-]{2,}(\/.*)?$"
+                                    placeholder="Company website.." />
+
+                            </div>
+
+                            <div class="form-group">
+                                <label>Email Address <span> *</span></label>
+                                <input type="email" name="email" [(ngModel)]="companyModel.email" #email="ngModel"
+                                    required email placeholder="Email.."
+                                    [class.is-invalid]="submitted && email.invalid" />
+                                <div class="invalid-feedback" *ngIf="submitted && email.errors?.['required']">
+                                    Email is required.
+                                </div>
+                                <div class="invalid-feedback" *ngIf="submitted && email.errors?.['email']">
+                                    Please enter a valid email address.
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Contact Person</label>
+                                <input type="text" name="contactPerson" [(ngModel)]="companyModel.contactPerson"
+                                    #contactPerson="ngModel" maxlength="100" placeholder="Contact Person.." />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Phone Number <span> *</span></label>
+                                <input type="text" name="phone" [(ngModel)]="companyModel.phone" #phone="ngModel"
+                                    required pattern="^[0-9+\-\s()]{7,15}$" placeholder="### ### ###"
+                                    [class.is-invalid]="submitted && phone.invalid" />
+                                <div class="invalid-feedback" *ngIf="submitted && phone.errors?.['required']">
+                                    Phone number is required.
+                                </div>
+                                <div class="invalid-feedback" *ngIf="submitted && phone.errors?.['pattern']">
+                                    Please enter a valid phone number.
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>GST No <span> *</span></label>
+                                <input type="text" name="gstNo" [(ngModel)]="companyModel.gstNo" #gstNo="ngModel"
+                                    required pattern="^[0-9A-Z]{15}$" placeholder="GST No..."
+                                    [class.is-invalid]="submitted && gstNo.invalid" />
+                                <div class="invalid-feedback" *ngIf="submitted && gstNo.errors?.['required']">
+                                    GST number is required.
+                                </div>
+                                <div class="invalid-feedback" *ngIf="submitted && gstNo.errors?.['pattern']">
+                                    Please enter a valid 15-character GST number.
+                                </div>
+                            </div>
+
+                            <div class="form-group full">
+                                <label>Address</label>
+                                <input type="text" name="address" [(ngModel)]="companyModel.address" #address="ngModel"
+                                    required maxlength="250" placeholder="Company Address.." />
+                            </div>
+                        </div>
+
+                        <div style="margin-top:18px">
+                            <button type="submit" class="btn btn-primary"><i class="ri-save-line"></i> Save
+                                Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- PIPELINE STAGES TAB -->
+            <div id="tab-pipeline" class="tab-content card" [class.active]="activeTab === 'pipeline'"
+                *ngIf="activeTab === 'pipeline'">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Pipeline Stages</div>
+                        <div class="card-subtitle">View and understand all contact pipeline stages</div>
+                    </div>
+                </div>
+                <div class="card-body" style="display:flex;flex-direction:column;gap:10px">
+                    <div
+                        style="display:flex;align-items:center;gap:12px;padding:12px 15px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:10px">
+                        <span style="width:12px;height:12px;border-radius:50%;background:#8B5CF6;flex-shrink:0"></span>
+                        <div style="flex:1">
+                            <div style="font-weight:600;font-size:.87rem">Lead</div>
+                            <div class="text-xs text-muted">Default entry stage. New lead added to the system.</div>
+                        </div><span
+                            style="font-size:.78rem;font-weight:600;color:#8B5CF6;background:rgba(139,92,246,.12);padding:3px 10px;border-radius:20px">Default
+                            Entry</span>
+                    </div>
+                    <div
+                        style="display:flex;align-items:center;gap:12px;padding:12px 15px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:10px">
+                        <span style="width:12px;height:12px;border-radius:50%;background:#3B82F6;flex-shrink:0"></span>
+                        <div style="flex:1">
+                            <div style="font-weight:600;font-size:.87rem">Contacted</div>
+                            <div class="text-xs text-muted">First call or contact made with the lead.</div>
+                        </div>
+                    </div>
+                    <div
+                        style="display:flex;align-items:center;gap:12px;padding:12px 15px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:10px">
+                        <span style="width:12px;height:12px;border-radius:50%;background:#F59E0B;flex-shrink:0"></span>
+                        <div style="flex:1">
+                            <div style="font-weight:600;font-size:.87rem">Qualified</div>
+                            <div class="text-xs text-muted">Lead has shown genuine interest and fits criteria.</div>
+                        </div>
+                    </div>
+                    <div
+                        style="display:flex;align-items:center;gap:12px;padding:12px 15px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:10px">
+                        <span style="width:12px;height:12px;border-radius:50%;background:#EC4899;flex-shrink:0"></span>
+                        <div style="flex:1">
+                            <div style="font-weight:600;font-size:.87rem">Proposal</div>
+                            <div class="text-xs text-muted">Proposal or quote has been sent to the lead.</div>
+                        </div>
+                    </div>
+                    <div
+                        style="display:flex;align-items:center;gap:12px;padding:12px 15px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:10px">
+                        <span style="width:12px;height:12px;border-radius:50%;background:#10B981;flex-shrink:0"></span>
+                        <div style="flex:1">
+                            <div style="font-weight:600;font-size:.87rem">Won</div>
+                            <div class="text-xs text-muted">Deal successfully closed. Contact converted to client.</div>
+                        </div><span
+                            style="font-size:.78rem;font-weight:600;color:#10B981;background:rgba(16,185,129,.12);padding:3px 10px;border-radius:20px">Deal
+                            Closed ✓</span>
+                    </div>
+                    <div
+                        style="display:flex;align-items:center;gap:12px;padding:12px 15px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:10px">
+                        <span style="width:12px;height:12px;border-radius:50%;background:#EF4444;flex-shrink:0"></span>
+                        <div style="flex:1">
+                            <div style="font-weight:600;font-size:.87rem">Lost</div>
+                            <div class="text-xs text-muted">Deal did not close. Lead marked as lost.</div>
+                        </div><span
+                            style="font-size:.78rem;font-weight:600;color:#EF4444;background:rgba(239,68,68,.12);padding:3px 10px;border-radius:20px">Deal
+                            Lost</span>
+                    </div>
+                    <div class="alert alert-info" style="margin-top:6px"><i class="ri-information-line"></i> Contact
+                        your Super Admin to add or rename pipeline stages.</div>
+                </div>
+            </div>
+
+            <!-- MY ACCOUNT TAB -->
+            <div id="tab-account" class="tab-content card" [class.active]="activeTab === 'account'"
+                *ngIf="activeTab === 'account'">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">My Account</div>
+                        <div class="card-subtitle">Update your personal profile and password</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div
+                        style="display:flex;align-items:center;gap:16px;margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid var(--gray-100)">
+                        <div
+                            style="width:62px;height:62px;border-radius:16px;background:linear-gradient(135deg,#00C8A0,#00A882);display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:800;color:#fff;font-family:'Syne',sans-serif">
+                            RK</div>
+                        <div>
+                            <div style="font-weight:700;font-size:.97rem">Rajesh Kumar</div>
+                            <div class="text-xs text-muted">Super Admin</div>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group"><label>Full Name</label><input type="text" value="Rajesh Kumar" /></div>
+                        <div class="form-group"><label>Email</label><input type="email" value="rajesh@growskill.in" />
+                        </div>
+                        <div class="form-group"><label>New Password</label><input type="password"
+                                placeholder="Leave blank to keep current" /></div>
+                        <div class="form-group"><label>Confirm Password</label><input type="password"
+                                placeholder="Confirm new password" /></div>
+                    </div>
+                    <div style="margin-top:18px"><button class="btn btn-primary"><i class="ri-save-line"></i> Save
+                            Account</button></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>

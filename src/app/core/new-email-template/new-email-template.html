@@ -27,65 +27,15 @@
           </div>
         </div>
         <div class="footer-option">
-             <button class="btn btn-secondary" style="margin-right: 6px;">Cancel</button>
-        <button class="btn btn-primary"><i class="ri-user-add-line"></i> Create Template</button>
+             <button routerLink="/email-templates" class="btn btn-secondary" style="margin-right: 6px;">Cancel</button>
+        <button class="btn btn-primary"><i class="ri-save-line"></i> Save Template</button>
         </div>
        
       </div>
     </div>
 
-    <!-- PIPELINE STAGES TAB -->
-    <div id="tab-pipeline" class="card" style="display:none">
-      <div class="card-header">
-        <div><div class="card-title">Pipeline Stages</div><div class="card-subtitle">View and understand all contact pipeline stages</div></div>
-      </div>
-      <div class="card-body">
-        <div id="pipeline-stages-list" style="display:flex;flex-direction:column;gap:10px">
-          <!-- Populated dynamically via JS using STATUS_META_HTML() -->
-        </div>
-        <div class="alert alert-info" style="margin-top:16px">
-          <i class="ri-information-line"></i> Contact your Super Admin to add or rename pipeline stages.
-        </div>
-      </div>
-    </div>
 
-    <!-- INTEGRATIONS TAB -->
-    <div id="tab-integrations" class="card" style="display:none">
-      <div class="card-header">
-        <div><div class="card-title">Integrations</div><div class="card-subtitle">Connect third-party services to enhance your CRM</div></div>
-      </div>
-      <div class="card-body" id="integrations-list" style="display:flex;flex-direction:column;gap:14px">
-        <!-- Populated dynamically via JS -->
-        <div class="alert alert-warning">
-          <i class="ri-alert-line"></i> Third-party API integrations are not included in the current quotation. A separate agreement and pricing will apply.
-        </div>
-      </div>
-    </div>
-
-    <!-- MY ACCOUNT TAB -->
-    <div id="tab-account" class="card" style="display:none">
-      <div class="card-header">
-        <div><div class="card-title">My Account</div><div class="card-subtitle">Update your personal profile and password</div></div>
-      </div>
-      <div class="card-body">
-        <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--gray-100)">
-          <div id="acct-avatar" style="width: 64px; height: 64px; border-radius: 16px; background: linear-gradient(135deg, rgb(0, 200, 160), rgba(0, 200, 160, 0.533)); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 800; color: rgb(255, 255, 255); font-family: Syne, sans-serif;">RK</div>
-          <div>
-            <div style="font-weight:700;font-size:1rem" id="acct-displayname">Rajesh Kumar</div>
-            <div style="font-size:.83rem;color:var(--gray-400)" id="acct-displayrole">Super Admin</div>
-          </div>
-        </div>
-        <div class="form-grid">
-          <div class="form-group"><label>Full Name</label><input type="text" id="acct-name"></div>
-          <div class="form-group"><label>Email</label><input type="email" id="acct-email"></div>
-          <div class="form-group"><label>New Password</label><input type="password" id="acct-pass" placeholder="Leave blank to keep current"></div>
-          <div class="form-group"><label>Confirm Password</label><input type="password" id="acct-pass2" placeholder="Confirm new password"></div>
-        </div>
-        <button class="btn btn-primary" onclick="saveAccount()"><i class="ri-save-line"></i> Save Account</button>
-      </div>
-    </div>
-
-  </div><!-- /settings-content -->
+  </div>
 
   </div>
 </main>
