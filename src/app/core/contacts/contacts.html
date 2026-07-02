@@ -9,41 +9,69 @@
         <div class="pb-title">All Contacts</div>
         <div class="pb-sub">{{totalRecords}} total contacts in your CRM</div>
       </div>
-      <div *ngIf="actionPermission.writePermission" style="margin-left:auto"><a href="javascript:void(0)" (click)="openAddContact('')" class="btn btn-primary btn-sm"><i class="ri-add-line"></i>
+      <div *ngIf="actionPermission.writePermission" style="margin-left:auto"><a href="javascript:void(0)"
+          (click)="openAddContact('')" class="btn btn-primary btn-sm"><i class="ri-add-line"></i>
           Add Contact</a></div>
     </div>
   </div>
 
   <div class="card">
-    <!-- Filters -->
-    <div class="card-header" style="flex-wrap:wrap;gap:10px">
-      <div style="display:flex;gap:10px;flex-wrap:wrap;flex:1">
-        <div style="position:relative"><i class="ri-search-line"
-            style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--gray-400);font-size:14px"></i><input
-            type="text" placeholder="Search name, email, company…" (input)="onSearchChange($any($event.target).value)"
-            style="padding:7px 12px 7px 30px;border:1.5px solid var(--gray-200);border-radius:8px;font-size:.8rem;outline:none;width:200px" />
+
+    <!-- bulk assign & bulk delete -->
+    <ng-container *ngIf="is_any_contact_selected">
+      <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+        <div style="display:flex;gap:10px;flex-wrap:wrap;flex:1;justify-content:flex-end">
+          <div class="_card-title">Select user for bulk assignment</div>
+          <select (change)="onBulkAssign($any($event.target).value)"
+            style="padding:3px 33px;border:1.5px solid var(--gray-200);border-radius:8px;font-size:.8rem;outline:none;background:#fff;color:#334155;min-width:220px">
+            <option value="-1">--Select Assignment--</option>
+            <option [value]="u.id" *ngFor="let u of userList">{{u?.name}}</option>
+          </select>
         </div>
-        <select (change)="onStatusChange($any($event.target).value)"
-          style="padding:7px 12px;border:1.5px solid var(--gray-200);border-radius:8px;font-size:.8rem;outline:none;background:#fff;color:#334155">
-          <option value="-1">All Statuses</option>
-          <option [value]="s.id" *ngFor="let s of status">{{s?.caption}}</option>
-        </select>
-        <select (change)="onAssigneeChange($any($event.target).value)"
-          style="padding:7px 12px;border:1.5px solid var(--gray-200);border-radius:8px;font-size:.8rem;outline:none;background:#fff;color:#334155">
-          <option value="-1">All Assignees</option>
-          <option [value]="u.id" *ngFor="let u of userList">{{u?.name}}</option>
-        </select>
+        <div style="display:flex;gap:8px;justify-content:flex-end">
+          <button *ngIf="actionPermission.writePermission" (click)="removeSelectedContacts()"
+            class="btn btn-sm btn-warning"><i class="ri-add-line"></i> Bulk Delete</button>
+        </div>
       </div>
-      <div style="display:flex;gap:8px">
-        <button (click)="exportContacts()" class="btn btn-sm btn-secondary"><i class="ri-download-line"></i> Export</button>
-        <button *ngIf="actionPermission.writePermission" (click)="openAddContact('')" class="btn btn-sm btn-primary"><i class="ri-add-line"></i> Add Contact</button>
+    </ng-container>
+
+
+    <!-- Filters -->
+    <ng-container *ngIf="!is_any_contact_selected">
+      <div class="card-header" style="flex-wrap:wrap;gap:10px">
+        <div style="display:flex;gap:10px;flex-wrap:wrap;flex:1">
+          <div style="position:relative"><i class="ri-search-line"
+              style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--gray-400);font-size:14px"></i><input
+              type="text" placeholder="Search name, email, company…" (input)="onSearchChange($any($event.target).value)"
+              style="padding:7px 12px 7px 30px;border:1.5px solid var(--gray-200);border-radius:8px;font-size:.8rem;outline:none;width:200px" />
+          </div>
+          <select (change)="onStatusChange($any($event.target).value)"
+            style="padding:7px 12px;border:1.5px solid var(--gray-200);border-radius:8px;font-size:.8rem;outline:none;background:#fff;color:#334155">
+            <option value="-1">All Statuses</option>
+            <option [value]="s.id" *ngFor="let s of status">{{s?.caption}}</option>
+          </select>
+          <select (change)="onAssigneeChange($any($event.target).value)"
+            style="padding:7px 12px;border:1.5px solid var(--gray-200);border-radius:8px;font-size:.8rem;outline:none;background:#fff;color:#334155">
+            <option value="-1">All Assignees</option>
+            <option [value]="u.id" *ngFor="let u of userList">{{u?.name}}</option>
+          </select>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button (click)="exportContacts()" class="btn btn-sm btn-secondary"><i class="ri-download-line"></i>
+            Export</button>
+          <button *ngIf="actionPermission.writePermission" (click)="openAddContact('')"
+            class="btn btn-sm btn-primary"><i class="ri-add-line"></i> Add Contact</button>
+        </div>
       </div>
-    </div>
+    </ng-container>
+
     <!-- Table -->
     <div class="table-wrap">
       <table class="data-table">
         <thead>
           <tr>
+            <th><input type="checkbox" [(ngModel)]="isAllSelected" (change)="onAllSelection()" class="table-checkbox">
+            </th>
             <th>Contact</th>
             <th>Phone</th>
             <th>Company</th>
@@ -55,46 +83,47 @@
         </thead>
         <tbody>
           <ng-container *ngFor="let c of contacts; let i = index; trackBy: trackByContact">
-          <tr>
-            <td>
-              <div class="contact-cell">
-                <div class="tbl-avatar" [ngStyle]="getAvatarStyle(i)"> {{c?.name | initials}}</div>
-                <div>
-                  <div class="contact-name">{{c?.name}}</div>
-                  <div class="contact-email">{{c?.email}}</div>
-                </div>
-              </div>
-            </td>
-            <td>{{c?.phone}}</td>
-            <td>{{c?.company}}</td>
-            <td><span class="badge badge-lead">{{c?.status}}</span></td>
-            <td>
-              <div class="flex items-center gap-8">
-                <div class="tbl-avatar"
-                  [ngStyle]="getAvatarStyle(i)">  {{ (c?.assignedTo || 'Not Assigned') | initials }}
-                </div>{{ c?.assignedTo || 'Not Assigned' }}
-              </div>
-            </td>
-            <td class="text-muted text-xs">{{c?.createdDate | date:'dd/MM/yyyy'}}</td>
-            <td>
-              <div class="tbl-actions">
-                <a (click)="openContactDetail(c)" class="btn btn-icon btn-outline"><i
-                    class="ri-eye-line"></i></a>
-                    <button *ngIf="actionPermission.writePermission" (click)="openAddContact(c)" class="btn btn-icon btn-secondary"><i
-                    class="ri-edit-line"></i>
-                  </button>
-                  <button *ngIf="actionPermission.writePermission" (click)="confirmDeleteContact(c)" class="btn btn-icon btn-danger"><i
-                    class="ri-delete-bin-line"></i>
-                  </button>
+            <tr>
+              <td><input type="checkbox" [(ngModel)]="c.is_selected" (change)="onSingleSelection()"
+                  class="table-checkbox"></td>
+              <td>
+                <div class="contact-cell">
+                  <div class="tbl-avatar" [ngStyle]="getAvatarStyle(i)"> {{c?.name | initials}}</div>
+                  <div>
+                    <div class="contact-name">{{c?.name}}</div>
+                    <div class="contact-email">{{c?.email}}</div>
                   </div>
-            </td>
-          </tr>
-       </ng-container>
-        <ng-container *ngIf="contacts.length === 0">
-          <tr>
-            <td colspan="7" style="text-align:center;padding:20px;color:var(--gray-400)">No contacts found</td>
-          </tr>
-        </ng-container>
+                </div>
+              </td>
+              <td>{{c?.phone}}</td>
+              <td>{{c?.company}}</td>
+              <td><span class="badge badge-lead">{{c?.status}}</span></td>
+              <td>
+                <div class="flex items-center gap-8">
+                  <div class="tbl-avatar" [ngStyle]="getAvatarStyle(i)"> {{ (c?.assignedTo || 'Not Assigned') | initials
+                    }}
+                  </div>{{ c?.assignedTo || 'Not Assigned' }}
+                </div>
+              </td>
+              <td class="text-muted text-xs">{{c?.createdDate | date:'dd/MM/yyyy'}}</td>
+              <td>
+                <div class="tbl-actions">
+                  <a (click)="openContactDetail(c)" class="btn btn-icon btn-outline"><i class="ri-eye-line"></i></a>
+                  <button *ngIf="actionPermission.writePermission" (click)="openAddContact(c)"
+                    class="btn btn-icon btn-secondary"><i class="ri-edit-line"></i>
+                  </button>
+                  <button *ngIf="actionPermission.writePermission" (click)="confirmDeleteContact(c)"
+                    class="btn btn-icon btn-danger"><i class="ri-delete-bin-line"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+          <ng-container *ngIf="contacts.length === 0">
+            <tr>
+              <td colspan="7" style="text-align:center;padding:20px;color:var(--gray-400)">No contacts found</td>
+            </tr>
+          </ng-container>
         </tbody>
       </table>
     </div>
@@ -105,12 +134,9 @@
         <button class="page-btn">2</button>
         <button class="page-btn"><i class="ri-arrow-right-s-line"></i></button> -->
 
-         <button
-            *ngFor="let p of [].constructor(totalPages); let i = index"
-            class="page-btn"
-            [class.active]="filter.pageNumber === i + 1"
-            (click)="goToPage(i + 1)">
-            {{ i + 1 }}
+        <button *ngFor="let p of [].constructor(totalPages); let i = index" class="page-btn"
+          [class.active]="filter.pageNumber === i + 1" (click)="goToPage(i + 1)">
+          {{ i + 1 }}
         </button>
       </div>
     </div>

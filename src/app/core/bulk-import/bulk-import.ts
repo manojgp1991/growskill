@@ -17,7 +17,6 @@ import { ReadWritePermission } from '../../models/loginUser/menuPermission';
   styleUrl: './bulk-import.css',
 })
 export class BulkImport implements OnInit {
-  bulkFilePath: string = 'assets/template/growskill_template.csv';
   selectedFile: File | null = null;
   result: contactDtoResponse | null = null;
   errorList: any[] = [];
@@ -75,7 +74,7 @@ export class BulkImport implements OnInit {
   }
 
   downloadTemplate() {
-    const csv = 'Name,Email,Phone,Company\nJohn Doe,john@example.com,+91 9000000000,Example Corp\nJane Smith,jane@example.com,+91 8000000000,Smith Ltd\n';
+    const csv = 'Name,Email,Phone,Company,AssignTo\nJohn Doe,john@example.com,+91 9000000000,Example Corp,Nitin Kumar\nJane Smith,jane@example.com,+91 8000000000,Smith Ltd,Abhishek Kumar\n';
     const a = document.createElement('a');
     a.href = 'data:text/csv,' + encodeURIComponent(csv);
     a.download = 'growskill_contact_template.csv';

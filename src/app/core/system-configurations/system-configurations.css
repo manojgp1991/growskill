@@ -49,3 +49,6 @@ span{
   object-fit: cover;
   display: block;
 }
+.pipeline_status:hover{
+  cursor: pointer;
+}

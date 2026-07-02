@@ -1,0 +1,51 @@
+<div class="modal-header">
+    <h3 class="popup-header"><i class="ri-user-add-line" style="color:var(--teal)"></i> {{headerText}}</h3>
+    <button class="modal-close" (click)="closeModel('close')"><i class="ri-close-line"></i></button>
+</div>
+<form #pipelineForm="ngForm" (ngSubmit)="onUpdatePipeline(pipelineForm)" novalidate>
+
+    <div class="modal-body">
+        <div class="form-grid">
+            <div class="form-group full">
+                <label>Pipeline <span> *</span></label>
+                <input type="text" id="Pipeline"
+                [ngClass]="{ 'is-invalid': pipelineForm.submitted && caption.invalid }" required
+                    placeholder="Pipeline" [(ngModel)]="pipelineModel.caption" name="caption" #caption="ngModel">
+                </div>
+            <div class="form-group full">
+                <label>Description</label>
+                <input type="text" id="description"
+                    placeholder="Description" id="description" [(ngModel)]="pipelineModel.description" name="description" #description="ngModel">
+                </div>
+            <div class="form-group">
+                <label>Color <span> *</span></label>
+                <input type="text" id="color_code"
+                [ngClass]="{ 'is-invalid': pipelineForm.submitted && color_code.invalid }" required
+                    placeholder="#ffffff"
+                    [(ngModel)]="pipelineModel.color_code"
+                    name="color_code"
+                    #color_code="ngModel"
+                     [style.background]="pipelineModel.color_code"
+                    [colorPicker]="pipelineModel.color_code"
+                    (colorPickerChange)="pipelineModel.color_code = $event"
+                    [cpOutputFormat]="'hex'"
+                    [cpPosition]="'bottom'">
+                </div>
+                <!-- [cpOKButton]="true"
+                    [cpCancelButton]="true" -->
+                <div class="form-group full">
+                <label>
+                    <input style="width: 9%;" type="checkbox" id="default_status" class="table-checkbox row-chk"
+                     [(ngModel)]="pipelineModel.default_status" name="default_status" #default_status="ngModel">
+                     Make Default 
+                </label>
+                
+                </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" (click)="closeModel('close')">Cancel</button>
+        <button class="btn btn-primary" type="submit"><i class="ri-save-line"></i> Save Contact</button>
+    </div>
+</form>

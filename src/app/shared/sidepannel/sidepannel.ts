@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterModule } from '@angular/router';
 import { Footer } from '../footer/footer';
 import { CookieStorageService } from '../../services/cookie-service/cookie.service';
-import { LoggedInUser } from '../../models/loginUser/loginUser';
+import { LoggedInUser, profileModel } from '../../models/loginUser/loginUser';
 import { MenuPermission } from '../../models/loginUser/menuPermission';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sidepannel',
-  imports: [RouterLink, Footer, RouterModule, CommonModule],
+  imports: [RouterLink, Footer, RouterModule, CommonModule,],
   templateUrl: './sidepannel.html',
   styleUrl: './sidepannel.css',
 })
@@ -24,7 +24,8 @@ export class Sidepannel implements OnInit {
     AllowLogin: false,
     role: [],
     moduleAccess: [],
-    permissions: []
+    permissions: [],
+    profile: [],
   };
   menuPermissions: MenuPermission = {
     dashboard: false,
@@ -35,9 +36,13 @@ export class Sidepannel implements OnInit {
     settings: false,
   }
   isSettingsOpen = false;
+  profile: profileModel = new profileModel();
+  _tempLogoUrl: string = '/assets/images/gs-logo.png';
   constructor(private _cookieService: CookieStorageService) { }
   ngOnInit(): void {
     this.cookieUserData = this._cookieService.getUser();
+    this.profile = this.cookieUserData?.profile[0] ?? new profileModel();
+    this.profile.logo = this.profile?.logo ?? this._tempLogoUrl;
     this.getModulePermissions();
   }
 

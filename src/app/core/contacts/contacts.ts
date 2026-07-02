@@ -11,10 +11,11 @@ import { AddContactPopup } from '../popup/add-contact-popup/add-contact-popup';
 import { NavigationExtras, Router, RouterLink } from '@angular/router';
 import { ApplicationToasterService } from '../../services/toaster-service/toaster-service';
 import { ReadWritePermission } from '../../models/loginUser/menuPermission';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-contacts',
-  imports: [CommonModule, InitialsPipe, NgbModule],
+  imports: [CommonModule, InitialsPipe, NgbModule, FormsModule],
   templateUrl: './contacts.html',
   styleUrl: './contacts.css',
 })
@@ -26,9 +27,10 @@ export class Contacts implements OnInit {
   contacts: ContactDto[] = [];
   totalRecords = 0;
   totalPages = 0;
-  isLoading = false;
   errorMessage = '';
   cookieUserData: any = {};
+  isAllSelected: boolean = false;
+  is_any_contact_selected: boolean = false;
 
   private searchInput$ = new Subject<string>();
   private sub?: Subscription;
@@ -96,13 +98,12 @@ export class Contacts implements OnInit {
     this.filter.pageNumber = page;
     this.cdr.markForCheck();
     this.loadContacts();
+    this.isAllSelected = false;
   }
 
   loadContacts(): void {
-    this.isLoading = true;
     this.errorMessage = '';
-
-    this._apiService.Post$(GrowSkillAPIEndPointPath.GetContactByFilter, this.filter, false).subscribe({
+    this._apiService.Post$(GrowSkillAPIEndPointPath.GetContactByFilter, this.filter, true).subscribe({
       next: (res) => {
         if (res?.status) {
           if (res?.response?.contactList?.length > 0) {
@@ -111,7 +112,6 @@ export class Contacts implements OnInit {
             this.totalPages = res?.response?.totalPages;
             this.filter.pageNumber = res?.response?.pageNumber;
             this.filter.pageSize = res?.response?.pageSize;
-            this.isLoading = false;
             this.cdr.markForCheck();
           } else {
             this.contacts = [];
@@ -123,7 +123,6 @@ export class Contacts implements OnInit {
       },
       error: (err) => {
         this.errorMessage = err.error?.message ?? 'Failed to load contacts.';
-        this.isLoading = false;
         this.cdr.markForCheck();
       }
     });
@@ -143,6 +142,7 @@ export class Contacts implements OnInit {
         next: (res: any) => {
           if (res.status) {
             if (res?.response?.length > 0) {
+               this.cdr.markForCheck();
               this.userList = res?.response[0]?.UserList ?? [];
               this.status = res?.response[0]?.StatusList ?? [];
             }
@@ -169,14 +169,14 @@ export class Contacts implements OnInit {
     };
   }
   exportContacts(): void {
-    this.isLoading = true;
     this.errorMessage = '';
-    this._apiService.PostApiExcelExport$(GrowSkillAPIEndPointPath.GetExportContacts, this.filter, false, 'blob')
+    this._apiService.PostApiExcelExport$(GrowSkillAPIEndPointPath.GetExportContacts, this.filter, true, 'blob')
       .subscribe({
         next: (response: Blob) => {
           const blob = new Blob([response], {
             type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
           });
+           this.cdr.markForCheck();
           const url = window.URL.createObjectURL(blob);
           const link = document.createElement('a');
           link.href = url;
@@ -185,11 +185,11 @@ export class Contacts implements OnInit {
           link.click();
           document.body.removeChild(link);
           window.URL.revokeObjectURL(url);
-          this.isLoading = false;
+           this.cdr.markForCheck();
         },
         error: (err) => {
           console.error('Export failed', err);
-          this.isLoading = false;
+           this.cdr.markForCheck();
         }
       });
   }
@@ -205,7 +205,7 @@ export class Contacts implements OnInit {
     modalRef.componentInstance.data = JSON.stringify(obj);
     modalRef.result.then(res => {
     }, (data: any) => {
-      if (data == 'success') { this.loadContacts(); }
+      if (data == 'success') { this.loadContacts(); this.cdr.markForCheck(); }
     })
   }
 
@@ -224,27 +224,18 @@ export class Contacts implements OnInit {
     this._apiService.Post$(GrowSkillAPIEndPointPath.GetUpdateContact, obj, true).subscribe({
       next: (res: any) => {
 
-         if (res.status) {
+        if (res.status) {
           const result = res?.response ?? {};
           if (result?.code == 'success') {
             this._toaster.success('', res?.response?.message ?? 'Contact removed successfully.');
           } else if (result?.code == 'error') {
             this._toaster.error('', res?.response?.message ?? 'Invalid contact information.');
           }
-           this.loadContacts();
-           this.cdr.markForCheck();
+          this.loadContacts();
+          this.cdr.markForCheck();
         } else {
           this._toaster.error('', res?.response?.message ?? 'Failed to removed contact.');
         }
-
-        // if (res.status) {
-        //   this._toaster.success('Successful', 'Contact removed successfully.');
-        //   this.loadContacts();
-        //   this.cdr.markForCheck();
-        // } else {
-        //   this._toaster.error('', 'Failed to removed contact.');
-        // }
-
       },
       error: () => {
       }
@@ -265,5 +256,73 @@ export class Contacts implements OnInit {
 
   getModulePermissions() {
     this.actionPermission = this._cookieService.getRolePermission(this.cookieUserData?.roleId)
+  }
+  onSingleSelection() {
+    this.checkAllSelected();
+    this.checkAnyContactSelected();
+  }
+
+  checkAllSelected() {
+    this.isAllSelected = this.contacts.every(contact => contact.is_selected);
+    this.cdr.markForCheck();
+  }
+  checkAnyContactSelected() {
+    this.is_any_contact_selected = this.contacts.some(contact => contact.is_selected);
+    this.cdr.markForCheck();
+  }
+  onAllSelection() {
+    this.contacts.forEach(e => e.is_selected = this.isAllSelected);
+    this.checkAnyContactSelected();
+    this.cdr.markForCheck();
+  }
+  removeSelectedContacts() {
+    if (confirm('Are you sure you want to delete selected contacts?')) {
+      this.bulkAssignmentAndDelete(-1, 0);
+    }
+  }
+  onBulkAssign(assignedTo: number): void {
+    if (Number(assignedTo) == -1) {
+      return;
+    } else {
+      if (confirm('Are you sure you want to assign selected contacts to this user?')) {
+        this.bulkAssignmentAndDelete(0, Number(assignedTo));
+      }
+    }
+  }
+
+  bulkAssignmentAndDelete(action_type: number, assignedTo: number) {
+    const allSelectedContacts = this.contacts.filter(contact => contact.is_selected);
+    const obj = {
+      user_id: this.cookieUserData?.id,
+      sub_id: this.cookieUserData?.subcriptionId,
+      assignedTo: assignedTo ?? 0,
+      action_type: action_type ?? '',
+      contactIds: allSelectedContacts.map(contact => contact.id)
+    }
+    this._apiService.Post$(GrowSkillAPIEndPointPath.GetUpdateBulkAssignment, obj, true).subscribe({
+      next: (res: any) => {
+
+        if (res.status) {
+          const result = res?.response ?? {};
+          if (result?.code == 'assignment') {
+            this._toaster.success('', res?.response?.message ?? 'Bulk assignment completed.');
+            this.cdr.markForCheck();
+          } else if (result?.code == 'remove') {
+            this._toaster.success('', res?.response?.message ?? 'Contacts removed successfully.');
+            this.cdr.markForCheck();
+          }
+          else if (result?.code == 'error') {
+            this._toaster.error('', res?.response?.message ?? 'Invalid contact information.');
+          }
+          this.loadContacts();
+          this.cdr.markForCheck();
+          this.is_any_contact_selected = false;
+        } else {
+          this._toaster.error('', res?.response?.message ?? 'Failed to bulk assignment.');
+        }
+      },
+      error: () => {
+      }
+    });
   }
 }

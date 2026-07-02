@@ -10,6 +10,7 @@ export interface LoggedInUser {
   role: IRole[];
   moduleAccess: IModuleAccess[];
   permissions: IPermission[];
+  profile: profileModel[];
 }
 export interface IRole {
   id: number;
@@ -41,4 +42,14 @@ export class addUserModel {
   password: string = '';
   role_id: number = 0;
   actionType: number = 0;
+}
+export class profileModel {
+  company_name: string = '';
+  contact_person: string = '';
+  slogan: string = '';
+  phone: string = '';
+  email:  string = '';
+  gst_number:  string = '';
+  address:  string = '';
+  logo:  string = '';
 }

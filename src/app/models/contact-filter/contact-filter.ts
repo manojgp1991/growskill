@@ -30,6 +30,7 @@ export interface ContactDto {
   assignedTo_id?: number;
   assignedTo?: string;
   createdDate: string;
+  is_selected?: boolean;
 }
 export interface ContactListResponse {
   data: ContactDto[];
