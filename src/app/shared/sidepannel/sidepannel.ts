@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { NavigationEnd, Router, RouterLink, RouterModule } from '@angular/router';
 import { Footer } from '../footer/footer';
 import { CookieStorageService } from '../../services/cookie-service/cookie.service';
 import { LoggedInUser, profileModel } from '../../models/loginUser/loginUser';
 import { MenuPermission } from '../../models/loginUser/menuPermission';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sidepannel',
@@ -38,12 +38,26 @@ export class Sidepannel implements OnInit {
   isSettingsOpen = false;
   profile: profileModel = new profileModel();
   _tempLogoUrl: string = '/assets/images/gs-logo.png';
-  constructor(private _cookieService: CookieStorageService) { }
+
+  private readonly settingsRoutes = ['/settings', '/users', '/email-templates', '/system-configurations'];
+
+  constructor(
+    private _cookieService: CookieStorageService,
+    private router: Router,
+  ) { }
+
   ngOnInit(): void {
     this.cookieUserData = this._cookieService.getUser();
     this.profile = this.cookieUserData?.profile[0] ?? new profileModel();
     this.profile.logo = this.profile?.logo ?? this._tempLogoUrl;
     this.getModulePermissions();
+    this.updateSettingsMenuState(this.router.url);
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.updateSettingsMenuState(event.urlAfterRedirects);
+      }
+    });
   }
 
   getModulePermissions() {
@@ -55,6 +69,14 @@ export class Sidepannel implements OnInit {
       userManagement: this._cookieService.hasModuleAccess('User Management'),
       settings: this._cookieService.hasModuleAccess('Settings'),
     };
+  }
+
+  toggleSettingsMenu(): void {
+    this.isSettingsOpen = !this.isSettingsOpen;
+  }
+
+  private updateSettingsMenuState(url: string): void {
+    this.isSettingsOpen = this.settingsRoutes.some((route) => url === route || url.startsWith(`${route}/`));
   }
 
 }

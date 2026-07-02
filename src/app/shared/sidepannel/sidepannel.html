@@ -26,7 +26,7 @@
                 class="ri-upload-cloud-2-line"></i> Bulk Import</a>
 
         <div class="nav-label" routerLinkActive="active" style="margin-top:6px">System</div>
-        <a *ngIf="menuPermissions.settings" (click)="isSettingsOpen = !isSettingsOpen" routerLinkActive="active"
+        <a *ngIf="menuPermissions.settings" (click)="toggleSettingsMenu()" routerLinkActive="active"
             class="nav-item ">
             <i class="ri-settings-3-line"></i>
             Settings</a>
