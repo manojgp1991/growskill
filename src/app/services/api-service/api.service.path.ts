@@ -19,5 +19,6 @@ export const GrowSkillAPIEndPointPath = {
   UpdatePassword:  "Admin/GetUpdatePassword",
   UpdatePipeLine:  "Admin/GetUpdatePipeline",
   GetUpdateBulkAssignment:  "Admin/GetUpdateBulkAssignment",
+  GetPipelineData:  "Admin/GetPipelineData",
 }
 

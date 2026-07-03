@@ -34,6 +34,11 @@ export class Sidepannel implements OnInit {
     bulkImport: false,
     userManagement: false,
     settings: false,
+    emailConfiguration: false,
+    companyProfileConfiguration: false,
+    pipelineConfiguration: false,
+    myProfile: false,
+    subscription: false
   }
   isSettingsOpen = false;
   profile: profileModel = new profileModel();
@@ -68,6 +73,11 @@ export class Sidepannel implements OnInit {
       bulkImport: this._cookieService.hasModuleAccess('Bulk Import'),
       userManagement: this._cookieService.hasModuleAccess('User Management'),
       settings: this._cookieService.hasModuleAccess('Settings'),
+      emailConfiguration: this._cookieService.hasModuleAccess('Email Configuration'),
+      companyProfileConfiguration: this._cookieService.hasModuleAccess('Company Profile Configuration'),
+      pipelineConfiguration: this._cookieService.hasModuleAccess('Pipeline Configuration'),
+      myProfile: this._cookieService.hasModuleAccess('My Profile'),
+      subscription: this._cookieService.hasModuleAccess('Subscription')
     };
   }
 

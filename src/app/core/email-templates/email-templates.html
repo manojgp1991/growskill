@@ -9,12 +9,25 @@
         <div class="pb-title">All Templates</div>
         <div class="pb-sub">2 total templates in your CRM</div>
       </div>
-      <div style="margin-left:auto"><a routerLink="/new-email-template" class="btn btn-primary btn-sm"><i class="ri-add-line"></i>
-          Add New Template</a></div>
+      <div style="margin-left:auto"> </div>
     </div>
   </div>
 
   <div class="card">
+
+   <div class="card-header" style="flex-wrap:wrap;gap:10px">
+        <div style="display:flex;gap:10px;flex-wrap:wrap;flex:1">
+          <div style="position:relative"><i class="ri-search-line"
+              style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--gray-400);font-size:14px"></i>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px">        
+          <a  routerLink="/new-email-template"
+            class="btn btn-sm btn-primary"><i class="ri-add-line"></i> Add New Template </a>
+        </div>
+      </div>
+
+      
     <!-- Table -->
     <div class="table-wrap">
       <table class="data-table">

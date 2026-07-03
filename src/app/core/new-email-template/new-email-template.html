@@ -27,8 +27,8 @@
           </div>
         </div>
         <div class="footer-option">
-             <button routerLink="/email-templates" class="btn btn-secondary" style="margin-right: 6px;">Cancel</button>
-        <button class="btn btn-primary"><i class="ri-save-line"></i> Save Template</button>
+             <button *ngIf="actionPermission.writePermission" routerLink="/email-templates" class="btn btn-secondary" style="margin-right: 6px;">Cancel</button>
+        <button *ngIf="actionPermission.writePermission" class="btn btn-primary"><i class="ri-save-line"></i> Save Template</button>
         </div>
        
       </div>

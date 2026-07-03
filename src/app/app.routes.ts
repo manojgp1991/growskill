@@ -36,11 +36,6 @@ export const routes: Routes = [
         path: 'users',
         loadComponent: () => import('./core/users/users').then(m => m.Users)
       },
-      {
-        canActivate: [authGuard],
-        path: 'settings',
-        loadComponent: () => import('./core/settings/settings').then(m => m.Settings)
-      },
        {
         canActivate: [authGuard],
         path: 'email-templates',

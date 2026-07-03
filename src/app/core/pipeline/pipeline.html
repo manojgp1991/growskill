@@ -1,70 +1,70 @@
-  <main class="main-content">
+<div class="main-content">
 
-      <div class="page-banner">
-        <img src="images/pipeline-icon.svg" alt=""/>
-        <div class="page-banner-overlay">
-          <i class="ri-kanban-view-line"></i>
-          <div><div class="pb-title">Visual Sales Pipeline</div><div class="pb-sub">Drag cards between columns to update stage</div></div>
-          <div style="margin-left:auto"><a href="contacts.html" class="btn btn-primary btn-sm"><i class="ri-add-line"></i> Add Contact</a></div>
+  <!-- Banner -->
+  <div style="margin-bottom:18px;border-radius:14px;overflow:hidden;height:80px;position:relative">
+    <img src="images/pipeline-icon.svg" alt="Pipeline" style="width:100%;height:100%;object-fit:cover"/>
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,27,42,.75) 0%,transparent 55%);display:flex;align-items:center;padding:0 22px;gap:14px">
+      <i class="ri-kanban-view-line" style="color:#00C8A0;font-size:24px"></i>
+      <div style="color:#fff">
+        <div style="font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700">Visual Sales Pipeline</div>
+        <div style="font-size:.8rem;opacity:.75">Drag cards between columns to update stage</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Board -->
+  <div class="pipeline-board">
+    <div
+      *ngFor="let status of statusOrder"
+      class="pipeline-col"
+      [id]="'col-' + status.key"
+      (dragover)="onDragOver($event, status.key)"
+      (dragleave)="onDragLeave(status.key)"
+      (drop)="onDrop($event, status.key)">
+
+      <div class="pipeline-col-header">
+        <div class="pipeline-col-title">
+          <span class="col-dot" [style.background]="status.color_code"></span>
+          <span>{{ status.label }}</span>
         </div>
+        <span class="col-count">{{ getContactsByStatus(status.key).length }}</span>
       </div>
 
-      <div class="pipeline-board">
+      <div class="pipeline-cards">
+        <ng-container *ngIf="getContactsByStatus(status.key).length > 0; else emptyCol">
+          <div
+            *ngFor="let contact of getContactsByStatus(status.key); let i = index;"
+            class="pipeline-card"
+            [attr.data-id]="contact.id"
+            [draggable]="canEdit"
+            (dragstart)="onDragStart($event, contact.id)"
+            (dragend)="onDragEnd($event)"
+            (click)="goToDetail(contact.id)"
+            [style.cursor]="canEdit ? 'grab' : 'pointer'">
 
-        <!-- LEAD -->
-        <div class="pipeline-col">
-          <div class="pipeline-col-header"><div class="pipeline-col-title"><span class="col-dot" style="background:#8B5CF6"></span>Lead</div><span class="col-count">4</span></div>
-          <div class="pipeline-cards">
-            <a href="contact-detail.html" class="pipeline-card" style="text-decoration:none"><div class="pc-name">Suresh Mehta</div><div class="pc-co">TechCorp India</div><div class="pc-meta"><div class="pc-assignee"><div class="mini-av" style="background:linear-gradient(135deg,#3B82F6,#1D4ED8)">AS</div>Amit</div><div class="pc-date">2024-01-15</div></div></a>
-            <a href="contact-detail.html" class="pipeline-card" style="text-decoration:none"><div class="pc-name">Sanjay Bose</div><div class="pc-co">Enterprise Ltd</div><div class="pc-meta"><div class="pc-assignee"><div class="mini-av" style="background:linear-gradient(135deg,#3B82F6,#1D4ED8)">AS</div>Amit</div><div class="pc-date">2024-01-21</div></div></a>
-            <a href="contact-detail.html" class="pipeline-card" style="text-decoration:none"><div class="pc-name">Rahul Ahuja</div><div class="pc-co">PixelWorks</div><div class="pc-meta"><div class="pc-assignee"><div class="mini-av" style="background:linear-gradient(135deg,#3B82F6,#1D4ED8)">AS</div>Amit</div><div class="pc-date">2024-01-25</div></div></a>
-            <a href="contact-detail.html" class="pipeline-card" style="text-decoration:none"><div class="pc-name">Sujata Rao</div><div class="pc-co">FinEdge</div><div class="pc-meta"><div class="pc-assignee"><div class="mini-av" style="background:linear-gradient(135deg,#EC4899,#BE185D)">NV</div>Neha</div><div class="pc-date">2024-01-27</div></div></a>
+            <div class="pc-name">{{ contact.name }}</div>
+            <div class="pc-co">{{ contact.company || '' }}</div>
+            <div class="pc-meta">
+              <div class="pc-assignee">
+                <ng-container *ngIf="getUser(contact.assignedTo) as u; else unassigned">
+                  <div class="mini-av" [ngStyle]="getAvatarStyle(i)">
+                    {{ u.name | initials }}
+                  </div>
+                  {{ u.name.split(' ')[0] }}
+                </ng-container>
+                <ng-template #unassigned>Unassigned</ng-template>
+              </div>
+              <div class="pc-date">{{ contact.createdAt | date:'dd/MM/yyyy'}}</div>
+            </div>
+
           </div>
-        </div>
-
-        <!-- CONTACTED -->
-        <div class="pipeline-col">
-          <div class="pipeline-col-header"><div class="pipeline-col-title"><span class="col-dot" style="background:#3B82F6"></span>Contacted</div><span class="col-count">2</span></div>
-          <div class="pipeline-cards">
-            <a href="contact-detail.html" class="pipeline-card" style="text-decoration:none"><div class="pc-name">Kavita Nair</div><div class="pc-co">Innovate Co</div><div class="pc-meta"><div class="pc-assignee"><div class="mini-av" style="background:linear-gradient(135deg,#3B82F6,#1D4ED8)">AS</div>Amit</div><div class="pc-date">2024-01-16</div></div></a>
-            <a href="contact-detail.html" class="pipeline-card" style="text-decoration:none"><div class="pc-name">Pooja Chatterjee</div><div class="pc-co">DigitalX</div><div class="pc-meta"><div class="pc-assignee"><div class="mini-av" style="background:linear-gradient(135deg,#EC4899,#BE185D)">NV</div>Neha</div><div class="pc-date">2024-01-22</div></div></a>
-          </div>
-        </div>
-
-        <!-- QUALIFIED -->
-        <div class="pipeline-col">
-          <div class="pipeline-col-header"><div class="pipeline-col-title"><span class="col-dot" style="background:#F59E0B"></span>Qualified</div><span class="col-count">2</span></div>
-          <div class="pipeline-cards">
-            <a href="contact-detail.html" class="pipeline-card" style="text-decoration:none"><div class="pc-name">Manish Gupta</div><div class="pc-co">Global Tech</div><div class="pc-meta"><div class="pc-assignee"><div class="mini-av" style="background:linear-gradient(135deg,#EC4899,#BE185D)">NV</div>Neha</div><div class="pc-date">2024-01-17</div></div></a>
-            <a href="contact-detail.html" class="pipeline-card" style="text-decoration:none"><div class="pc-name">Arjun Reddy</div><div class="pc-co">Cloud9</div><div class="pc-meta"><div class="pc-assignee"><div class="mini-av" style="background:linear-gradient(135deg,#3B82F6,#1D4ED8)">AS</div>Amit</div><div class="pc-date">2024-01-23</div></div></a>
-          </div>
-        </div>
-
-        <!-- PROPOSAL -->
-        <div class="pipeline-col">
-          <div class="pipeline-col-header"><div class="pipeline-col-title"><span class="col-dot" style="background:#EC4899"></span>Proposal</div><span class="col-count">2</span></div>
-          <div class="pipeline-cards">
-            <a href="contact-detail.html" class="pipeline-card" style="text-decoration:none"><div class="pc-name">Deepa Joshi</div><div class="pc-co">StartUp.io</div><div class="pc-meta"><div class="pc-assignee"><div class="mini-av" style="background:linear-gradient(135deg,#EC4899,#BE185D)">NV</div>Neha</div><div class="pc-date">2024-01-18</div></div></a>
-            <a href="contact-detail.html" class="pipeline-card" style="text-decoration:none"><div class="pc-name">Meena Krishnan</div><div class="pc-co">Nexus IO</div><div class="pc-meta"><div class="pc-assignee"><div class="mini-av" style="background:linear-gradient(135deg,#EC4899,#BE185D)">NV</div>Neha</div><div class="pc-date">2024-01-24</div></div></a>
-          </div>
-        </div>
-
-        <!-- WON -->
-        <div class="pipeline-col">
-          <div class="pipeline-col-header"><div class="pipeline-col-title"><span class="col-dot" style="background:#10B981"></span>Won</div><span class="col-count">2</span></div>
-          <div class="pipeline-cards">
-            <a href="contact-detail.html" class="pipeline-card" style="text-decoration:none"><div class="pc-name">Ravi Shankar</div><div class="pc-co">BizPlus</div><div class="pc-meta"><div class="pc-assignee"><div class="mini-av" style="background:linear-gradient(135deg,#3B82F6,#1D4ED8)">AS</div>Amit</div><div class="pc-date">2024-01-19</div></div></a>
-            <a href="contact-detail.html" class="pipeline-card" style="text-decoration:none"><div class="pc-name">Sunita Malhotra</div><div class="pc-co">DataSys</div><div class="pc-meta"><div class="pc-assignee"><div class="mini-av" style="background:linear-gradient(135deg,#EC4899,#BE185D)">NV</div>Neha</div><div class="pc-date">2024-01-26</div></div></a>
-          </div>
-        </div>
-
-        <!-- LOST -->
-        <div class="pipeline-col">
-          <div class="pipeline-col-header"><div class="pipeline-col-title"><span class="col-dot" style="background:#EF4444"></span>Lost</div><span class="col-count">1</span></div>
-          <div class="pipeline-cards">
-            <a href="contact-detail.html" class="pipeline-card" style="text-decoration:none"><div class="pc-name">Anita Desai</div><div class="pc-co">Ventures Co</div><div class="pc-meta"><div class="pc-assignee"><div class="mini-av" style="background:linear-gradient(135deg,#EC4899,#BE185D)">NV</div>Neha</div><div class="pc-date">2024-01-20</div></div></a>
-          </div>
-        </div>
-
+        </ng-container>
+        <ng-template #emptyCol>
+          <div style="padding:18px 0;text-align:center;color:var(--gray-400);font-size:.8rem">Drop here</div>
+        </ng-template>
       </div>
-    </main>
+
+    </div>
+  </div>
+
+</div>

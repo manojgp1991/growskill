@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 import { InitialsPipe } from '../../services/pipe/initials-pipe';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddPipeline } from '../popup/add-pipeline/add-pipeline';
+import { ReadWritePermission } from '../../models/loginUser/menuPermission';
 
 export class CompanyModel {
   companyName: string = '';
@@ -49,25 +50,33 @@ export class SystemConfigurations implements OnInit {
   loadSystemConfigSubscription: Subscription | undefined;
   pipeLineStages: any[] = [];
   userDetails: any = {};
-  localLogourl: string = 'assets/images/logo.png';
+  localLogourl: string = '/assets/images/gs-logo.png';
   changePasswordModel: passwordChangeModel = new passwordChangeModel();
   submittedResetPass = false;
   passwordMismatch = false;
+    actionPermission: ReadWritePermission = {
+      readPermission: false,
+      writePermission: false
+    }
   constructor(
     private _apiService: ApiService,
-    private _cookieService: CookieStorageService,
+    public _cookieService: CookieStorageService,
     private _toaster: ToastrService,
     private cdr: ChangeDetectorRef,
     private modalService: NgbModal,
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {debugger
     this.cookieUserData = this._cookieService.getUser();
+    this._cookieService.checkModuleAccess('Company Profile Configuration');
+    this.getModulePermissions();
     this.loadSystemConfig(true);
   }
-
   switchTab(tabName: string): void {
     this.activeTab = tabName;
+  }
+  getModulePermissions() {
+    this.actionPermission = this._cookieService.getRolePermission(this.cookieUserData?.roleId)
   }
   loadSystemConfig(isPageLoaderShow: boolean) {
     const payload = {
