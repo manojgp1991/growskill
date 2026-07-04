@@ -32,6 +32,9 @@
 
     <div class="grid-2 mb-20">
         <!-- Chart image -->
+
+
+
         <div class="card">
             <div class="card-header">
                 <div>
@@ -39,9 +42,25 @@
                     <div class="card-subtitle">Contact distribution by stage</div>
                 </div>
             </div>
-            <div class="card-body" style="padding:12px"><img src="images/dashboard-chart.svg" alt="Pipeline chart"
-                    style="width:100%;border-radius:8px" /></div>
+            <div class="card-body" style="padding:12px">
+
+                <!-- Bar Chart -->
+                <canvas baseChart [data]="barChartData" [options]="barChartOptions" type="bar">
+                </canvas>
+
+                <!-- Pie Chart -->
+                <canvas baseChart [data]="pieChartData" [options]="pieChartOptions" type="pie">
+                </canvas>
+
+
+
+
+            </div>
         </div>
+
+
+
+
         <!-- Breakdown bars -->
         <div class="card">
             <div class="card-header">
@@ -120,15 +139,20 @@
                 <div class="card-title">Quick Actions</div>
             </div>
             <div class="card-body" style="display:flex;flex-direction:column;gap:10px">
-                <a href="contacts.html" class="btn btn-primary btn-block"><i class="ri-user-add-line"></i> Add New
+                <a *ngIf="menuPermissions.contacts" routerLink="/contacts" class="btn btn-primary btn-block"><i
+                        class="ri-user-add-line"></i> Add New
                     Contact</a>
-                <a href="bulk-import.html" class="btn btn-secondary btn-block"><i class="ri-upload-cloud-2-line"></i>
+                <a *ngIf="menuPermissions.bulkImport" routerLink="/bulk-import" class="btn btn-secondary btn-block"><i
+                        class="ri-upload-cloud-2-line"></i>
                     Bulk Import Contacts</a>
-                <a href="contacts.html" class="btn btn-secondary btn-block"><i class="ri-file-excel-2-line"></i> Export
+                <a *ngIf="menuPermissions.contacts" routerLink="/contacts" class="btn btn-secondary btn-block"><i
+                        class="ri-file-excel-2-line"></i> Export
                     to CSV</a>
-                <a href="pipeline.html" class="btn btn-secondary btn-block"><i class="ri-kanban-view-line"></i> Open
+                <a *ngIf="menuPermissions.pipeline" routerLink="/pipeline" class="btn btn-secondary btn-block"><i
+                        class="ri-kanban-view-line"></i> Open
                     Sales Pipeline</a>
-                <a href="user-management.html" class="btn btn-outline btn-block"><i class="ri-team-line"></i> Manage
+                <a *ngIf="menuPermissions.userManagement" routerLink="/users" class="btn btn-outline btn-block"><i
+                        class="ri-team-line"></i> Manage
                     Team Members</a>
             </div>
         </div>

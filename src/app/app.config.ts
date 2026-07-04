@@ -7,6 +7,7 @@ import { provideToastr } from 'ngx-toastr';
 import { routes } from './app.routes';
 import { tokenInterceptor } from './services/interceptor-service/token-interceptor/token-interceptor';
 import { loadingInterceptor } from './services/interceptor-service/loading-interceptor/loading-interceptor';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,6 +15,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimations(),
     provideToastr(),
-    provideHttpClient(withInterceptors([tokenInterceptor, loadingInterceptor]))
+    provideCharts(withDefaultRegisterables()),
+    provideHttpClient(withInterceptors([tokenInterceptor, loadingInterceptor])),
   ]
 };
