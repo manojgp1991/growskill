@@ -59,19 +59,87 @@
         <div class="card-body">
           <div class="timeline">
 
-            <ng-container *ngFor="let activity of activityList; let i = index">
-              <div class="tl-item">
-                <div class="tl-left">
-                  <div class="tl-dot" style="background:rgba(245,158,11,.15);border:2px solid #F59E0B;color:#F59E0B"><i
-                      class="ri-chat-3-line"></i></div>
+            <!-- <ng-container *ngFor="let activity of activityList; let i = index">
+
+              <ng-container *ngIf="activity?.is_comment == 0">
+                <div class="tl-item">
+                  <div class="tl-left">
+                    <div class="tl-dot" style="background:rgba(245,158,11,.15);border:2px solid #F59E0B;color:#F59E0B">
+                      <i class="ri-chat-3-line"></i></div>
+                  </div>
+                  <div class="tl-content">
+                    <div class="tl-box">{{activity?.contact_follow_up}}</div>
+                    <div class="tl-meta"><b>{{activity?.assignedTo}}</b> · {{activity?.updated_date | date:'dd-MM-yyyy
+                      HH:mm'}}</div>
+                  </div>
                 </div>
-                <div class="tl-content">
-                  <div class="tl-box">{{activity?.contact_follow_up}}</div>
-                  <div class="tl-meta"><b>{{activity?.assignedTo}}</b> · {{activity?.updated_date | date:'dd-MM-yyyy
-                    HH:mm'}}</div>
+              </ng-container>
+
+              <ng-container *ngIf="activity?.is_comment == 1">
+                <div class="tl-item">
+                  <div class="tl-left">
+                    <div class="tl-dot" style="background:rgba(245,158,11,.15);border:2px solid #F59E0B;color:#F59E0B">
+                      <i class="ri-chat-3-line"></i></div>
+                  </div>
+                  <div class="tl-content">
+                    <div class="tl-box">{{activity?.contact_follow_up}}</div>
+                    <div class="tl-meta"><b>{{activity?.assignedTo}}</b> · {{activity?.updated_date | date:'dd-MM-yyyy
+                      HH:mm'}}</div>
+                  </div>
                 </div>
+              </ng-container>
+
+
+            </ng-container> -->
+
+
+
+       <!-- is_comment == 1 : one dot, all contents looped -->
+            <div class="tl-item" *ngIf="hasComments">
+              <div class="tl-left">
+                <div class="tl-dot" style="background:rgba(245,158,11,.15);border:2px solid #F59E0B;color:#F59E0B">
+                  <i class="ri-chat-3-line"></i>
+                </div>
+                <div class="tl-connector"></div>
               </div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <ng-container *ngFor="let activity of activityList">
+                  <ng-container *ngIf="activity?.is_comment == 1">
+                    <div class="tl-content">
+                      <div class="tl-box">{{activity?.contact_follow_up}}</div>
+                      <div class="tl-meta"><b>{{activity?.assignedTo}}</b> · {{activity?.updated_date | date:'dd-MM-yyyy
+                        HH:mm'}}</div>
+                    </div>
+                  </ng-container>
+                </ng-container>
+              </div>
+            </div>
+
+
+            <ng-container *ngFor="let activity of activityList; let i = index">
+
+              <!-- is_comment == 0 : normal one-by-one -->
+              <ng-container *ngIf="activity?.is_comment == 0">
+                <div class="tl-item">
+                  <div class="tl-left">
+                    <div class="tl-dot" style="border-color:#00C8A0;background:#00C8A018;color:#00C8A0">
+          <i class="ri-user-add-line"></i>
+        </div>
+        <div class="tl-connector"></div>
+                  </div>
+                  <div class="tl-content">
+                    <div class="tl-box">{{activity?.contact_follow_up}}</div>
+                    <div class="tl-meta"><b>{{activity?.assignedTo}}</b> · {{activity?.updated_date | date:'dd-MM-yyyy
+                      HH:mm'}}</div>
+                  </div>
+                </div>
+              </ng-container>
             </ng-container>
+
+     
+
+
+
 
           </div>
         </div>
@@ -110,7 +178,7 @@
 
             <ng-container *ngIf="actionPermission.writePermission">
               <div (click)="updateContactStatus(s)"
-                style="display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:9px;border:1.5px solid var(--gray-200);background:#fff"
+                style="display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:9px;border:1.5px solid var(--gray-200);background:#fff;cursor:pointer"
                 [style.border]="s.id == contactDetails?.status_id ? '1.5px solid #3B82F6' : null"
                 [style.background]="s.id == contactDetails?.status_id ? 'rgba(59,130,246,.1)' : null">
 

@@ -20,5 +20,6 @@ export const GrowSkillAPIEndPointPath = {
   UpdatePipeLine:  "Admin/GetUpdatePipeline",
   GetUpdateBulkAssignment:  "Admin/GetUpdateBulkAssignment",
   GetPipelineData:  "Admin/GetPipelineData",
+  GetUpdatePipelineStatusByDrag:  "Admin/GetUpdatePipelineStatusByDrag",
 }
 

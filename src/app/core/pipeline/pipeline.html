@@ -39,7 +39,7 @@
             [draggable]="canEdit"
             (dragstart)="onDragStart($event, contact.id)"
             (dragend)="onDragEnd($event)"
-            (click)="goToDetail(contact.id)"
+            (click)="openContactDetail(contact)"
             [style.cursor]="canEdit ? 'grab' : 'pointer'">
 
             <div class="pc-name">{{ contact.name }}</div>

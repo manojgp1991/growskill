@@ -93,7 +93,6 @@ export class ContactDetails implements OnInit {
     this.contactDetailSubscription =
       this._apiService.Post$(GrowSkillAPIEndPointPath.GetContactDetails, payload, isPageLoaderShow).subscribe({
         next: (res: any) => {
-          debugger
           if (res.status) {
             if (res?.response?.length > 0) {
               this.activityList = res?.response[0]?.activityList ?? [];
@@ -146,9 +145,9 @@ export class ContactDetails implements OnInit {
       comment: this.tempConnetNote ? this.tempConnetNote : ''
     };
 
-    this._apiService.Post$(GrowSkillAPIEndPointPath.UpdateContactStatus, payload, true).subscribe({
+   this.contactDetails.status_id == status?.id ?'' :
+   this._apiService.Post$(GrowSkillAPIEndPointPath.UpdateContactStatus, payload, true).subscribe({
       next: (res: any) => {
-        debugger
         if (res.status) {
           this._toaster.success('', 'Status updated successfully.');
           this.contactNote = '';
@@ -187,4 +186,7 @@ export class ContactDetails implements OnInit {
   getModulePermissions() {
     this.actionPermission = this._cookieService.getRolePermission(this.cookieUserData?.roleId)
   }
+  get hasComments(): boolean {
+  return this.activityList?.some(a => a.is_comment == 1) ?? false;
+}
 }
