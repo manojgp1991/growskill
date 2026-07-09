@@ -2,40 +2,67 @@
 
 
   <div class="card">
-  <div id="settings-content">
+    <div id="settings-content">
 
-    <div id="tab-users" class="card" style="display: block;">
-      <div class="card-header">
-        <div><div class="card-title">Add New Email Template</div><div class="card-subtitle">Create a new email template with a customized content</div></div>
-      </div>
-      <div class="card-body" style="height: 100vh;">
-        <div class="form-grid">
-          <div class="form-group full"><label>Template Name *</label><input type="text" id="su-name" placeholder="Enter template name"></div>
-        
-          <div class="form-group full">
-            
-            <div class="NgxEditor__Wrapper">
-            <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
-            <ngx-editor
-                [editor]="editor"
-                [ngModel]="html"
-                [disabled]="false"
-                [placeholder]="'Type your email here...'" >
-            </ngx-editor>
+      <div id="tab-users" class="card" style="display: block;">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Add New Email Template</div>
+            <div class="card-subtitle">Create a new email template with a customized content</div>
+          </div>
+        </div>
+
+        <form (ngSubmit)="f.form.valid && onUpdateTemplate()" #f="ngForm" novalidate>
+          <div class="card-body" style="height: 100vh;">
+            <div class="form-grid">
+              <div class="form-group full"><label>Template Name *</label><input type="text" id="su-name"
+                  [ngClass]="{ 'is-invalid': f.submitted && template_name.invalid }"
+                  [(ngModel)]="emailTemplateModel.template_name" name="template_name" #template_name="ngModel"
+                  placeholder="Enter template name" required></div>
+
+
+                                <div class="form-group full"><label>Email Action *</label>
+                                  <select id="su-name" name="email_action_id" #email_action_id="ngModel"
+                                    [ngClass]="{ 'is-invalid': f.submitted && email_action_id.invalid }"
+                                    [(ngModel)]="emailTemplateModel.email_action_id" required>
+                                    <option value="0">--Select Email Action--</option>
+                                    <option *ngFor="let action of actionList" [value]="action.id">
+                                      {{ action.action_name }}
+                                    </option>
+                                  </select>
+                                  
+                
+                </div>
+
+              <div class="form-group full">
+
+                <div class="NgxEditor__Wrapper">
+                  <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+                  <ngx-editor [editor]="editor" [ngModel]="html" [disabled]="false"
+                    [(ngModel)]="emailTemplateModel.email_body" #email_body="ngModel" name="email_body"
+                    [ngClass]="{ 'is-invalid': f.submitted && email_body.invalid }"
+                    [placeholder]="'Type your email here...'" required>
+                  </ngx-editor>
+                </div>
+
+              </div>
+            </div>
+            <div class="footer-option">
+              <button type="button" *ngIf="actionPermission.writePermission" routerLink="/email-templates"
+                class="btn btn-secondary" style="margin-right: 6px;">Cancel</button>
+              <button type="submit" *ngIf="actionPermission.writePermission" class="btn btn-primary"><i
+                  class="ri-save-line"></i> Save
+                Template</button>
             </div>
 
           </div>
-        </div>
-        <div class="footer-option">
-             <button *ngIf="actionPermission.writePermission" routerLink="/email-templates" class="btn btn-secondary" style="margin-right: 6px;">Cancel</button>
-        <button *ngIf="actionPermission.writePermission" class="btn btn-primary"><i class="ri-save-line"></i> Save Template</button>
-        </div>
-       
+        </form>
+
+
       </div>
+
+
     </div>
-
-
-  </div>
 
   </div>
 </main>

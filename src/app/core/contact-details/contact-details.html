@@ -7,8 +7,8 @@
     <img src="images/contact-detail-icon.svg" alt="" />
     <div class="page-banner-overlay">
       <div>
-        <div class="pb-title">{{contactDetails?.name}}</div>
-        <div class="pb-sub">{{contactDetails?.company}}</div>
+        <div class="pb-title">{{contactDetails.name}}</div>
+        <div class="pb-sub">{{contactDetails.company}}</div>
       </div>
     </div>
   </div>
@@ -23,21 +23,21 @@
 
             <div
               style="width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#3B82F6,#1D4ED8);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;color:#fff;font-family:'Syne',sans-serif;flex-shrink:0">
-              {{contactDetails?.name | initials}}</div>
+              {{contactDetails.name | initials}}</div>
             <div style="flex:1">
               <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.15rem;color:var(--navy)">
-                {{contactDetails?.name}}
+                {{contactDetails.name}}
               </div>
               <div style="display:flex;gap:14px;margin-top:6px;flex-wrap:wrap">
                 <span style="font-size:.8rem;color:var(--gray-600)"><i class="ri-mail-line"></i>
-                  {{contactDetails?.email}}</span>
+                  {{contactDetails.email}}</span>
                 <span style="font-size:.8rem;color:var(--gray-600)"><i class="ri-phone-line"></i>
-                  {{contactDetails?.phone}}</span>
+                  {{contactDetails.phone}}</span>
               </div>
               <div style="display:flex;gap:8px;margin-top:8px;align-items:center;flex-wrap:wrap">
-                <span class="badge badge-contacted">{{contactDetails?.status}}</span>
+                <span class="badge badge-contacted">{{contactDetails.status}}</span>
                 <span style="font-size:.8rem;color:var(--gray-600)"><i class="ri-building-line"></i>
-                  {{contactDetails?.company}}</span>
+                  {{contactDetails.company}}</span>
               </div>
 
             </div>
@@ -46,13 +46,13 @@
             <div
               style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#3B82F6,#1D4ED8);display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;color:#fff">
               AS</div>
-            <span style="font-size:.83rem;color:var(--gray-600)">Assigned to <strong>{{contactDetails?.assignedTo ??
+            <span style="font-size:.83rem;color:var(--gray-600)">Assigned to <strong>{{contactDetails.assignedTo ??
                 'Not Assigned'}}</strong></span>
           </div>
         </div>
       </div>
       <!-- Timeline -->
-      <div class="card" *ngIf="(activityList?.length ?? 0) > 0">
+      <div class="card" *ngIf="activityList.length > 0">
         <div class="card-header">
           <div class="card-title">📋 Activity Timeline</div>
         </div>
@@ -158,18 +158,18 @@
             <ng-container *ngIf="!actionPermission.writePermission">
               <div
                 style="display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:9px;border:1.5px solid var(--gray-200);background:#fff"
-                [style.border]="s.id == contactDetails?.status_id ? '1.5px solid #3B82F6' : null"
-                [style.background]="s.id == contactDetails?.status_id ? 'rgba(59,130,246,.1)' : null">
+                [style.border]="s.id == contactDetails.status_id ? '1.5px solid #3B82F6' : null"
+                [style.background]="s.id == contactDetails.status_id ? 'rgba(59,130,246,.1)' : null">
 
                 <span>{{ statusIcons[i % statusIcons.length] }}</span>
 
                 <span style="font-size:.86rem;flex:1"
-                  [style.font-weight]="s.id == contactDetails?.status_id ? '700' : null"
-                  [style.color]="s.id == contactDetails?.status_id ? '#3B82F6' : null">
+                  [style.font-weight]="s.id == contactDetails.status_id ? '700' : null"
+                  [style.color]="s.id == contactDetails.status_id ? '#3B82F6' : null">
                   {{ s?.caption }}
                 </span>
 
-                <span *ngIf="s.id == contactDetails?.status_id" style="font-size:16px">
+                <span *ngIf="s.id == contactDetails.status_id" style="font-size:16px">
                   ✓
                 </span>
 
@@ -179,18 +179,18 @@
             <ng-container *ngIf="actionPermission.writePermission">
               <div (click)="updateContactStatus(s)"
                 style="display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:9px;border:1.5px solid var(--gray-200);background:#fff;cursor:pointer"
-                [style.border]="s.id == contactDetails?.status_id ? '1.5px solid #3B82F6' : null"
-                [style.background]="s.id == contactDetails?.status_id ? 'rgba(59,130,246,.1)' : null">
+                [style.border]="s.id == contactDetails.status_id ? '1.5px solid #3B82F6' : null"
+                [style.background]="s.id == contactDetails.status_id ? 'rgba(59,130,246,.1)' : null">
 
                 <span>{{ statusIcons[i % statusIcons.length] }}</span>
 
                 <span style="font-size:.86rem;flex:1"
-                  [style.font-weight]="s.id == contactDetails?.status_id ? '700' : null"
-                  [style.color]="s.id == contactDetails?.status_id ? '#3B82F6' : null">
+                  [style.font-weight]="s.id == contactDetails.status_id ? '700' : null"
+                  [style.color]="s.id == contactDetails.status_id ? '#3B82F6' : ''">
                   {{ s?.caption }}
                 </span>
 
-                <span *ngIf="s.id == contactDetails?.status_id" style="font-size:16px">
+                <span *ngIf="s.id == contactDetails.status_id" style="font-size:16px">
                   ✓
                 </span>
 

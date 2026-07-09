@@ -34,53 +34,39 @@
         <thead>
           <tr>
             <th>Template Name</th>
-            <th>Create on</th>
-            <th>Created by</th>
+            <th>Email Action</th>
+            <th>Status</th>
+            <th>Created Date</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <!-- <ng-container *ngFor="let c of contacts; let i = index; trackBy: trackByContact">
+          <ng-container *ngFor="let c of templates; let i = index;">
           <tr>
-            <td>
-              <div class="contact-cell">
-                <div class="tbl-avatar" [ngStyle]="getAvatarStyle(i)"> {{c?.name | initials}}</div>
-                <div>
-                  <div class="contact-name">{{c?.name}}</div>
-                  <div class="contact-email">{{c?.email}}</div>
-                </div>
-              </div>
-            </td>
-            <td>{{c?.phone}}</td>
-            <td>{{c?.company}}</td>
-            <td><span class="badge badge-lead">{{c?.status}}</span></td>
-            <td>
-              <div class="flex items-center gap-8">
-                <div class="tbl-avatar"
-                  [ngStyle]="getAvatarStyle(i)">  {{ (c?.assignedTo || 'Not Assigned') | initials }}
-                </div>{{ c?.assignedTo || 'Not Assigned' }}
-              </div>
-            </td>
-            <td class="text-muted text-xs">{{c?.createdDate | date:'dd/MM/yyyy'}}</td>
+            <td>{{c.template_name}}</td>
+             <td>{{c.email_action_name}}</td>
+            <td>{{c.is_active==true ? 'Active' : 'Inactive'}}</td>
+           
+            <td class="text-muted text-xs">{{c.createdDate | date:'dd/MM/yyyy'}}</td>
             <td>
               <div class="tbl-actions">
-                <a (click)="openContactDetail(c)" class="btn btn-icon btn-outline"><i
+                <a (click)="openTemplateDetail(c)" class="btn btn-icon btn-outline"><i
                     class="ri-eye-line"></i></a>
-                    <button *ngIf="actionPermission.writePermission" (click)="openAddContact(c)" class="btn btn-icon btn-secondary"><i
+                    <!-- <button *ngIf="actionPermission.writePermission" (click)="openAddContact(c)" class="btn btn-icon btn-secondary"><i
                     class="ri-edit-line"></i>
                   </button>
                   <button *ngIf="actionPermission.writePermission" (click)="confirmDeleteContact(c)" class="btn btn-icon btn-danger"><i
                     class="ri-delete-bin-line"></i>
-                  </button>
+                  </button> -->
                   </div>
             </td>
           </tr>
        </ng-container>
-        <ng-container *ngIf="contacts.length === 0">
+        <ng-container *ngIf="templates.length === 0">
           <tr>
-            <td colspan="7" style="text-align:center;padding:20px;color:var(--gray-400)">No contacts found</td>
+            <td colspan="7" style="text-align:center;padding:20px;color:var(--gray-400)">No templates found</td>
           </tr>
-        </ng-container> -->
+        </ng-container>
         </tbody>
       </table>
     </div>
