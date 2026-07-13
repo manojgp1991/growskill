@@ -48,16 +48,6 @@ export const routes: Routes = [
       },
       {
         canActivate: [authGuard],
-        path: 'manage-subscriptions',
-        loadComponent: () => import('./core/manage-subscriptions/manage-subscriptions').then(m => m.ManageSubscriptions)
-      },
-      {
-        canActivate: [authGuard],
-        path: 'add-new-subscription',
-        loadComponent: () => import('./core/add-new-subscriptions/add-new-subscriptions').then(m => m.AddNewSubscriptions)
-      },
-      {
-        canActivate: [authGuard],
         path: 'system-configurations',
         loadComponent: () => import('./core/system-configurations/system-configurations').then(m => m.SystemConfigurations)
       }
@@ -66,5 +56,26 @@ export const routes: Routes = [
   {
     path: 'login',
     loadComponent: () => import('./core/login/login').then(m => m.Login)
-  }
+  },
+  {
+    path: 'supper-admin-login',
+    loadComponent: () => import('./core/supper-admin/supper-admin-login/supper-admin-login').then(m => m.SupperAdminLogin)
+  },
+  {
+    path: '',
+    canActivate: [authGuard],
+    loadComponent: () => import('./core/supper-admin/supper-admin-layout/supper-admin-layout').then(m => m.SupperAdminLayout),
+    children: [
+      {
+        path: 'admin-dashboard',
+        loadComponent: () => import('./core/supper-admin/supper-admin-dashboard/supper-admin-dashboard').then(m => m.SupperAdminDashboard)
+      },
+      {
+        canActivate: [authGuard],
+        path: 'admin/manage-subscriptions',
+        loadComponent: () => import('./core/supper-admin/manage-subscriptions/manage-subscriptions').then(m => m.ManageSubscriptions)
+      },
+    ]
+  },
+
 ];

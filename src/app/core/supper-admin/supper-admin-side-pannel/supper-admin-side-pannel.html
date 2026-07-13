@@ -1,1 +1,32 @@
-<p>supper-admin-side-pannel works!</p>
+  <!-- ══ SIDEBAR ══ -->
+  <aside class="sa-sidebar">
+    <div class="sa-sidebar-logo">
+      <div class="sa-logo-img"><img [src]="localLogourl" alt="GrowSkill"></div>
+      <div>
+        <div class="sa-logo-text">Grow<span>Skill</span></div>
+        <div class="sa-logo-sub">Super Admin Panel</div>
+      </div>
+    </div>
+
+    <nav class="sa-nav">
+      <div class="sa-nav-label">Overview</div>
+      <a routerLink="/admin-dashboard" class="sa-nav-item active"><i class="ri-dashboard-2-line"></i> Dashboard</a>
+
+      <div class="sa-nav-label">Subscriptions</div>
+      <a routerLink="/admin/manage-subscriptions" class="sa-nav-item"><i class="ri-vip-crown-line"></i> All Subscriptions <span class="sa-nav-badge">24</span></a>
+      <a (click)="openAddNewSubscriptionsPopup('')" class="sa-nav-item"><i class="ri-add-circle-line"></i> New Subscription</a>
+      <!-- <a class="sa-nav-item"><i class="ri-refresh-line"></i> Renewals <span class="sa-nav-badge orange">4</span></a>
+      <a class="sa-nav-item"><i class="ri-alarm-warning-line"></i> Expiring Soon <span class="sa-nav-badge red">3</span></a> -->
+    </nav>
+
+    <div class="sa-sidebar-footer">
+      <a (click)="logOut()" class="sa-user-row" style="text-decoration:none">
+        <div class="sa-avatar">{{cookieUserData?.name | initials}}</div>
+        <div>
+          <div class="sa-user-name">{{cookieUserData?.name}}</div>
+           <div class="sa-user-role">{{cookieUserData?.email}}</div>
+        </div>
+        <i class="ri-logout-box-r-line sa-logout"></i>
+      </a>
+    </div>
+  </aside>

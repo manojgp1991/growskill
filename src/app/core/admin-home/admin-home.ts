@@ -87,7 +87,7 @@ export class AdminHome implements OnInit {
     this.getModulePermissions();
     this.getActionModulePermissions();
   }
-  ngOnInit(): void {
+  ngOnInit(): void {debugger
     this.cdr.markForCheck();
     this.loadHomePageData(true);
   }

@@ -128,17 +128,60 @@ export class Pipeline implements OnInit {
     });
   }
 
-  buildBoard(): void {
-    this.cdr.markForCheck()
-    this.statusOrder = [...this.statusList]
-      .sort((a, b) => a.sort_order - b.sort_order)
-      .map(s => ({
-        key: s.caption.toLowerCase(),
-        label: s.caption,
-        color_code: s.color_code
-      }));
+  // buildBoard(): void {
+  //   this.cdr.markForCheck()
+  //   this.statusOrder = [...this.statusList]
+  //     .sort((a, b) => a.sort_order - b.sort_order)
+  //     .map(s => ({
+  //       key: s.caption.toLowerCase(),
+  //       label: s.caption,
+  //       color_code: s.color_code
+  //     }));
 
-    this.pipelineContacts = this.contactList.map(c => {
+  //   this.pipelineContacts = this.contactList.map(c => {
+  //     const status = this.statusList.find(s => s.id === c.status_id);
+  //     const userCont = this.userContactList.find(uc => uc.contact_id === c.id);
+  //     const assignedId = userCont?.assigned_to ?? null;
+  //     const user = assignedId ? this.userList.find(u => u.id === assignedId) : null;
+
+  //     if(user?.id) {
+        
+  //     }
+  //     return {
+  //       id: c.id,
+  //       internal_code: c.internal_code,
+  //       name: c.name,
+  //       company: c.company,
+  //       status_id: c.status_id,
+  //       statusKey: status?.caption.toLowerCase() ?? '',
+  //       assignedTo: assignedId,
+  //       assignedName: user?.name ?? 'Unassigned',
+  //       createdAt: c.created_date,
+  //       sort_order: c.sort_order
+  //     } as PipelineContact;
+  //   });
+
+  //   this.cdr.markForCheck();
+  // }
+buildBoard(): void {
+  this.cdr.markForCheck()
+  this.statusOrder = [...this.statusList]
+    .sort((a, b) => a.sort_order - b.sort_order)
+    .map(s => ({
+      key: s.caption.toLowerCase(),
+      label: s.caption,
+      color_code: s.color_code
+    }));
+
+  this.pipelineContacts = this.contactList
+    .filter(c => {
+      // Admins (role_id === 2) see everything; others only see contacts assigned to them
+      if (this.cookieUserData?.role_id === 2) return true;
+
+      const userCont = this.userContactList.find(uc => uc.contact_id === c.id);
+      return userCont?.assigned_to === this.cookieUserData?.id;
+    })
+    .map(c => {
       const status = this.statusList.find(s => s.id === c.status_id);
       const userCont = this.userContactList.find(uc => uc.contact_id === c.id);
       const assignedId = userCont?.assigned_to ?? null;
@@ -158,9 +201,8 @@ export class Pipeline implements OnInit {
       } as PipelineContact;
     });
 
-    this.cdr.markForCheck();
-  }
-
+  this.cdr.markForCheck();
+}
   getContactsByStatus(statusKey: string): PipelineContact[] {
     return this.pipelineContacts
       .filter(c => c.statusKey === statusKey)

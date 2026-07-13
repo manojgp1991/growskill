@@ -1,1 +1,100 @@
-<p>supper-admin-login works!</p>
+<div class="sa-page">
+
+    <!-- Background effects -->
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+    <div class="grid-overlay"></div>
+
+    <!-- Floating version info -->
+    <!-- <div class="sa-floating-info">
+    <i class="ri-shield-check-line" style="color:#00C8A0"></i>
+    <span>GrowSkill CRM &nbsp;<strong>v2.0</strong></span>
+  </div> -->
+
+    <!-- Login Card -->
+    <div class="sa-card">
+
+        <!-- Badge -->
+        <!-- <div class="sa-badge"><span></span> Super Admin Portal</div> -->
+
+        <!-- Logo + Title -->
+        <div class="sa-logo-row">
+            <div class="sa-logo">
+                <img [src]="localLogourl" alt="GrowSkill Logo" />
+            </div>
+            <div>
+                <div class="sa-title">Grow<span>Skill</span></div>
+                <div class="sa-sub">Client & Subscription Management</div>
+            </div>
+        </div>
+
+        <div class="sa-divider"></div>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+        <!-- STEP 1: Login -->
+        <div class="step active" id="step-login">
+
+            <div class="hint-chip">
+                <i class="ri-information-line" style="font-size:15px;flex-shrink:0"></i>
+                <span><strong>Credentials:</strong> example@example.in &nbsp;/&nbsp; example@2024</span>
+            </div>
+
+            <div class="sa-error" id="login-error">
+                <i class="ri-error-warning-line" style="font-size:15px;flex-shrink:0"></i>
+                <span id="login-error-txt">Invalid credentials. Please try again.</span>
+            </div>
+
+            <div class="sa-field">
+                <label class="sa-label">Email Address</label>
+                <i class="ri-mail-line ico"></i>
+                <input class="sa-input" type="email"
+                 formControlName="user_name"
+                  id="sa-email" placeholder="Email Address.." />
+            </div>
+
+            <div class="sa-field">
+                <label class="sa-label">Password</label>
+                <i class="ri-lock-line ico"></i>
+                <input class="sa-input"
+                formControlName="user_password"
+                [type]="showPassword ? 'text' : 'password'" id="sa-pass"
+                    placeholder="### ### ###" id="sa-pass" />
+                <button (click)="showPassword = !showPassword" class="sa-eye" type="button">
+                    <i [class]="showPassword ? 'ri-eye-off-line' : 'ri-eye-line'"></i>
+                </button>
+            </div>
+
+            <button class="sa-btn" type="submit">
+                <i class="ri-login-box-line"></i> Sign In to Dashboard
+            </button>
+        </div>
+        </form>
+        <!-- Stats strip -->
+        <!-- <div class="sa-stats-strip">
+      <div class="sa-stat-item">
+        <div class="sa-stat-val">24</div>
+        <div class="sa-stat-label">Clients</div>
+      </div>
+      <div class="sa-stat-item">
+        <div class="sa-stat-val">18</div>
+        <div class="sa-stat-label">Active</div>
+      </div>
+      <div class="sa-stat-item">
+        <div class="sa-stat-val">4</div>
+        <div class="sa-stat-label">Expiring</div>
+      </div>
+      <div class="sa-stat-item">
+        <div class="sa-stat-val">2</div>
+        <div class="sa-stat-label">Expired</div>
+      </div>
+    </div> -->
+    
+        <div class="sa-note">
+            Restricted access — authorised personnel only.<br />
+            <a routerLink="/login">← Back to CRM Login</a>
+        </div>
+
+    </div><!-- /card -->
+
+</div>

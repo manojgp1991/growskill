@@ -1,0 +1,276 @@
+<main class="sa-content">
+    <!-- <div class="sa-stats-grid">
+        <div class="sa-stat c1">
+          <div class="sa-stat-icon" style="background:rgba(0,200,160,.12);color:#00C8A0"><i class="ri-building-2-line"></i></div>
+          <div class="sa-stat-val" id="s-total">8</div>
+          <div class="sa-stat-label">Total Clients</div>
+          <div class="sa-stat-trend up"><i class="ri-arrow-up-line"></i> All subscriptions</div>
+        </div>
+        <div class="sa-stat c2">
+          <div class="sa-stat-icon" style="background:rgba(16,185,129,.12);color:#34D399"><i class="ri-checkbox-circle-line"></i></div>
+          <div class="sa-stat-val" id="s-active">3</div>
+          <div class="sa-stat-label">Active</div>
+          <div class="sa-stat-trend up"><i class="ri-arrow-up-line"></i> Running plans</div>
+        </div>
+        <div class="sa-stat c3">
+          <div class="sa-stat-icon" style="background:rgba(245,158,11,.12);color:#FCD34D"><i class="ri-alarm-warning-line"></i></div>
+          <div class="sa-stat-val" id="s-expiring">3</div>
+          <div class="sa-stat-label">Expiring ≤ 30 days</div>
+          <div class="sa-stat-trend warn"><i class="ri-time-line"></i> Action needed</div>
+        </div>
+        <div class="sa-stat c4">
+          <div class="sa-stat-icon" style="background:rgba(239,68,68,.12);color:#F87171"><i class="ri-close-circle-line"></i></div>
+          <div class="sa-stat-val" id="s-expired">2</div>
+          <div class="sa-stat-label">Expired</div>
+          <div class="sa-stat-trend down"><i class="ri-arrow-down-line"></i> Follow up now</div>
+        </div>
+      </div> -->
+
+    <!-- TABLE CARD -->
+    <div class="sa-card">
+        <div class="sa-card-head">
+            <div>
+                <div class="sa-card-title">All Subscriptions</div>
+                <div class="sa-card-sub" id="sub-count-label">8 clients</div>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+                <div style="position:relative">
+                    <i class="ri-search-line"
+                        style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.3);font-size:13px"></i>
+                    <input (input)="onSearchChange($any($event.target).value)" type="text" id="search-input"
+                        class="sa-search-input" placeholder="Search company…" oninput="renderTable()">
+                </div>
+                <select id="filter-status" class="sa-select" (change)="onStatusChange($any($event.target).value)">
+                    <option *ngFor="let s of statusList" [value]="s.id">{{ s.name }}</option>
+                </select>
+                <button class="sa-btn sa-btn-primary" (click)="openAddNewSubscriptionsPopup('')"><i
+                        class="ri-add-line"></i> Add New</button>
+            </div>
+        </div>
+        <div style="overflow-x:auto">
+            <table class="sa-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Company</th>
+                        <th>Email / Phone</th>
+                        <th>GST No.</th>
+                        <!-- <th>Plan</th> -->
+                        <th>Users</th>
+                        <th>Start Date</th>
+                        <th>Valid Till</th>
+                        <th>Days Left</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="sub-tbody">
+
+                    <ng-container *ngFor="let s of subscriptionList;let i = index ">
+                        <tr>
+                            <td style="color:rgba(255,255,255,.25);font-size:.74rem">{{i+1}}</td>
+                            <td>
+                                <div style="display:flex;align-items:center;gap:9px">
+                                    <div class="tbl-av" [style.background]="getAvatarColor(i).bg"
+                                        [style.color]="getAvatarColor(i).color">{{ s?.company_name | initials }}</div>
+                                    <div>
+                                        <div style="font-weight:600;font-size:.85rem">{{s?.company_name}}</div>
+                                        <div style="font-size:.71rem;color:rgba(255,255,255,.3)">GST: {{s?.gst_number}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div style="font-size:.82rem">{{s?.email}}</div>
+                                <div style="font-size:.73rem;color:rgba(255,255,255,.3)">{{s?.phone}}</div>
+                            </td>
+                            <td style="font-size:.78rem;color:rgba(255,255,255,.35)">{{s?.gst_number}}</td>
+                            <!-- <td><span class="plan-tag pro">Pro</span></td> -->
+                            <td style="text-align:center;font-weight:600">{{s?.allow_users}}</td>
+                            <td style="font-size:.78rem;color:rgba(255,255,255,.35)">{{s?.subscription_date | date:
+                                'dd MMM yyyy'}}</td>
+                            <td style="font-size:.8rem;font-weight:600">{{s?.subscription_valid_till | date:
+                                'dd MMM yyyy'}}</td>
+                            <td><span style="color:#34D399;font-weight:700">{{s?.days_left}}d</span></td>
+                            <td><span class="s-pill active">{{s?.is_suspended ? 'Suspended' : 'Active'}}</span></td>
+                            <td>
+                                <div style="display:flex;gap:5px"><button class="sa-btn sa-btn-ghost sa-btn-sm"
+                                        title="View" onclick="openView('s001')"><i
+                                            class="ri-eye-line"></i></button><button
+                                        class="sa-btn sa-btn-primary sa-btn-sm" title="Renew"
+                                        onclick="openRenew('s001')"><i class="ri-refresh-line"></i></button>
+                                       
+                                    </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+        <div style="padding:12px 20px;display:flex;align-items:center;justify-content:space-between">
+            <span style="font-size:.76rem;color:rgba(255,255,255,.3)" id="page-info">Showing 1–8 of 8</span>
+            <div style="display:flex;gap:5px" id="pagination">
+                <div class="sa-page-btn active" onclick="goPage(1)">1</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HISTORY CARD -->
+    <div class="sa-card">
+        <div class="sa-card-head">
+            <div>
+                <div class="sa-card-title">Subscription History</div>
+                <div class="sa-card-sub">All new subscriptions &amp; renewals</div>
+            </div>
+        </div>
+        <div class="sa-card-body" id="history-body">
+            <div style="display:flex;flex-direction:column">
+                <div class="hist-item">
+                    <div class="hist-left">
+                        <div class="hist-dot"
+                            style="background:rgba(0,200,160,.12);border:2px solid #00C8A0;color:#00C8A0"><i
+                                class="ri-add-circle-line"></i></div>
+                        <div class="hist-line"></div>
+                    </div>
+                    <div class="hist-body">
+                        <div class="hist-title">Nexus Technologies</div>
+                        <div class="hist-meta"><span class="plan-tag pro">Pro</span> &nbsp;·&nbsp; 12 users
+                            &nbsp;·&nbsp; 04 Jul 2026 → 02 Aug 2026</div>
+                        <div style="display:flex;align-items:center;gap:8px;margin-top:5px"><span
+                                style="font-size:.7rem;font-weight:700;padding:2px 9px;border-radius:20px;background:rgba(0,200,160,.12);color:#00C8A0">New
+                                Subscription</span><span style="font-size:.71rem;color:rgba(255,255,255,.25)">5/7/2026,
+                                12:00:00 am</span></div>
+                        <div style="font-size:.76rem;color:rgba(255,255,255,.3);margin-top:3px;font-style:italic">
+                            Expiring soon</div>
+                    </div>
+                </div>
+                <div class="hist-item">
+                    <div class="hist-left">
+                        <div class="hist-dot"
+                            style="background:rgba(0,200,160,.12);border:2px solid #00C8A0;color:#00C8A0"><i
+                                class="ri-add-circle-line"></i></div>
+                        <div class="hist-line"></div>
+                    </div>
+                    <div class="hist-body">
+                        <div class="hist-title">Shah Enterprises</div>
+                        <div class="hist-meta"><span class="plan-tag">Starter</span> &nbsp;·&nbsp; 3 users &nbsp;·&nbsp;
+                            29 Jun 2026 → 29 Jul 2026</div>
+                        <div style="display:flex;align-items:center;gap:8px;margin-top:5px"><span
+                                style="font-size:.7rem;font-weight:700;padding:2px 9px;border-radius:20px;background:rgba(0,200,160,.12);color:#00C8A0">New
+                                Subscription</span><span style="font-size:.71rem;color:rgba(255,255,255,.25)">30/6/2026,
+                                12:00:00 am</span></div>
+                        <div style="font-size:.76rem;color:rgba(255,255,255,.3);margin-top:3px;font-style:italic">Trial
+                            period</div>
+                    </div>
+                </div>
+                <div class="hist-item">
+                    <div class="hist-left">
+                        <div class="hist-dot"
+                            style="background:rgba(0,200,160,.12);border:2px solid #00C8A0;color:#00C8A0"><i
+                                class="ri-add-circle-line"></i></div>
+                        <div class="hist-line"></div>
+                    </div>
+                    <div class="hist-body">
+                        <div class="hist-title">DataSoft India</div>
+                        <div class="hist-meta"><span class="plan-tag ent">Enterprise</span> &nbsp;·&nbsp; 25 users
+                            &nbsp;·&nbsp; 09 Jun 2026 → 06 Aug 2026</div>
+                        <div style="display:flex;align-items:center;gap:8px;margin-top:5px"><span
+                                style="font-size:.7rem;font-weight:700;padding:2px 9px;border-radius:20px;background:rgba(0,200,160,.12);color:#00C8A0">New
+                                Subscription</span><span style="font-size:.71rem;color:rgba(255,255,255,.25)">10/6/2026,
+                                12:00:00 am</span></div>
+                    </div>
+                </div>
+                <div class="hist-item">
+                    <div class="hist-left">
+                        <div class="hist-dot"
+                            style="background:rgba(0,200,160,.12);border:2px solid #00C8A0;color:#00C8A0"><i
+                                class="ri-add-circle-line"></i></div>
+                        <div class="hist-line"></div>
+                    </div>
+                    <div class="hist-body">
+                        <div class="hist-title">Innovate Technologies Pvt Ltd</div>
+                        <div class="hist-meta"><span class="plan-tag pro">Pro</span> &nbsp;·&nbsp; 10 users
+                            &nbsp;·&nbsp; 10 May 2026 → 10 May 2027</div>
+                        <div style="display:flex;align-items:center;gap:8px;margin-top:5px"><span
+                                style="font-size:.7rem;font-weight:700;padding:2px 9px;border-radius:20px;background:rgba(0,200,160,.12);color:#00C8A0">New
+                                Subscription</span><span style="font-size:.71rem;color:rgba(255,255,255,.25)">11/5/2026,
+                                12:00:00 am</span></div>
+                        <div style="font-size:.76rem;color:rgba(255,255,255,.3);margin-top:3px;font-style:italic">Annual
+                            plan</div>
+                    </div>
+                </div>
+                <div class="hist-item">
+                    <div class="hist-left">
+                        <div class="hist-dot"
+                            style="background:rgba(0,200,160,.12);border:2px solid #00C8A0;color:#00C8A0"><i
+                                class="ri-add-circle-line"></i></div>
+                        <div class="hist-line"></div>
+                    </div>
+                    <div class="hist-body">
+                        <div class="hist-title">BizPlus Solutions</div>
+                        <div class="hist-meta"><span class="plan-tag pro">Pro</span> &nbsp;·&nbsp; 8 users &nbsp;·&nbsp;
+                            10 Apr 2026 → 10 Apr 2027</div>
+                        <div style="display:flex;align-items:center;gap:8px;margin-top:5px"><span
+                                style="font-size:.7rem;font-weight:700;padding:2px 9px;border-radius:20px;background:rgba(0,200,160,.12);color:#00C8A0">New
+                                Subscription</span><span style="font-size:.71rem;color:rgba(255,255,255,.25)">11/4/2026,
+                                12:00:00 am</span></div>
+                    </div>
+                </div>
+                <div class="hist-item">
+                    <div class="hist-left">
+                        <div class="hist-dot"
+                            style="background:rgba(0,200,160,.12);border:2px solid #00C8A0;color:#00C8A0"><i
+                                class="ri-add-circle-line"></i></div>
+                        <div class="hist-line"></div>
+                    </div>
+                    <div class="hist-body">
+                        <div class="hist-title">PixelWave Studios</div>
+                        <div class="hist-meta"><span class="plan-tag">Starter</span> &nbsp;·&nbsp; 3 users &nbsp;·&nbsp;
+                            11 Mar 2026 → 11 Mar 2027</div>
+                        <div style="display:flex;align-items:center;gap:8px;margin-top:5px"><span
+                                style="font-size:.7rem;font-weight:700;padding:2px 9px;border-radius:20px;background:rgba(0,200,160,.12);color:#00C8A0">New
+                                Subscription</span><span style="font-size:.71rem;color:rgba(255,255,255,.25)">12/3/2026,
+                                12:00:00 am</span></div>
+                    </div>
+                </div>
+                <div class="hist-item">
+                    <div class="hist-left">
+                        <div class="hist-dot"
+                            style="background:rgba(0,200,160,.12);border:2px solid #00C8A0;color:#00C8A0"><i
+                                class="ri-add-circle-line"></i></div>
+                        <div class="hist-line"></div>
+                    </div>
+                    <div class="hist-body">
+                        <div class="hist-title">Global Realty Group</div>
+                        <div class="hist-meta"><span class="plan-tag ent">Enterprise</span> &nbsp;·&nbsp; 50 users
+                            &nbsp;·&nbsp; 21 Dec 2025 → 29 Jun 2026</div>
+                        <div style="display:flex;align-items:center;gap:8px;margin-top:5px"><span
+                                style="font-size:.7rem;font-weight:700;padding:2px 9px;border-radius:20px;background:rgba(0,200,160,.12);color:#00C8A0">New
+                                Subscription</span><span
+                                style="font-size:.71rem;color:rgba(255,255,255,.25)">22/12/2025, 12:00:00 am</span>
+                        </div>
+                        <div style="font-size:.76rem;color:rgba(255,255,255,.3);margin-top:3px;font-style:italic">Follow
+                            up</div>
+                    </div>
+                </div>
+                <div class="hist-item">
+                    <div class="hist-left">
+                        <div class="hist-dot"
+                            style="background:rgba(0,200,160,.12);border:2px solid #00C8A0;color:#00C8A0"><i
+                                class="ri-add-circle-line"></i></div>
+                    </div>
+                    <div class="hist-body">
+                        <div class="hist-title">Apex Ventures</div>
+                        <div class="hist-meta"><span class="plan-tag">Starter</span> &nbsp;·&nbsp; 2 users &nbsp;·&nbsp;
+                            04 Jul 2025 → 06 Jul 2026</div>
+                        <div style="display:flex;align-items:center;gap:8px;margin-top:5px"><span
+                                style="font-size:.7rem;font-weight:700;padding:2px 9px;border-radius:20px;background:rgba(0,200,160,.12);color:#00C8A0">New
+                                Subscription</span><span style="font-size:.71rem;color:rgba(255,255,255,.25)">5/7/2025,
+                                12:00:00 am</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>

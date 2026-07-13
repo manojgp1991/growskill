@@ -1,0 +1,164 @@
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;overflow:hidden;font-family:'Space Grotesk',sans-serif}
+
+    /* ── FULL PAGE BACKGROUND ── */
+    .sa-page {
+      height:100vh;display:flex;align-items:center;justify-content:center;
+      background:#060D1A;position:relative;overflow:hidden;
+    }
+
+    /* Animated gradient orbs */
+    .orb {
+      position:absolute;border-radius:50%;filter:blur(80px);opacity:.35;
+      animation:orbFloat 8s ease-in-out infinite;
+    }
+    .orb1{width:500px;height:500px;background:radial-gradient(circle,#00C8A0,transparent);top:-120px;left:-100px;animation-delay:0s}
+    .orb2{width:400px;height:400px;background:radial-gradient(circle,#3B82F6,transparent);bottom:-80px;right:-80px;animation-delay:2s}
+    .orb3{width:300px;height:300px;background:radial-gradient(circle,#8B5CF6,transparent);top:50%;left:50%;transform:translate(-50%,-50%);animation-delay:4s}
+    @keyframes orbFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-30px) scale(1.05)}}
+    .orb3{animation:orbPulse 6s ease-in-out infinite}
+    @keyframes orbPulse{0%,100%{opacity:.2;transform:translate(-50%,-50%) scale(1)}50%{opacity:.4;transform:translate(-50%,-50%) scale(1.2)}}
+
+    /* Grid lines overlay */
+    .grid-overlay {
+      position:absolute;inset:0;
+      background-image:
+        linear-gradient(rgba(0,200,160,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,200,160,.04) 1px, transparent 1px);
+      background-size:60px 60px;
+    }
+
+    /* ── CARD ── */
+    .sa-card {
+      position:relative;z-index:10;
+      width:100%;max-width:460px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:24px;
+      padding:42px 44px 36px;
+      backdrop-filter:blur(24px);
+      box-shadow:0 24px 80px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.1);
+    }
+
+    /* Top badge */
+    .sa-badge {
+      display:inline-flex;align-items:center;gap:7px;
+      background:rgba(0,200,160,.12);border:1px solid rgba(0,200,160,.25);
+      color:#00C8A0;font-size:.72rem;font-weight:700;
+      padding:4px 12px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase;
+      margin-bottom:24px;
+    }
+    .sa-badge span{width:6px;height:6px;background:#00C8A0;border-radius:50%;display:inline-block;animation:blink 1.4s infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+    /* Logo + Title */
+    .sa-logo-row{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+    .sa-logo {
+      width:52px;height:52px;flex-shrink:0;
+      background:linear-gradient(135deg,#00C8A0,#006B5E);
+      border-radius:14px;display:flex;align-items:center;justify-content:center;
+      box-shadow:0 4px 20px rgba(0,200,160,.4);overflow:hidden;
+    }
+    .sa-logo img{width:100%;height:100%;object-fit:cover;border-radius:12px}
+    .sa-title{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:#fff;line-height:1.1}
+    .sa-title span{color:#00C8A0}
+    .sa-sub{font-size:.78rem;color:rgba(255,255,255,.45);margin-top:2px}
+
+    /* Divider */
+    .sa-divider{height:1px;background:rgba(255,255,255,.07);margin-bottom:26px}
+
+    /* Form */
+    .sa-label{display:block;font-size:.71rem;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.4px;margin-bottom:7px}
+    .sa-field{
+      position:relative;margin-bottom:18px;
+    }
+    .sa-field i.ico{
+      position:absolute;left:14px;top:50%;transform:translateY(-50%);
+      color:rgba(255,255,255,.3);font-size:16px;pointer-events:none;
+    }
+    .sa-input {
+      width:100%;padding:13px 16px 13px 42px;
+      background:rgba(255,255,255,.06);
+      border:1.5px solid rgba(255,255,255,.1);
+      border-radius:12px;font-size:.9rem;
+      font-family:'Space Grotesk',sans-serif;
+      color:#fff;outline:none;transition:all .2s;
+    }
+    .sa-input::placeholder{color:rgba(255,255,255,.25)}
+    .sa-input:focus{
+      border-color:#00C8A0;
+      background:rgba(0,200,160,.07);
+      box-shadow:0 0 0 4px rgba(0,200,160,.12);
+    }
+    .sa-eye{
+      position:absolute;right:12px;top:67%;transform:translateY(-50%);
+      background:none;border:none;cursor:pointer;color:rgba(255,255,255,.3);font-size:16px;
+      transition:color .15s;padding:4px;
+    }
+    .sa-eye:hover{color:#00C8A0}
+
+    /* 2FA row */
+    .sa-otp-row{display:flex;gap:10px;margin-bottom:6px}
+    .sa-otp-input{
+      flex:1;padding:13px 10px;text-align:center;font-size:1.2rem;font-weight:700;
+      background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);
+      border-radius:12px;color:#fff;outline:none;transition:all .2s;
+      font-family:'Space Grotesk',sans-serif;
+    }
+    .sa-otp-input:focus{border-color:#00C8A0;background:rgba(0,200,160,.07);box-shadow:0 0 0 3px rgba(0,200,160,.12)}
+
+    /* Error */
+    .sa-error{
+      background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);
+      border-radius:10px;padding:10px 14px;font-size:.8rem;color:#FCA5A5;
+      display:none;align-items:center;gap:8px;margin-bottom:14px;
+    }
+
+    /* Submit button */
+    .sa-btn {
+      width:100%;padding:14px;margin-top:4px;
+      background:linear-gradient(135deg,#00C8A0,#00A882);
+      color:#fff;border:none;border-radius:12px;
+      font-size:.95rem;font-weight:700;font-family:'Space Grotesk',sans-serif;
+      cursor:pointer;transition:all .2s;letter-spacing:.3px;
+      box-shadow:0 4px 20px rgba(0,200,160,.35);
+      display:flex;align-items:center;justify-content:center;gap:9px;
+    }
+    .sa-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,200,160,.5)}
+    .sa-btn:active{transform:translateY(0)}
+
+    /* Steps (login / 2FA) */
+    .step{display:none}
+    .step.active{display:block}
+
+    /* Bottom note */
+    .sa-note{text-align:center;font-size:.74rem;color:rgba(255,255,255,.25);margin-top:22px;line-height:1.6}
+    .sa-note a{color:#00C8A0;text-decoration:none}
+
+    /* Top-right floating info */
+    .sa-floating-info{
+      position:absolute;top:20px;right:24px;z-index:20;
+      display:flex;align-items:center;gap:8px;
+      background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+      border-radius:20px;padding:6px 14px;
+      font-size:.72rem;color:rgba(255,255,255,.4);
+    }
+    .sa-floating-info strong{color:rgba(255,255,255,.7)}
+
+    /* Stats strip at bottom of card */
+    .sa-stats-strip{
+      display:flex;gap:0;margin-top:24px;
+      border-top:1px solid rgba(255,255,255,.07);padding-top:20px;
+    }
+    .sa-stat-item{flex:1;text-align:center;padding:0 8px}
+    .sa-stat-item+.sa-stat-item{border-left:1px solid rgba(255,255,255,.07)}
+    .sa-stat-val{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;color:#fff}
+    .sa-stat-label{font-size:.68rem;color:rgba(255,255,255,.35);margin-top:2px;text-transform:uppercase;letter-spacing:.4px}
+
+    /* Hint chip */
+    .hint-chip{
+      display:flex;align-items:center;gap:7px;
+      background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);
+      border-radius:9px;padding:9px 13px;margin-bottom:20px;
+      font-size:.78rem;color:rgba(147,197,253,1);
+    }

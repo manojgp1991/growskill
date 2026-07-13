@@ -64,6 +64,8 @@ export class Contacts implements OnInit {
   }
   ngOnInit(): void {
     this.filter.sub_id = this.cookieUserData?.subcriptionId;
+    this.filter.user_id = this.cookieUserData?.id;
+
     this.getDropdowns();
     this.sub = this.searchInput$
       .pipe(debounceTime(400), distinctUntilChanged())
@@ -132,7 +134,8 @@ export class Contacts implements OnInit {
   }
   getDropdownsApiCall(isPageLoaderShow: boolean) {
     const payload = {
-      sub_id: this.cookieUserData?.subcriptionId
+      sub_id: this.cookieUserData?.subcriptionId,
+      user_id: this.cookieUserData?.id
     };
     if (this.dropdownSubscription) {
       this.dropdownSubscription.unsubscribe();

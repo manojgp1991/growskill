@@ -5,6 +5,7 @@ export class ContactFilter {
   pageNumber: number = 1;
   pageSize: number = 10;
   sub_id: string = '';
+  user_id: string = '';
 
   toPayload(): any {
     return {
@@ -13,7 +14,8 @@ export class ContactFilter {
       assignedTo: this.assignedTo || -1,
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
-      sub_id: this.sub_id
+      sub_id: this.sub_id,
+      user_id: this.user_id
     };
   }
 }

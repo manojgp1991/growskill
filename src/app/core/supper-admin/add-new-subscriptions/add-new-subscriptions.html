@@ -1,0 +1,253 @@
+ <!-- <form>
+<div class="sa-overlay open" id="modal-add">
+  <div class="sa-modal">
+    <div class="sa-modal-head">
+      <h3 id="modal-add-title"><i class="ri-add-circle-line" style="color:#00C8A0;margin-right:8px"></i>Add New
+        Subscription</h3>
+      <button class="sa-modal-close" (click)="closeModel('close')"><i class="ri-close-line"></i></button>
+    </div>
+   
+    <div class="sa-modal-body">
+      <div class="section-hd"><i class="ri-building-line"></i> Company Information</div>
+      <div class="fgrid">
+        <div class="fg full"><label>Company Name <span class="req">*</span></label><input type="text" id="f-company"
+            placeholder="e.g. Innovate Technologies Pvt Ltd"></div>
+        <div class="fg"><label>Email Address <span class="req">*</span></label><input appEmailOnly type="email" id="f-email"
+            placeholder="admin@company.com"></div>
+        <div class="fg"><label>Phone Number <span class="req">*</span></label><input appNumberOnly type="tel" id="f-phone"
+            placeholder="+91 99999 00000"></div>
+        <div class="fg"><label>Contact Person</label><input type="text" id="f-contact" placeholder="Tony Maroor"></div>
+        <div class="fg"><label>GST Number</label><input type="text" id="f-gst" placeholder="e.g. 27AAAAA0000A1Z5"
+            maxlength="15" oninput="this.value=this.value.toUpperCase()"></div>
+        <div class="fg full"><label>Address</label><input type="text" id="f-address" placeholder="e.g. Address...">
+        </div>
+      </div>
+      <div class="section-hd"><i class="ri-vip-crown-line"></i> Subscription Details</div>
+      <div class="fgrid">
+        <div class="fg"><label>Allowed Users <span class="req">*</span></label><input appNumberOnly type="number" id="f-users"
+            placeholder="e.g. 5" min="1"></div>
+        <div class="fg"><label>Start Date <span class="req">*</span></label><input type="date" id="f-start"></div>
+        <div class="fg"><label>Valid Till <span class="req">*</span></label><input type="date" id="f-end"></div>
+        
+      </div>
+    </div>
+    <div class="sa-modal-foot">
+      <button class="sa-btn sa-btn-ghost" (click)="closeModel('close')">Cancel</button>
+      <button class="sa-btn sa-btn-primary" onclick="saveSub()"><i class="ri-save-line"></i> Save Subscription</button>
+    </div>
+  </div>
+</div>
+
+</form> -->
+
+<!-- 
+<div class="sa-modal">
+  <div class="sa-modal-head">
+    <h3><i class="ri-add-circle-line" style="color:#00C8A0;margin-right:8px"></i>Add New Subscription</h3>
+    <button class="sa-modal-close" (click)="closeModel('close')"><i class="ri-close-line"></i></button>
+  </div>
+
+  <form #form="ngForm" (ngSubmit)="onSave(form)">
+    <div class="sa-modal-body">
+
+   
+      <div class="section-hd"><i class="ri-building-line"></i> Company Information</div>
+      <div class="fgrid">
+
+        <div class="fg full">
+          <label>Company Name <span class="req">*</span></label>
+          <input type="text" name="company_name" [(ngModel)]="model.company_name" #company_name="ngModel" required
+            maxlength="200" placeholder="e.g. Innovate Technologies Pvt Ltd"
+            [class.input-error]="company_name.invalid && company_name.touched">
+          <span class="err-msg" *ngIf="company_name.touched && company_name.errors?.['required']">Company name is
+            required.</span>
+          <span class="err-msg" *ngIf="company_name.touched && company_name.errors?.['maxlength']">Max 200 characters
+            allowed.</span>
+        </div>
+
+        <div class="fg">
+          <label>Email Address <span class="req">*</span></label>
+          <input type="email" name="email" appEmailOnly [(ngModel)]="model.email" #email="ngModel" required email maxlength="200"
+            placeholder="admin@company.com" [class.input-error]="email.invalid && email.touched">
+          <span class="err-msg" *ngIf="email.touched && email.errors?.['required']">Email is required.</span>
+          <span class="err-msg" *ngIf="email.touched && email.errors?.['email']">Enter a valid email address.</span>
+        </div>
+
+        <div class="fg">
+          <label>Phone Number <span class="req">*</span></label>
+          <input type="tel" name="phone" appNumberOnly [(ngModel)]="model.phone" #phone="ngModel" required
+            placeholder="# ### ### ###" [class.input-error]="phone.invalid && phone.touched">
+          <span class="err-msg" *ngIf="phone.touched && phone.errors?.['required']">Phone number is required.</span>
+          <span class="err-msg" *ngIf="phone.touched && phone.errors?.['pattern']">Enter a valid phone number.</span>
+        </div>
+
+        <div class="fg">
+          <label>Contact Person</label>
+          <input type="text" name="contact_person" [(ngModel)]="model.contact_person" #contact_person="ngModel"
+            maxlength="200" placeholder="Tony Maroor"
+            [class.input-error]="contact_person.invalid && contact_person.touched">
+          <span class="err-msg" *ngIf="contact_person.touched && contact_person.errors?.['maxlength']">Max 200
+            characters allowed.</span>
+        </div>
+
+        <div class="fg">
+          <label>GST Number</label>
+          <input type="text" name="gst_number" [(ngModel)]="model.gst_number" #gst_number="ngModel" maxlength="15"
+            placeholder="e.g. 27AAAAA0000A1Z5" style="text-transform:uppercase"
+            [class.input-error]="gst_number.invalid && gst_number.touched">
+          <span class="err-msg" *ngIf="gst_number.touched && gst_number.errors?.['maxlength']">Max 15 characters
+            allowed.</span>
+        </div>
+
+        <div class="fg full">
+          <label>Address</label>
+          <input type="text" name="address" [(ngModel)]="model.address" #address="ngModel" maxlength="500"
+            placeholder="e.g. Address..." [class.input-error]="address.invalid && address.touched">
+          <span class="err-msg" *ngIf="address.touched && address.errors?.['maxlength']">Max 500 characters
+            allowed.</span>
+        </div>
+
+      </div>
+
+    
+      <div class="section-hd"><i class="ri-vip-crown-line"></i> Subscription Details</div>
+      <div class="fgrid">
+
+        <div class="fg">
+          <label>Allowed Users <span class="req">*</span></label>
+          <input type="number" name="allow_users" [(ngModel)]="model.allow_users" #allow_users="ngModel" required
+            min="1" max="9999" appNumberOnly placeholder="e.g. 5" [class.input-error]="allow_users.invalid && allow_users.touched">
+          <span class="err-msg" *ngIf="allow_users.touched && allow_users.errors?.['required']">Allowed users is
+            required.</span>
+          <span class="err-msg" *ngIf="allow_users.touched && allow_users.errors?.['min']">Minimum 1 user
+            required.</span>
+          <span class="err-msg" *ngIf="allow_users.touched && allow_users.errors?.['max']">Maximum 9999 users
+            allowed.</span>
+        </div>
+
+        <div class="fg">
+          <label>Start Date <span class="req">*</span></label>
+          <input type="date" name="start_date" [(ngModel)]="model.start_date" #start_date="ngModel" required
+            [class.input-error]="start_date.invalid && start_date.touched">
+          <span class="err-msg" *ngIf="start_date.touched && start_date.errors?.['required']">Start date is
+            required.</span>
+        </div>
+
+        <div class="fg">
+          <label>Valid Till <span class="req">*</span></label>
+          <input type="date" name="valid_till" [(ngModel)]="model.valid_till" #valid_till="ngModel" required
+            [class.input-error]="(valid_till.invalid && valid_till.touched) || (valid_till.touched && isDateRangeInvalid())">
+          <span class="err-msg" *ngIf="valid_till.touched && valid_till.errors?.['required']">Valid till date is
+            required.</span>
+          <span class="err-msg"
+            *ngIf="valid_till.touched && !valid_till.errors?.['required'] && isDateRangeInvalid()">Valid Till must be
+            after Start Date.</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="sa-modal-foot">
+      <button type="button" class="sa-btn sa-btn-ghost" (click)="closeModel('close')">Cancel</button>
+      <button type="submit" class="sa-btn sa-btn-primary" [disabled]="isSubmitting">
+        <i class="ri-save-line"></i>
+        {{ isSubmitting ? 'Saving...' : 'Save Subscription' }}
+      </button>
+    </div>
+
+  </form>
+</div> -->
+
+
+
+<form #form="ngForm" (ngSubmit)="onSave(form)">
+<div class="sa-overlay open" id="modal-add">
+  <div class="sa-modal">
+    <div class="sa-modal-head">
+      <h3 id="modal-add-title"><i class="ri-add-circle-line" style="color:#00C8A0;margin-right:8px"></i>Add New
+        Subscription</h3>
+      <button class="sa-modal-close" (click)="closeModel('close')"><i class="ri-close-line"></i></button>
+    </div>
+    
+      <div class="sa-modal-body">
+        <div class="section-hd"><i class="ri-building-line"></i> Company Information</div>
+        <div class="fgrid">
+          <div class="fg full">
+            <label>Company Name <span class="req">*</span></label>
+            <input type="text" id="f-company" placeholder="e.g. Innovate Technologies Pvt Ltd"
+              name="company_name" [(ngModel)]="model.company_name" #company_name="ngModel" required maxlength="200"
+              [class.input-error]="company_name.invalid && company_name.touched">
+            <span class="err-msg" *ngIf="company_name.touched && company_name.errors?.['required']">Company name is required.</span>
+          </div>
+          <div class="fg">
+            <label>Email Address <span class="req">*</span></label>
+            <input appEmailOnly type="email" id="f-email" placeholder="admin@company.com"
+              name="email" [(ngModel)]="model.email" #email="ngModel" required email maxlength="200"
+              [class.input-error]="email.invalid && email.touched">
+            <span class="err-msg" *ngIf="email.touched && email.errors?.['required']">Email is required.</span>
+            <span class="err-msg" *ngIf="email.touched && email.errors?.['email']">Enter a valid email address.</span>
+          </div>
+          <div class="fg">
+            <label>Phone Number <span class="req">*</span></label>
+            <input appNumberOnly type="tel" id="f-phone" placeholder="+91 99999 00000"
+              name="phone" [(ngModel)]="model.phone" #phone="ngModel" required
+              [class.input-error]="phone.invalid && phone.touched">
+            <span class="err-msg" *ngIf="phone.touched && phone.errors?.['required']">Phone number is required.</span>
+          </div>
+          <div class="fg">
+            <label>Contact Person</label>
+            <input type="text" id="f-contact" placeholder="Tony Maroor"
+              name="contact_person" [(ngModel)]="model.contact_person" maxlength="200">
+          </div>
+          <div class="fg">
+            <label>GST Number</label>
+            <input type="text" id="f-gst" placeholder="e.g. 27AAAAA0000A1Z5"
+              maxlength="15" oninput="this.value=this.value.toUpperCase()"
+              name="gst_number" [(ngModel)]="model.gst_number">
+          </div>
+          <div class="fg full">
+            <label>Address</label>
+            <input type="text" id="f-address" placeholder="e.g. Address..."
+              name="address" [(ngModel)]="model.address" maxlength="500">
+          </div>
+        </div>
+        <div class="section-hd"><i class="ri-vip-crown-line"></i> Subscription Details</div>
+        <div class="fgrid">
+          <div class="fg">
+            <label>Allowed Users <span class="req">*</span></label>
+            <input appNumberOnly type="number" id="f-users" placeholder="e.g. 5" min="1"
+              name="allow_users" [(ngModel)]="model.allow_users" #allow_users="ngModel" required min="1" max="9999"
+              [class.input-error]="allow_users.invalid && allow_users.touched">
+            <span class="err-msg" *ngIf="allow_users.touched && allow_users.errors?.['required']">Allowed users is required.</span>
+            <span class="err-msg" *ngIf="allow_users.touched && allow_users.errors?.['min']">Minimum 1 user required.</span>
+          </div>
+          <div class="fg">
+            <label>Start Date <span class="req">*</span></label>
+            <input type="date" id="f-start"
+              name="start_date" [(ngModel)]="model.start_date" #start_date="ngModel" required
+              [class.input-error]="start_date.invalid && start_date.touched">
+            <span class="err-msg" *ngIf="start_date.touched && start_date.errors?.['required']">Start date is required.</span>
+          </div>
+          <div class="fg">
+            <label>Valid Till <span class="req">*</span></label>
+            <input type="date" id="f-end"
+              name="valid_till" [(ngModel)]="model.valid_till" #valid_till="ngModel" required
+              [class.input-error]="(valid_till.invalid && valid_till.touched) || (valid_till.touched && isDateRangeInvalid())">
+            <span class="err-msg" *ngIf="valid_till.touched && valid_till.errors?.['required']">Valid till date is required.</span>
+            <span class="err-msg" *ngIf="valid_till.touched && !valid_till.errors?.['required'] && isDateRangeInvalid()">Valid Till must be after Start Date.</span>
+          </div>
+        </div>
+      </div>
+      <div class="sa-modal-foot">
+        <button type="button" class="sa-btn sa-btn-ghost" (click)="closeModel('close')">Cancel</button>
+        <button type="submit" class="sa-btn sa-btn-primary" [disabled]="isSubmitting">
+          <i class="ri-save-line"></i>
+          {{ isSubmitting ? 'Saving...' : 'Save Subscription' }}
+        </button>
+      </div>
+  
+  </div>
+</div>
+  </form>
+

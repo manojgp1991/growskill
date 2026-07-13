@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApplicationToasterService } from '../../services/toaster-service/toaster-service';
 import { CookieStorageService } from '../../services/cookie-service/cookie.service';
+import { ThemeCssService } from '../../services/theme-service/theme-service';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +31,8 @@ export class Login implements OnInit {
     private cdr: ChangeDetectorRef,
     private _toaster: ApplicationToasterService,
     private _cookieService: CookieStorageService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private themeService: ThemeCssService
   ) { }
 
   ngOnInit(): void {
@@ -89,7 +91,7 @@ export class Login implements OnInit {
     };
 
     this._apiService.Post$(GrowSkillAPIEndPointPath.Login, payload, true).subscribe({
-      next: (res: any) => {
+      next: (res: any) => {debugger
         if (res.status) {
 
             if (res?.accessToken) {
@@ -99,7 +101,7 @@ export class Login implements OnInit {
           if (res?.response?.length > 0) {
             this._cookieService.setUser(res?.response[0]);
           }
-
+          this.themeService.loadTheme('custom');
           this._toaster.success('Login Successful', 'You are logged in successfully.');
           this._router.navigateByUrl('/');
 

@@ -19,7 +19,7 @@
 
     <!-- bulk assign & bulk delete -->
     <ng-container *ngIf="is_any_contact_selected">
-      <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+      <div *ngIf="actionPermission.writePermission" class="card-header" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
         <div style="display:flex;gap:10px;flex-wrap:wrap;flex:1;justify-content:flex-end">
           <div class="_card-title">Select user for bulk assignment</div>
           <select (change)="onBulkAssign($any($event.target).value)"

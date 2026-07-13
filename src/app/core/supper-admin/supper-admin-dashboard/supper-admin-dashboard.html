@@ -1,1 +1,162 @@
-<p>supper-admin-dashboard works!</p>
+ <main class="sa-content">
+  <div class="sa-stats-grid">
+    <div class="sa-stat c1">
+      <div class="sa-stat-icon" style="background:rgba(0,200,160,.12);color:#00C8A0"><i class="ri-building-2-line"></i></div>
+      <div class="sa-stat-val">24</div>
+      <div class="sa-stat-label">Total Clients</div>
+      <div class="sa-stat-trend up"><i class="ri-arrow-up-line"></i> +3 this month</div>
+    </div>
+    <div class="sa-stat c2">
+      <div class="sa-stat-icon" style="background:rgba(59,130,246,.12);color:#60A5FA"><i class="ri-checkbox-circle-line"></i></div>
+      <div class="sa-stat-val">18</div>
+      <div class="sa-stat-label">Active Subscriptions</div>
+      <div class="sa-stat-trend up"><i class="ri-arrow-up-line"></i> 75% of total</div>
+    </div>
+    <div class="sa-stat c3">
+      <div class="sa-stat-icon" style="background:rgba(16,185,129,.12);color:#34D399"><i class="ri-money-rupee-circle-line"></i></div>
+      <div class="sa-stat-val">₹1.8L</div>
+      <div class="sa-stat-label">Monthly Revenue</div>
+      <div class="sa-stat-trend up"><i class="ri-arrow-up-line"></i> +12% vs last mo</div>
+    </div>
+    <div class="sa-stat c4">
+      <div class="sa-stat-icon" style="background:rgba(245,158,11,.12);color:#FCD34D"><i class="ri-alarm-warning-line"></i></div>
+      <div class="sa-stat-val">4</div>
+      <div class="sa-stat-label">Expiring ≤ 30 days</div>
+      <div class="sa-stat-trend warn"><i class="ri-time-line"></i> Action needed</div>
+    </div>
+    <div class="sa-stat c5">
+      <div class="sa-stat-icon" style="background:rgba(239,68,68,.12);color:#F87171"><i class="ri-close-circle-line"></i></div>
+      <div class="sa-stat-val">2</div>
+      <div class="sa-stat-label">Expired</div>
+      <div class="sa-stat-trend down"><i class="ri-arrow-down-line"></i> Follow up now</div>
+    </div>
+  </div>
+
+  <!-- Row 1 -->
+  <div class="sa-grid-3" style="margin-bottom:16px">
+
+    <!-- Bar Chart -->
+    <div class="sa-card">
+      <div class="sa-card-head">
+        <div><div class="sa-card-title">Monthly Subscriptions</div><div class="sa-card-sub">New vs Renewed — last 7 months</div></div>
+        <span class="sa-btn-sm sa-btn-ghost"><i class="ri-download-line"></i> Export</span>
+      </div>
+      <div class="sa-card-body">
+        <div class="chart-wrap" style="height:200px">
+          <canvas #barChart style="width:100%;height:100%"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Donut Chart -->
+    <div class="sa-card">
+      <div class="sa-card-head">
+        <div><div class="sa-card-title">Status Breakdown</div><div class="sa-card-sub">All 24 subscriptions</div></div>
+      </div>
+      <div class="sa-card-body" style="display:flex;align-items:center;gap:18px">
+        <div style="flex-shrink:0"><canvas #donutChart width="110" height="110"></canvas></div>
+        <div class="donut-legend" style="flex:1">
+          <div class="legend-item"><span class="legend-dot" style="background:#00C8A0"></span><span class="legend-label">Active</span><span class="legend-val">18<span class="legend-pct">75%</span></span></div>
+          <div class="legend-item"><span class="legend-dot" style="background:#F59E0B"></span><span class="legend-label">Expiring</span><span class="legend-val">4<span class="legend-pct">17%</span></span></div>
+          <div class="legend-item"><span class="legend-dot" style="background:#EF4444"></span><span class="legend-label">Expired</span><span class="legend-val">2<span class="legend-pct">8%</span></span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alerts -->
+    <div class="sa-card">
+      <div class="sa-card-head">
+        <div><div class="sa-card-title">⚠ Action Required</div><div class="sa-card-sub">Expiring & expired clients</div></div>
+      </div>
+      <div class="sa-card-body" style="padding:12px 14px">
+        <div class="alert-row danger">
+          <div class="alert-icon" style="background:rgba(239,68,68,.12);color:#F87171"><i class="ri-close-circle-line"></i></div>
+          <div class="alert-body"><div class="alert-title">Global Realty Group</div><div class="alert-meta">Enterprise · Expired 10 days ago</div></div>
+          <div class="alert-days" style="color:#F87171">–10d</div>
+        </div>
+        <div class="alert-row danger">
+          <div class="alert-icon" style="background:rgba(239,68,68,.12);color:#F87171"><i class="ri-close-circle-line"></i></div>
+          <div class="alert-body"><div class="alert-title">Apex Ventures</div><div class="alert-meta">Starter · Expired 3 days ago</div></div>
+          <div class="alert-days" style="color:#F87171">–3d</div>
+        </div>
+        <div class="alert-row warn">
+          <div class="alert-icon" style="background:rgba(245,158,11,.12);color:#FCD34D"><i class="ri-alarm-warning-line"></i></div>
+          <div class="alert-body"><div class="alert-title">Shah Enterprises</div><div class="alert-meta">Starter · Expiring soon</div></div>
+          <div class="alert-days" style="color:#FCD34D">20d</div>
+        </div>
+        <div class="alert-row warn">
+          <div class="alert-icon" style="background:rgba(245,158,11,.12);color:#FCD34D"><i class="ri-alarm-warning-line"></i></div>
+          <div class="alert-body"><div class="alert-title">Nexus Technologies</div><div class="alert-meta">Pro · Expiring soon</div></div>
+          <div class="alert-days" style="color:#FCD34D">24d</div>
+        </div>
+        <div class="alert-row info">
+          <div class="alert-icon" style="background:rgba(59,130,246,.12);color:#93C5FD"><i class="ri-information-line"></i></div>
+          <div class="alert-body"><div class="alert-title">DataSoft India</div><div class="alert-meta">Pro · Expiring next month</div></div>
+          <div class="alert-days" style="color:#93C5FD">28d</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 2: Line Chart -->
+  <div class="sa-card" style="margin-bottom:16px">
+    <div class="sa-card-head">
+      <div><div class="sa-card-title">Revenue Trend</div><div class="sa-card-sub">Monthly revenue (₹) — last 12 months</div></div>
+      <div style="display:flex;gap:8px">
+        <span class="sa-btn-sm sa-btn-ghost">Monthly</span>
+        <span class="sa-btn-sm sa-btn-primary">Quarterly</span>
+      </div>
+    </div>
+    <div class="sa-card-body">
+      <div class="chart-wrap" style="height:170px">
+        <canvas #lineChart style="width:100%;height:100%"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 3: Table -->
+  <div class="sa-card">
+    <div class="sa-card-head">
+      <div><div class="sa-card-title">Recent Subscriptions</div><div class="sa-card-sub">Latest 8 clients</div></div>
+      <a routerLink="/subscription" class="sa-btn-sm sa-btn-ghost"><i class="ri-external-link-line"></i> View All</a>
+    </div>
+    <div style="overflow-x:auto">
+      <table class="sa-table">
+        <thead>
+          <tr>
+            <th>#</th><th>Company</th><th>Plan</th><th>Users</th>
+            <th>Start Date</th><th>Valid Till</th><th>Days Left</th><th>Status</th><th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let s of subs; let i = index">
+            <td style="color:rgba(255,255,255,.25);font-size:.75rem">{{ i + 1 }}</td>
+            <td>
+              <div style="display:flex;align-items:center;gap:9px">
+                <div class="tbl-av" [style.background]="s.bg + '22'" [style.color]="s.bg">{{ avatar(s.co) }}</div>
+                <div style="font-weight:600;font-size:.85rem">{{ s.co }}</div>
+              </div>
+            </td>
+            <td><span [class]="planCls(s.plan)">{{ s.plan }}</span></td>
+            <td style="text-align:center;font-weight:600">{{ s.users }}</td>
+            <td style="font-size:.79rem;color:rgba(255,255,255,.4)">{{ fmtD(s.start) }}</td>
+            <td style="font-size:.79rem;font-weight:600">{{ fmtD(s.end) }}</td>
+            <td>
+              <span [style.color]="dLabel(s.end).color" style="font-weight:700">
+                {{ dLabel(s.end).text }}
+              </span>
+            </td>
+            <td><span class="pill" [class]="statusPill(s.end).cls">{{ statusPill(s.end).label }}</span></td>
+            <td>
+              <div style="display:flex;gap:5px">
+                <button class="sa-btn-sm sa-btn-ghost" style="padding:4px 9px"><i class="ri-eye-line"></i></button>
+                <button class="sa-btn-sm sa-btn-primary" style="padding:4px 9px"><i class="ri-refresh-line"></i></button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</main>

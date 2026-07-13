@@ -1,6 +1,7 @@
 export const GrowSkillAPIEndPointPath = {
   UserRoles: "Login/GetUserRole",
   Login: "Login/Login",
+  SupperAdminLogin: "Login/Adminlogin",
   GetUserByRole: "Admin/GetUserByRole",
   GetContactPageData: "Admin/GetContactPageData",
   GetContactByFilter: "Admin/GetContactByFilter",
@@ -23,5 +24,7 @@ export const GrowSkillAPIEndPointPath = {
   GetUpdatePipelineStatusByDrag:  "Admin/GetUpdatePipelineStatusByDrag",
   GetUpdateEmailTemplate:  "Admin/GetUpdateEmailTemplate",
   GetEmailTemplates:  "Admin/GetEmailTemplates",
+  GetSubscriptions:  "Admin/GetSubscriptions",
+  GetUpdateSubscription:  "Admin/GetUpdateSubscription"
 }
 
