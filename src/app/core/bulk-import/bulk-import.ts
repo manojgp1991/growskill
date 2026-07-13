@@ -51,7 +51,8 @@ export class BulkImport implements OnInit {
   }
   getDropdownsApiCall(isPageLoaderShow: boolean) {
     const payload = {
-      sub_id: this.cookieUserData?.subcriptionId
+      sub_id: this.cookieUserData?.subcriptionId,
+      user_id: this.cookieUserData?.id
     };
     if (this.dropdownSubscription) {
       this.dropdownSubscription.unsubscribe();

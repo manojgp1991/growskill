@@ -176,7 +176,7 @@ buildBoard(): void {
   this.pipelineContacts = this.contactList
     .filter(c => {
       // Admins (role_id === 2) see everything; others only see contacts assigned to them
-      if (this.cookieUserData?.role_id === 2) return true;
+      if (this.cookieUserData?.roleId === 2) return true;
 
       const userCont = this.userContactList.find(uc => uc.contact_id === c.id);
       return userCont?.assigned_to === this.cookieUserData?.id;
